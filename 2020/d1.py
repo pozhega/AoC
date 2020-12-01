@@ -23,8 +23,7 @@ def part2(data):
             if e3 > 0 and data_schema[e3]:
                 return e1 * e2 * e3
             else:
-                data_schema[e1] = True
-                data_schema[e2] = True
+                data_schema[e1], data_schema[e2] = True, True
 
 
 if __name__ == "__main__":
