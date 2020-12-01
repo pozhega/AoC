@@ -2,20 +2,29 @@
 
 
 def part1(data):
-    for i in range(0, len(data) - 1):
-        for j in range(i + 1, len(data) - 1):
-            e1, e2 = data[i], data[j]
-            if e1 + e2 == 2020:
-                return e1 * e2
+    """ O(n) solution """
+
+    data_schema = [False] * 2020
+    for e1 in data:
+        e2 = 2020 - e1
+        if e2 > 0 and data_schema[e2]:
+            return e1 * e2
+        else:
+            data_schema[e1] = True
 
 
 def part2(data):
-    for i in range(0, len(data) - 1):
-        for j in range(i + 1, len(data) - 1):
-            for z in range(j + 1, len(data) - 1):
-                e1, e2, e3 = data[i], data[j], data[z]
-                if e1 + e2 + e3 == 2020:
-                    return e1 * e2 * e3
+    """ O(n^2) solution """
+
+    data_schema = [False] * 2020
+    for e1 in data:
+        for e2 in data:
+            e3 = 2020 - e2 - e1
+            if e3 > 0 and data_schema[e3]:
+                return e1 * e2 * e3
+            else:
+                data_schema[e1] = True
+                data_schema[e2] = True
 
 
 if __name__ == "__main__":
