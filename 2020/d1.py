@@ -27,10 +27,10 @@ def part2(data):
 
 
 if __name__ == "__main__":
-    test = [1721, 979, 366, 299, 675, 1456]
-    puzzle = [int(line.strip()) for line in open("inputs/d1.txt", "r")]
+    TEST = [1721, 979, 366, 299, 675, 1456]
+    PUZZLE = [int(line.strip()) for line in open("inputs/d1.txt", "r")]
 
-    print(part1(test))
-    print(part1(puzzle))
-    print(part2(test))
-    print(part2(puzzle))
+    print(part1(TEST))
+    print(part1(PUZZLE))
+    print(part2(TEST))
+    print(part2(PUZZLE))
