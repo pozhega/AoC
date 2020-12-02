@@ -5,6 +5,7 @@ Solutions for [Advent of Code](https://adventofcode.com) puzzles in [Python](htt
 ## [2020](https://adventofcode.com/2020)
 
 * [Day 1](https://github.com/pozhega/AoC/blob/master/2020/d1.py)
+* [Day 2](https://github.com/pozhega/AoC/blob/master/2020/d2.py)
 
 ## [2019](https://adventofcode.com/2019)
 
