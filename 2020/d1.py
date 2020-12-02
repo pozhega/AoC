@@ -1,4 +1,4 @@
-""" https://adventofcode.com/2020/leaderboard/private/view/227112 """
+""" https://adventofcode.com/2020/day/1 """
 
 
 def part1(data):
