@@ -27,8 +27,8 @@ def part2(data):
 
 
 if __name__ == "__main__":
-    TEST = [1721, 979, 366, 299, 675, 1456]
-    PUZZLE = [int(line.strip()) for line in open("inputs/d1.txt", "r")]
+    TEST = [int(line.strip()) for line in open("tests/d1.txt", "r")]
+    PUZZLE = [int(line.strip()) for line in open("puzzles/d1.txt", "r")]
 
     print(part1(TEST))
     print(part1(PUZZLE))

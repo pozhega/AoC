@@ -24,8 +24,8 @@ def part2(map, steps):
 
 
 if __name__ == "__main__":
-    TEST = [line.strip() for line in open("inputs/d3_test.txt", "r")]
-    PUZZLE = [line.strip() for line in open("inputs/d3.txt", "r")]
+    TEST = [line.strip() for line in open("tests/d3.txt", "r")]
+    PUZZLE = [line.strip() for line in open("puzzles/d3.txt", "r")]
     PART_1_STEP = (3, 1)
     PART_2_STEPS = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]
 

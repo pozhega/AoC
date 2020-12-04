@@ -19,8 +19,8 @@ def part2(count, policy):
 
 
 if __name__ == "__main__":
-    TEST = ["1-3 a: abcde", "1-3 b: cdefg", "2-9 c: ccccccccc"]
-    PUZZLE = [line.strip() for line in open("inputs/d2.txt", "r")]
+    TEST = [line.strip() for line in open("tests/d2.txt", "r")]
+    PUZZLE = [line.strip() for line in open("puzzles/d2.txt", "r")]
     INPUT_PATTERN = re.compile(r"(\d+)-(\d+) (\w): (\w*)")
 
     print(reduce(part1, TEST, 0))
