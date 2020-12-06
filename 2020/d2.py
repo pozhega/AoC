@@ -1,7 +1,7 @@
 """ https://adventofcode.com/2020/day/2 """
 
 from functools import reduce
-from typing import Callable, List, Optional
+from typing import Callable, List
 import re
 
 
