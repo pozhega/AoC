@@ -1,7 +1,9 @@
 """ https://adventofcode.com/2020/day/1 """
 
+from typing import List, Optional
 
-def part1(data):
+
+def part1(data: List[int]) -> Optional[int]:
     """ O(n) solution """
 
     data_schema = [False] * 2020
@@ -12,8 +14,10 @@ def part1(data):
         else:
             data_schema[e1] = True
 
+    return None
 
-def part2(data):
+
+def part2(data: List[int]) -> Optional[int]:
     """ O(n^2) solution """
 
     data_schema = [False] * 2020
@@ -24,6 +28,8 @@ def part2(data):
                 return e1 * e2 * e3
             else:
                 data_schema[e1], data_schema[e2] = True, True
+
+    return None
 
 
 if __name__ == "__main__":

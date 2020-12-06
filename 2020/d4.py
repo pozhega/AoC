@@ -1,9 +1,10 @@
 """ https://adventofcode.com/2020/day/4 """
 
+from typing import Callable, List, Optional
 import re
 
 
-def check_passport(fun):
+def check_passport(fun: Callable) -> Callable:
     """ O(n) solution """
 
     def wrapper(data):
@@ -21,11 +22,11 @@ def check_passport(fun):
 
 
 @check_passport
-def part1(field): return field.split(":")[0] in RULES
+def part1(field: str) -> bool: return field.split(":")[0] in RULES
 
 
 @check_passport
-def part2(field):
+def part2(field: str) -> bool:
     key, value = field.split(":")
     return key in RULES and RULES[key](value)
 
@@ -45,4 +46,5 @@ if __name__ == "__main__":
 
     print(part1(TEST))
     print(part1(PUZZLE))
+    print(part2(TEST))
     print(part2(PUZZLE))
