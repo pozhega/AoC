@@ -27,8 +27,7 @@ def part2(boarding_passes: List[str]) -> Optional[int]:
         seats[id] = True
 
     for i in range(lo_seat, hi_seat):
-        if not seats[i]:
-            return i
+        if not seats[i]: return i
 
     return None
 

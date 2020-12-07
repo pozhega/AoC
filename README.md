@@ -10,6 +10,7 @@ Solutions for [Advent of Code](https://adventofcode.com) puzzles in [Python](htt
 * [Day 4](https://github.com/pozhega/AoC/blob/master/2020/d4.py)
 * [Day 5](https://github.com/pozhega/AoC/blob/master/2020/d5.py)
 * [Day 6](https://github.com/pozhega/AoC/blob/master/2020/d6.py)
+* [Day 7](https://github.com/pozhega/AoC/blob/master/2020/d7.py)
 
 ## [2019](https://adventofcode.com/2019)
 
