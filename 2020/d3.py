@@ -1,10 +1,9 @@
 """ https://adventofcode.com/2020/day/3 """
 
 from functools import reduce
-from typing import List, Optional, Tuple
 
 
-def part1(map: List[str], step: Tuple[int, int]) -> int:
+def part1(map, step):
     """ O(n) solution """
 
     x, y = step[0], step[1]
@@ -18,7 +17,7 @@ def part1(map: List[str], step: Tuple[int, int]) -> int:
     return trees
 
 
-def part2(map: List[str], steps: List[Tuple[int, int]]) -> int:
+def part2(map, steps):
     """ O(n) solution """
 
     return reduce(lambda x, step: x * part1(map, step), steps, 1)

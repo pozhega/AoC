@@ -2,6 +2,7 @@
 
 from collections import defaultdict
 from typing import List, DefaultDict, Tuple, Set
+import re
 
 RevBagTree = DefaultDict[str, List[str]]
 BagTree = DefaultDict[str, List[List[str]]]
@@ -9,7 +10,7 @@ Edge = Tuple[str, List[List[str]]]
 
 
 def part1(nodes: List[Edge]) -> int:
-    """ O(n) solution """
+    """ O(?) solution """
 
     rev_bag_tree = defaultdict(list)
     for parent, children in nodes:
@@ -20,7 +21,7 @@ def part1(nodes: List[Edge]) -> int:
 
 
 def part2(nodes: List[Edge]) -> int:
-    """ O(n) solution """
+    """ O(?) solution """
 
     bag_tree = defaultdict(list)
     for parent, children in nodes:
@@ -32,6 +33,7 @@ def part2(nodes: List[Edge]) -> int:
 
 def parse_input(line: str) -> Edge:
     """ Maybe use regex for this or find more sexy solution ?! """
+    print(re.search(INPUT_PATTERN, line).group(3))
     rule = line.strip().split(" bags contain ")
     parent = rule[0].strip().rstrip("s")
 
@@ -61,6 +63,8 @@ def count_individual_bags(bag_tree: BagTree, child: str) -> int:
 
 
 if __name__ == "__main__":
+    INPUT_PATTERN = re.compile(
+        r"(.+) bags contain (?:no other bags\.|(?:(\d) (.+) bags?(?:\.|,))+)")
     TEST = [parse_input(line) for line in open("tests/d7.txt", "r")]
     TEST2 = [parse_input(line) for line in open("tests/d7_2.txt", "r")]
     PUZZLE = [parse_input(line) for line in open("puzzles/d7.txt", "r")]
