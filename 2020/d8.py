@@ -1,4 +1,4 @@
-""" https://adventofcode.com/2020/day/8 (WIP) """
+""" https://adventofcode.com/2020/day/8  """
 
 from typing import List
 import copy
@@ -8,39 +8,42 @@ class Console:
     def __init__(self, code):
         self.instructions = self.__parse_code(code)
         self.executed = [False] * len(self.instructions)
-        self.acc = 0
-        self.pos = 0
-        self.finished = False
-        self.terminated = False
+        self.accumulator = 0
+        self.pointer = 0
+        self.status = "running"
 
     def run(self):
-        while not self.terminated and not self.finished:
+        while self.status not in ["terminated", "halted"]:
             self.exec()
 
     def exec(self):
-        name, value = self.instructions[self.pos]
-        self.executed[self.pos] = True
+        name, value = self.instructions[self.pointer]
+        self.executed[self.pointer] = True
 
         if name == "nop":
-            self.pos += 1
+            self.pointer += 1
         elif name == "acc":
-            self.acc += value
-            self.pos += 1
+            self.accumulator += value
+            self.pointer += 1
         elif name == "jmp":
-            self.pos += value
+            self.pointer += value
 
-        if self.pos >= len(self.instructions):
-            self.finished = True
-        elif self.executed[self.pos]:
-            self.terminated = True
+        if self.pointer >= len(self.instructions):
+            self.status = "terminated"
+        elif self.executed[self.pointer]:
+            self.status = "halted"
+
+    def is_fixable(self):
+        name, value = self.instructions[self.pointer]
+        return (name == "nop" and value != 0 and not self.executed[self.pointer + value]) or name == "jmp"
 
     def deploy_fix(self):
-        name, value = self.instructions[self.pos]
+        name = self.instructions[self.pointer][0]
 
-        if name == "nop" and value != 0 and not self.executed[self.pos + value]:
-            self.instructions[self.pos][0] = "jmp"
+        if name == "nop":
+            self.instructions[self.pointer][0] = "jmp"
         elif name == "jmp":
-            self.instructions[self.pos][0] = "nop"
+            self.instructions[self.pointer][0] = "nop"
 
     def __parse_code(self, code):
         return [[line.split()[0], int(line.split()[1])] for line in code]
@@ -51,24 +54,23 @@ def part1(code: List[str]) -> int:
 
     console = Console(code)
     console.run()
-    return console.acc
+    return console.accumulator
 
 
 def part2(code: List[str]) -> int:
-    """ O(?) solution """
+    """ O(n) solution """
 
     console = Console(code)
     while True:
-        fix = copy.deepcopy(console)
-        fix.deploy_fix()
-        fix.run()
+        if console.is_fixable:
+            fix = copy.deepcopy(console)
+            fix.deploy_fix()
+            fix.run()
 
-        if fix.finished:
-            return fix.acc
-        else:
-            console.exec()
-            if console.terminated or console.finished:
-                return console.acc
+            if fix.status == "terminated":
+                return fix.accumulator
+
+        console.exec()
 
 
 if __name__ == "__main__":

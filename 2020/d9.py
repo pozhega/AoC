@@ -1,12 +1,12 @@
-""" https://adventofcode.com/2020/day/9 (WIP) """
+""" https://adventofcode.com/2020/day/9 """
 
 from typing import List
 
 
-def part1(data: List[str], preamble_size: int) -> int:
+def part1(data: List[int], preamble_size: int) -> int:
     """ O(n) solution """
 
-    preamble = []
+    preamble: List[int] = []
     for num in data:
         valid = False
         if len(preamble) == preamble_size:
@@ -27,11 +27,12 @@ def part1(data: List[str], preamble_size: int) -> int:
     return -1
 
 
-def part2(data: List[str], preamble_size: int) -> int:
+def part2(data: List[int], preamble_size: int) -> int:
     """ O(n) solution """
 
     invalid = part1(data, preamble_size)
-    cont_set, set_sum = [], 0
+    cont_set: List[int] = []
+    set_sum = 0
     for num in data:
         while set_sum > invalid:
             set_sum -= cont_set.pop(0)
