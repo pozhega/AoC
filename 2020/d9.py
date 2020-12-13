@@ -39,9 +39,9 @@ def part2(data: List[int], preamble_size: int) -> int:
 
         if set_sum == invalid:
             return min(cont_set) + max(cont_set)
-        else:
-            cont_set.append(num)
-            set_sum += num
+
+        cont_set.append(num)
+        set_sum += num
 
     return -1
 
