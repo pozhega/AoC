@@ -1,13 +1,13 @@
 """ https://adventofcode.com/2020/day/11 """
 
 from typing import List
-import copy
+from copy import deepcopy
 
 
 def find_occupied_seats(fun):
     def wrapper(layout):
         changed = True
-        transformed = copy.deepcopy(layout)
+        transformed = deepcopy(layout)
         while changed:
             changed = False
             for i, row in enumerate(layout):
@@ -17,7 +17,7 @@ def find_occupied_seats(fun):
                         changed = True
                         transformed[i][j] = change
 
-            layout = copy.deepcopy(transformed)
+            layout = deepcopy(transformed)
         return sum([x.count("#") for x in layout])
 
     return wrapper

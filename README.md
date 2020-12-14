@@ -16,6 +16,8 @@ Solutions for [Advent of Code](https://adventofcode.com) puzzles in [Python](htt
 * [Day 10](https://github.com/pozhega/AoC/blob/master/2020/d10.py)
 * [Day 11](https://github.com/pozhega/AoC/blob/master/2020/d11.py)
 * [Day 12](https://github.com/pozhega/AoC/blob/master/2020/d12.py)
+* [Day 13](https://github.com/pozhega/AoC/blob/master/2020/d13.py)
+* [Day 14](https://github.com/pozhega/AoC/blob/master/2020/d14.py)
 
 ## [2019](https://adventofcode.com/2019)
 

@@ -16,14 +16,8 @@ def part1(instructions: List[Tuple[str, int]]) -> int:
         elif code == "L":
             direction = (direction - val) % 360
         elif code == "F":
-            if direction == 0:
-                ship[1] += val
-            elif direction == 90:
-                ship[0] += val
-            elif direction == 180:
-                ship[1] -= val
-            elif direction == 270:
-                ship[0] -= val
+            ship[0] += ROTATIONS[direction][0] * val
+            ship[1] += ROTATIONS[direction][1] * val
 
     return abs(ship[0]) + abs(ship[1])
 
@@ -32,11 +26,12 @@ def part2(instructions: List[Tuple[str, int]]) -> int:
     """ O(n) solution """
 
     wp, ship = [10, 1], [0, 0]
-    for code, val in instructions:
+    for instruction in instructions:
+        code, val = instruction
         if code in COMPASS:
             wp[0] += COMPASS[code][0] * val
             wp[1] += COMPASS[code][1] * val
-        elif code in ["R", "L"] and val == 180:
+        elif code in ("R", "L") and val == 180:
             wp[0], wp[1] = -wp[0], -wp[1]
         elif (code == "R" and val == 90) or (code == "L" and val == 270):
             wp[0], wp[1] = wp[1], -wp[0]
@@ -60,6 +55,7 @@ if __name__ == "__main__":
               for line in open("puzzles/d12.txt", "r")]
 
     COMPASS = {"N": (0, 1), "S": (0, -1), "E": (1, 0), "W": (-1, 0)}
+    ROTATIONS = {0: (0, 1), 180: (0, -1), 90: (1, 0), 270: (-1, 0)}
 
     print(part1(TEST))
     print(part1(PUZZLE))
