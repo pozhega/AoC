@@ -33,35 +33,31 @@ def part2(data: List[str]) -> int:
                     departures[i] = "x"
                     departures[j] *= bus
 
-    offset, step = 0, 0
+    referent_offset, biggest_cycle = 0, 0
+    offsets = []
     for i, bus in enumerate(departures):
-        if bus != "x" and bus > step:
-            offset, step = i, bus
+        if bus != "x":
+            offsets.append(i)
+            if bus > biggest_cycle:
+                referent_offset, biggest_cycle = i, bus
+    offsets.remove(referent_offset)
 
-    timestamp = step
+    timestamp = biggest_cycle
     while True:
-        matching = 1
+        match = 0
 
-        for i in range(offset + 1, len(departures), 1):
-            if departures[i] == "x":
-                matching += 1
-            elif (timestamp + (i - offset)) % departures[i] == 0:
-                matching += 1
+        for offset in offsets:
+            if offset > referent_offset:
+                match += ((timestamp + (offset - referent_offset)) %
+                          departures[offset] == 0)
             else:
-                break
+                match += ((timestamp - (referent_offset - offset)) %
+                          departures[offset] == 0)
 
-        for i in range(offset - 1, -1, -1):
-            if departures[i] == "x":
-                matching += 1
-            elif (timestamp - (offset - i)) % departures[i] == 0:
-                matching += 1
-            else:
-                break
+        if match == len(offsets):
+            return timestamp - referent_offset
 
-        if matching == len(departures):
-            return timestamp - offset
-
-        timestamp += step
+        timestamp += biggest_cycle
 
 
 if __name__ == "__main__":

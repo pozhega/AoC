@@ -17,7 +17,7 @@ def part1(adapters: List[int]) -> int:
 
 
 def part2(adapters: List[int]) -> int:
-    """ O(nLon) solution """
+    """ O(nLogn) solution """
 
     adapters = sorted(adapters)
     adapters = [0] + adapters + [max(adapters)+3]
