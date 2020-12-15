@@ -20,44 +20,37 @@ def part2(data: List[str]) -> int:
     """ O(n) solution """
 
     data = list(map(lambda x: int(x) if x != "x" else x, data[1].split(",")))
-    departures = deepcopy(data)
+    buses = dict((i, x) for i, x in enumerate(data) if x != "x")
     for i, bus in enumerate(data):
         if bus != "x":
             for j in range(i + bus, len(data), bus):
                 if data[j] != "x":
-                    departures[i] = "x"
-                    departures[j] *= bus
+                    buses[j] *= bus
+                    del buses[i]
 
             for j in range(i - bus, -1, -bus):
                 if data[j] != "x":
-                    departures[i] = "x"
-                    departures[j] *= bus
+                    buses[j] *= bus
+                    del buses[i]
 
-    referent_offset, biggest_cycle = 0, 0
-    offsets = []
-    for i, bus in enumerate(departures):
-        if bus != "x":
-            offsets.append(i)
-            if bus > biggest_cycle:
-                referent_offset, biggest_cycle = i, bus
-    offsets.remove(referent_offset)
+    bc_offset, biggest_cycle = list(
+        sorted(buses.items(), key=lambda x: -x[1]))[0]
+    del buses[bc_offset]
 
-    timestamp = biggest_cycle
+    ts = biggest_cycle
     while True:
         match = 0
 
-        for offset in offsets:
-            if offset > referent_offset:
-                match += ((timestamp + (offset - referent_offset)) %
-                          departures[offset] == 0)
+        for offset in buses:
+            if offset > bc_offset:
+                match += ((ts + (offset - bc_offset)) % buses[offset] == 0)
             else:
-                match += ((timestamp - (referent_offset - offset)) %
-                          departures[offset] == 0)
+                match += ((ts - (bc_offset - offset)) % buses[offset] == 0)
 
-        if match == len(offsets):
-            return timestamp - referent_offset
+        if match == len(buses):
+            return ts - bc_offset
 
-        timestamp += biggest_cycle
+        ts += biggest_cycle
 
 
 if __name__ == "__main__":
