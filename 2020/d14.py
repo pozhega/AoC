@@ -70,7 +70,8 @@ if __name__ == "__main__":
     TEST2 = [line.strip() for line in open("tests/d14_2.txt", "r")]
     PUZZLE = [line.strip() for line in open("puzzles/d14.txt", "r")]
 
-    print(part1(TEST1))
-    print(part1(PUZZLE))
-    print(part2(TEST2))
-    print(part2(PUZZLE))
+    assert part1(TEST1) == 165
+    assert part2(TEST2) == 208
+
+    print(f"Part 1: {part1(PUZZLE)}")
+    print(f"Part 2: {part2(PUZZLE)}")

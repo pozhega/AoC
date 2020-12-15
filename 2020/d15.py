@@ -45,19 +45,20 @@ if __name__ == "__main__":
     PART1 = 2020
     PART2 = 30000000
 
-    # assert(solve(TEST1, PART1) == 436)
-    # assert(solve(TEST2, PART1) == 1)
-    # assert(solve(TEST3, PART1) == 10)
-    # assert(solve(TEST4, PART1) == 27)
-    # assert(solve(TEST5, PART1) == 78)
-    # assert(solve(TEST6, PART1) == 438)
-    # assert(solve(TEST7, PART1) == 1836)
-    # print(solve(PUZZLE, PART1))
-    # assert(solve(TEST1, PART2) == 175594)
-    # assert(solve(TEST2, PART2) == 2578)
-    # assert(solve(TEST3, PART2) == 3544142)
-    # assert(solve(TEST4, PART2) == 261214)
-    # assert(solve(TEST5, PART2) == 6895259)
-    # assert(solve(TEST6, PART2) == 18)
-    # assert(solve(TEST7, PART2) == 362)
-    # print(solve(PUZZLE, PART2))
+    assert solve(TEST1, PART1) == 436
+    assert solve(TEST2, PART1) == 1
+    assert solve(TEST3, PART1) == 10
+    assert solve(TEST4, PART1) == 27
+    assert solve(TEST5, PART1) == 78
+    assert solve(TEST6, PART1) == 438
+    assert solve(TEST7, PART1) == 1836
+    assert solve(TEST1, PART2) == 175594
+    assert solve(TEST2, PART2) == 2578
+    assert solve(TEST3, PART2) == 3544142
+    assert solve(TEST4, PART2) == 261214
+    assert solve(TEST5, PART2) == 6895259
+    assert solve(TEST6, PART2) == 18
+    assert solve(TEST7, PART2) == 362
+
+    print(f"Part 1: {solve(PUZZLE, PART1)}")
+    print(f"Part 2: {solve(PUZZLE, PART2)}")
