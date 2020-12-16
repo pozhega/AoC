@@ -1,23 +1,85 @@
 """ https://adventofcode.com/2020/day/16 """
 
-from typing import List
+from typing import Dict, List, Tuple
+from collections import defaultdict
+
+Ticket = List[int]
+Tickets = List[Ticket]
+Fields = Dict[int, List[str]]
 
 
-def part1(data: List[str]) -> int:
-    """ O(?) solution """
-    return 0
+def part1(data: Tuple[Fields, Tickets]) -> int:
+    """ O(n) solution """
+
+    fields, tickets = data[0], data[1]
+    return sum([val for ticket in tickets[1:] for val in ticket if not fields[val]])
 
 
-def part2(data: List[str]) -> int:
-    """ O(?) solution """
-    return 0
+def part2(data: Tuple[Fields, Tickets]) -> int:
+    """ O(n^2) solution """
+
+    fields, tickets = data[0], data[1]
+
+    invalid = []
+    for i, ticket in enumerate(tickets[1:]):
+        for value in ticket:
+            if not fields[value]:
+                invalid.append(i + 1)
+                break
+
+    tickets = [ticket for i, ticket in enumerate(tickets) if i not in invalid]
+
+    field_order = {}
+    for i in range(len(tickets[0])):
+        candidates: Dict[str, int] = defaultdict(lambda: 0)
+        for ticket in tickets:
+            for field in fields[ticket[i]]:
+                candidates[field] += 1
+        field_order[i] = dict(
+            filter(lambda x: x[1] == len(tickets), candidates.items()))
+
+    for i in field_order:
+        for field in field_order[i]:
+            for j in field_order:
+                if field in field_order[j]:
+                    field_order[i][field] -= 1
+
+    multi = 1
+    for i in field_order:
+        field = max(field_order[i].items(), key=lambda x: x[1])[0]
+        if field.startswith("departure"):
+            multi *= tickets[0][i]
+
+    return multi
+
+
+def parse_input(file: str) -> Tuple[Fields, Tickets]:
+    fields, tickets = defaultdict(list), []
+    segment = 1
+    for line in open(file, "r"):
+        line = line.strip()
+        if line:
+            if line in ("your ticket:", "nearby tickets:"):
+                segment = 2
+                continue
+
+            if segment == 1:
+                field, values = line.split(": ")
+                for interval in values.split(" or "):
+                    start, stop = list(map(int, interval.split("-")))
+                    for i in range(start, stop + 1):
+                        fields[i].append(field)
+            else:
+                tickets.append(list(map(int, line.split(","))))
+
+    return (fields, tickets)
 
 
 if __name__ == "__main__":
-    TEST = [line.strip() for line in open("tests/d16.txt", "r")]
-    PUZZLE = [line.strip() for line in open("puzzles/d16.txt", "r")]
+    TEST = parse_input("tests/d16.txt")
+    PUZZLE = parse_input("puzzles/d16.txt")
 
-    print(part1(TEST))
+    assert part1(TEST) == 71
+
     print(part1(PUZZLE))
-    print(part2(TEST))
     print(part2(PUZZLE))
