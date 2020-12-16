@@ -20,23 +20,24 @@ def part2(data: Tuple[Fields, Tickets]) -> int:
 
     fields, tickets = data[0], data[1]
 
-    invalid = []
-    for i, ticket in enumerate(tickets[1:]):
+    valid_tickets = [tickets[0]]
+    for ticket in tickets[1:]:
+        valid = True
         for value in ticket:
             if not fields[value]:
-                invalid.append(i + 1)
+                valid = False
                 break
-
-    tickets = [ticket for i, ticket in enumerate(tickets) if i not in invalid]
+        if valid:
+            valid_tickets.append(ticket)
 
     field_order = {}
-    for i in range(len(tickets[0])):
+    for i in range(len(valid_tickets[0])):
         candidates: Dict[str, int] = defaultdict(lambda: 0)
-        for ticket in tickets:
+        for ticket in valid_tickets:
             for field in fields[ticket[i]]:
                 candidates[field] += 1
         field_order[i] = dict(
-            filter(lambda x: x[1] == len(tickets), candidates.items()))
+            filter(lambda x: x[1] == len(valid_tickets), candidates.items()))
 
     for i in field_order:
         for field in field_order[i]:
@@ -48,7 +49,7 @@ def part2(data: Tuple[Fields, Tickets]) -> int:
     for i in field_order:
         field = max(field_order[i].items(), key=lambda x: x[1])[0]
         if field.startswith("departure"):
-            multi *= tickets[0][i]
+            multi *= valid_tickets[0][i]
 
     return multi
 
