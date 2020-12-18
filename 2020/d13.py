@@ -62,12 +62,13 @@ if __name__ == "__main__":
     TEST6 = [line.strip() for line in open("tests/d13_6.txt", "r")]
     PUZZLE = [line.strip() for line in open("puzzles/d13.txt", "r")]
 
-    print(part1(TEST1))
-    print(part1(PUZZLE))
-    print(part2(TEST1))
-    print(part2(TEST2))
-    print(part2(TEST3))
-    print(part2(TEST4))
-    print(part2(TEST5))
-    print(part2(TEST6))
-    print(part2(PUZZLE))
+    assert part1(TEST1) == 171
+    assert part2(TEST1) == 1068781
+    assert part2(TEST2) == 3417
+    assert part2(TEST3) == 754018
+    assert part2(TEST4) == 779210
+    assert part2(TEST5) == 1261476
+    assert part2(TEST6) == 1202161486
+
+    print(f"Part 1: {part1(PUZZLE)}")
+    print(f"Part 2: {part2(PUZZLE)}")
