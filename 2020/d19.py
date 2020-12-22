@@ -74,5 +74,5 @@ if __name__ == "__main__":
     assert part1(TEST2) == 3
     assert part2(TEST2) == 12
 
-    print(part1(PUZZLE))
-    print(part2(PUZZLE))
+    print(f"Part 1: {part1(PUZZLE)}")
+    print(f"Part 2: {part2(PUZZLE)}")
