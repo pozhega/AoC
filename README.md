@@ -24,6 +24,7 @@ Solutions for [Advent of Code](https://adventofcode.com) puzzles in [Python](htt
 * [Day 18](https://github.com/pozhega/AoC/blob/master/2020/d18.py)
 * [Day 19](https://github.com/pozhega/AoC/blob/master/2020/d19.py)
 * [Day 21](https://github.com/pozhega/AoC/blob/master/2020/d21.py)
+* [Day 22](https://github.com/pozhega/AoC/blob/master/2020/d22.py)
 
 ## [2019](https://adventofcode.com/2019)
 
