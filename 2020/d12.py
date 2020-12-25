@@ -2,8 +2,10 @@
 
 from typing import List, Tuple
 
+Instructions = List[Tuple[str, int]]
 
-def part1(instructions: List[Tuple[str, int]]) -> int:
+
+def part1(instructions: Instructions) -> int:
     """ O(n) solution """
 
     ship, direction = [0, 0], 90
@@ -22,7 +24,7 @@ def part1(instructions: List[Tuple[str, int]]) -> int:
     return abs(ship[0]) + abs(ship[1])
 
 
-def part2(instructions: List[Tuple[str, int]]) -> int:
+def part2(instructions: Instructions) -> int:
     """ O(n) solution """
 
     wp, ship = [10, 1], [0, 0]
@@ -57,8 +59,9 @@ if __name__ == "__main__":
     COMPASS = {"N": (0, 1), "S": (0, -1), "E": (1, 0), "W": (-1, 0)}
     ROTATIONS = {0: (0, 1), 180: (0, -1), 90: (1, 0), 270: (-1, 0)}
 
-    print(part1(TEST))
-    print(part1(PUZZLE))
-    print(part2(TEST))
-    print(part2(TEST2))
-    print(part2(PUZZLE))
+    assert part1(TEST) == 25
+    assert part2(TEST) == 286
+    assert part2(TEST2) == 52069
+
+    print(f"Part 1: {part1(PUZZLE)}")
+    print(f"Part 2: {part2(PUZZLE)}")

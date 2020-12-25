@@ -1,8 +1,8 @@
 # AoC
 
-Solutions for [Advent of Code](https://adventofcode.com) puzzles in [Python](https://www.python.org/) and [Elixir](https://elixir-lang.org/) programming languages.
+Solutions for [Advent of Code](https://adventofcode.com) puzzles.
 
-## [2020](https://adventofcode.com/2020)
+## [2020](https://adventofcode.com/2020) in [Python](https://www.python.org/)
 
 * [Day 1](https://github.com/pozhega/AoC/blob/master/2020/d1.py)
 * [Day 2](https://github.com/pozhega/AoC/blob/master/2020/d2.py)
@@ -23,11 +23,14 @@ Solutions for [Advent of Code](https://adventofcode.com) puzzles in [Python](htt
 * [Day 17](https://github.com/pozhega/AoC/blob/master/2020/d17.py)
 * [Day 18](https://github.com/pozhega/AoC/blob/master/2020/d18.py)
 * [Day 19](https://github.com/pozhega/AoC/blob/master/2020/d19.py)
+* [Day 20](https://github.com/pozhega/AoC/blob/master/2020/d20.py)
 * [Day 21](https://github.com/pozhega/AoC/blob/master/2020/d21.py)
 * [Day 22](https://github.com/pozhega/AoC/blob/master/2020/d22.py)
 * [Day 23](https://github.com/pozhega/AoC/blob/master/2020/d23.py)
+* [Day 24](https://github.com/pozhega/AoC/blob/master/2020/d24.py)
+* [Day 25](https://github.com/pozhega/AoC/blob/master/2020/d25.py)
 
-## [2019](https://adventofcode.com/2019)
+## [2019](https://adventofcode.com/2019) in [Elixir](https://elixir-lang.org/)
 
 * [Day 1](https://github.com/pozhega/AoC/blob/master/2019/lib/aoc/d1.ex)
 * [Day 2](https://github.com/pozhega/AoC/blob/master/2019/lib/aoc/d2.ex)

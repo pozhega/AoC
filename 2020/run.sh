@@ -1,2 +1,2 @@
 #! /bin/sh
-mypy d"$@".py && pypy3 d"$@".py
+mypy d"$@".py && time -f "Total time: %E" pypy3 d"$@".py

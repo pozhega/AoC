@@ -1,20 +1,16 @@
 """ https://adventofcode.com/2020/day/5 """
 
 from functools import reduce
-from typing import List, Optional
+from typing import List
 
 
 def part1(boarding_passes: List[str]) -> int:
     """ O(n) solution """
 
-    hi_seat = 0
-    for bp in boarding_passes:
-        hi_seat = max(hi_seat, get_row(bp) * 8 + get_column(bp))
-
-    return hi_seat
+    return max([get_row(bp) * 8 + get_column(bp) for bp in boarding_passes])
 
 
-def part2(boarding_passes: List[str]) -> Optional[int]:
+def part2(boarding_passes: List[str]) -> int:
     """ O(n) solution """
 
     max_seats = 2 ** len(boarding_passes[0])
@@ -27,9 +23,10 @@ def part2(boarding_passes: List[str]) -> Optional[int]:
         seats[id] = True
 
     for i in range(lo_seat, hi_seat):
-        if not seats[i]: return i
+        if not seats[i]:
+            return i
 
-    return None
+    return -1
 
 
 def get_row(bp: str) -> int:
@@ -44,7 +41,8 @@ if __name__ == "__main__":
     TEST = [line.strip() for line in open("tests/d5.txt", "r")]
     PUZZLE = [line.strip() for line in open("puzzles/d5.txt", "r")]
 
-    print(part1(TEST))
-    print(part1(PUZZLE))
-    print(part2(TEST))
-    print(part2(PUZZLE))
+    assert part1(TEST) == 820
+    assert part2(TEST) == 120
+
+    print(f"Part 1: {part1(PUZZLE)}")
+    print(f"Part 2: {part2(PUZZLE)}")

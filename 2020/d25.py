@@ -3,21 +3,28 @@
 from typing import List
 
 
-def part1(data: List[str]) -> int:
+def part1(data: List[int]) -> int:
     """ O(?) solution """
-    return 0
 
+    pub_key_1, pub_key_2 = data
 
-def part2(data: List[str]) -> int:
-    """ O(?) solution """
-    return 0
+    s_num, loop_size = 1, 0
+    while s_num != pub_key_1:
+        s_num = (s_num * 7) % 20201227
+        loop_size += 1
+
+    encryption_key = 1
+    for _ in range(loop_size):
+        encryption_key = (encryption_key * pub_key_2) % 20201227
+
+    return encryption_key
 
 
 if __name__ == "__main__":
-    TEST = [line.strip() for line in open("tests/d25.txt", "r")]
-    PUZZLE = [line.strip() for line in open("puzzles/d25.txt", "r")]
+    TEST = [int(line.strip()) for line in open("tests/d25.txt", "r")]
+    PUZZLE = [int(line.strip()) for line in open("puzzles/d25.txt", "r")]
 
-    print(part1(TEST))
-    print(part1(PUZZLE))
-    print(part2(TEST))
-    print(part2(PUZZLE))
+    assert part1(TEST) == 14897079
+
+    print(f"Part 1: {part1(PUZZLE)}")
+    print(f"Part 2: Go and solve Jurasic Jigsaw!")

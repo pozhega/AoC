@@ -36,7 +36,8 @@ if __name__ == "__main__":
     TEST = [line.strip() for line in open("tests/d6.txt", "r")]
     PUZZLE = [line.strip() for line in open("puzzles/d6.txt", "r")]
 
-    print(part1(TEST))
-    print(part1(PUZZLE))
-    print(part2(TEST))
-    print(part2(PUZZLE))
+    assert part1(TEST) == 11
+    assert part2(TEST) == 6
+
+    print(f"Part 1: {part1(PUZZLE)}")
+    print(f"Part 2: {part2(PUZZLE)}")

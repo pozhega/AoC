@@ -8,8 +8,7 @@ import re
 def validator(fun: Callable) -> Callable:
     """ O(n) solution """
 
-    def wrapper(data): return reduce(fun, data, 0)
-    return wrapper
+    return lambda data: reduce(fun, data, 0)
 
 
 @validator
@@ -35,7 +34,8 @@ if __name__ == "__main__":
     PUZZLE = [line.strip() for line in open("puzzles/d2.txt", "r")]
     INPUT_PATTERN = re.compile(r"(\d+)-(\d+) (\w): (\w*)")
 
-    print(part1(TEST))
-    print(part1(PUZZLE))
-    print(part2(TEST))
-    print(part2(PUZZLE))
+    assert part1(TEST) == 2
+    assert part2(TEST) == 1
+
+    print(f"Part 1: {part1(PUZZLE)}")
+    print(f"Part 2: {part2(PUZZLE)}")

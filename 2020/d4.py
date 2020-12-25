@@ -1,6 +1,6 @@
 """ https://adventofcode.com/2020/day/4 """
 
-from typing import Callable, List, Optional
+from typing import Callable, List
 import re
 
 
@@ -38,13 +38,14 @@ if __name__ == "__main__":
         "byr": lambda x: 1920 <= int(x) <= 2002,
         "iyr": lambda x: 2010 <= int(x) <= 2020,
         "eyr": lambda x: 2020 <= int(x) <= 2030,
-        "hgt": lambda x: re.findall(r"^(1([5-8][0-9]|9[0-3])cm|(59|6[0-9]|7[0-6])in)$", x) != [],
-        "hcl": lambda x: re.findall(r"^#[0-9a-f]{6}$", x) != [],
+        "hgt": lambda x: bool(re.findall(r"^(1([5-8][0-9]|9[0-3])cm|(59|6[0-9]|7[0-6])in)$", x)),
+        "hcl": lambda x: bool(re.findall(r"^#[0-9a-f]{6}$", x)),
         "ecl": lambda x: x in ("amb", "blu", "brn", "gry", "grn", "hzl", "oth"),
-        "pid": lambda x: re.findall(r"^[0-9]{9}$", x) != []
+        "pid": lambda x: bool(re.findall(r"^[0-9]{9}$", x))
     }
 
-    print(part1(TEST))
-    print(part1(PUZZLE))
-    print(part2(TEST))
-    print(part2(PUZZLE))
+    assert part1(TEST) == 2
+    assert part2(TEST) == 2
+
+    print(f"Part 1: {part1(PUZZLE)}")
+    print(f"Part 2: {part2(PUZZLE)}")

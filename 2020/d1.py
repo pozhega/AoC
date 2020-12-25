@@ -1,9 +1,9 @@
 """ https://adventofcode.com/2020/day/1 """
 
-from typing import List, Optional
+from typing import List
 
 
-def part1(data: List[int]) -> Optional[int]:
+def part1(data: List[int]) -> int:
     """ O(n) solution """
 
     data_schema = [False] * 2020
@@ -14,10 +14,10 @@ def part1(data: List[int]) -> Optional[int]:
         else:
             data_schema[e1] = True
 
-    return None
+    return -1
 
 
-def part2(data: List[int]) -> Optional[int]:
+def part2(data: List[int]) -> int:
     """ O(n^2) solution """
 
     data_schema = [False] * 2020
@@ -29,14 +29,15 @@ def part2(data: List[int]) -> Optional[int]:
             else:
                 data_schema[e1], data_schema[e2] = True, True
 
-    return None
+    return -1
 
 
 if __name__ == "__main__":
     TEST = [int(line.strip()) for line in open("tests/d1.txt", "r")]
     PUZZLE = [int(line.strip()) for line in open("puzzles/d1.txt", "r")]
 
-    print(part1(TEST))
-    print(part1(PUZZLE))
-    print(part2(TEST))
-    print(part2(PUZZLE))
+    assert part1(TEST) == 514579
+    assert part2(TEST) == 241861950
+
+    print(f"Part 1: {part1(PUZZLE)}")
+    print(f"Part 2: {part2(PUZZLE)}")

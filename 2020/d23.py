@@ -14,8 +14,6 @@ class Node:
 
 
 class LinkedList:
-    """ Implement true cirucular linked list instead! """
-
     def __init__(self, nodes=None):
         self.head = None
         if nodes is not None:
@@ -41,10 +39,10 @@ class LinkedList:
         return " -> ".join(nodes)
 
 
-def part1(cups: List[int]) -> int:
+def part1(data: List[int]) -> int:
     """ O(n) solution """
 
-    cups, ref = play(cups, 100)
+    cups, ref = play(data, 100)
 
     result = ""
     node = ref[1].next
@@ -60,13 +58,13 @@ def part1(cups: List[int]) -> int:
     return int(result)
 
 
-def part2(cups: List[int]) -> int:
+def part2(data: List[int]) -> int:
     """ O(n) solution """
 
-    for i in range(max(cups) + 1, 1000000 + 1):
-        cups.append(i)
+    for i in range(max(data) + 1, 1000000 + 1):
+        data.append(i)
 
-    cups, ref = play(cups, 10000000)
+    cups, ref = play(data, 10000000)
 
     one = ref[1]
     if not one.next:
@@ -77,9 +75,9 @@ def part2(cups: List[int]) -> int:
         return one.next.data * one.next.next.data
 
 
-def play(cups: List[int], moves: int) -> Tuple[LinkedList, Dict[int, Node]]:
-    cups_max = max(cups)
-    cups = LinkedList(cups)
+def play(data: List[int], moves: int) -> Tuple[LinkedList, Dict[int, Node]]:
+    cups_max = max(data)
+    cups = LinkedList(data)
     ref = dict([(cup.data, cup) for cup in cups])
     curr = cups.head
     for _ in range(moves):

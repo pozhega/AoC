@@ -7,16 +7,16 @@ from copy import deepcopy
 def part1(program: List[str]) -> int:
     """ O(n) solution """
 
-    mem = {}
+    memory = {}
     for instruction in program:
         key, value = instruction.split(" = ")
         if key == "mask":
             mask = list(value)
         else:
             address = key.split("[")[1].split("]")[0]
-            mem[address] = decoder_v1(mask, value)
+            memory[address] = decoder_v1(mask, value)
 
-    return sum([mem[x] for x in mem])
+    return sum(memory.values())
 
 
 def decoder_v1(mask: List[str], value: str) -> int:
@@ -32,7 +32,7 @@ def decoder_v1(mask: List[str], value: str) -> int:
 def part2(program: List[str]) -> int:
     """ O(n) solution """
 
-    mem = {}
+    memory = {}
     for instruction in program:
         key, value = instruction.split(" = ")
         if key == "mask":
@@ -40,9 +40,9 @@ def part2(program: List[str]) -> int:
         else:
             encoded = key.split("[")[1].split("]")[0]
             for address in decoder_v2(mask, encoded):
-                mem[address] = int(value)
+                memory[address] = int(value)
 
-    return sum([mem[x] for x in mem])
+    return sum(memory.values())
 
 
 def decoder_v2(mask: List[str], encoded: str) -> Iterator[int]:

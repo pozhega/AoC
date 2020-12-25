@@ -26,10 +26,9 @@ def part2(player_1: List[int], player_2: List[int]) -> int:
 
 
 def recursive_combat(player_1: List[int], player_2: List[int]) -> Tuple[int, List[int]]:
-    configs: Dict[int, bool] = defaultdict(lambda: False)
+    configs: Dict[str, bool] = defaultdict(lambda: False)
     while player_1 and player_2:
-        config = hash(str(player_1) +
-                      "[♥]]] [♦]]] [♣]]] [♠]]]" + str(player_2))
+        config = str(player_1) + "[♣]]]" + str(player_2)
 
         if configs[config]:
             return (0, player_1)

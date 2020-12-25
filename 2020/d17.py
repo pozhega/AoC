@@ -2,6 +2,7 @@
 
 from typing import List
 from copy import deepcopy
+from functools import lru_cache
 
 
 def part1(data: List[str]) -> int:
@@ -23,7 +24,8 @@ def part1(data: List[str]) -> int:
             for y, row in enumerate(depth):
                 for x, cube in enumerate(row):
                     position = (z, y, x)
-                    adjacents = find_3d_adjacents(pocket, position)
+                    adjacents = find_3d_adjacents(
+                        position, len(pocket), len(pocket[0]))
                     active = sum([(pocket[i][j][k]) for i, j, k in adjacents])
 
                     if cube and active not in (2, 3):
@@ -59,7 +61,8 @@ def part2(data: List[str]) -> int:
                 for y, row in enumerate(depth):
                     for x, cube in enumerate(row):
                         position = (w, z, y, x)
-                        adjacents = find_4d_adjacents(pocket, position)
+                        adjacents = find_4d_adjacents(position, len(
+                            pocket), len(pocket[0]), len(pocket[0][0]))
                         active = sum([(pocket[i][j][k][l])
                                       for i, j, k, l in adjacents])
 
@@ -73,20 +76,22 @@ def part2(data: List[str]) -> int:
     return sum([x for w in pocket for z in w for y in z for x in y])
 
 
-def find_3d_adjacents(pocket, pos):
+@lru_cache(maxsize=None)
+def find_3d_adjacents(pos, depth, width):
     z, y, x = pos
 
     adjacents = []
     for i in range(z - 1, z + 2):
         for j in range(y - 1, y + 2):
             for k in range(x - 1, x + 2):
-                if (i, j, k) != pos and - 1 < i < len(pocket) and - 1 < j < len(pocket[0]) and - 1 < k < len(pocket[0]):
+                if (i, j, k) != pos and - 1 < i < depth and - 1 < j < width and - 1 < k < width:
                     adjacents.append((i, j, k))
 
     return adjacents
 
 
-def find_4d_adjacents(pocket, pos):
+@lru_cache(maxsize=None)
+def find_4d_adjacents(pos, time, depth, width):
     w, z, y, x = pos
 
     adjacents = []
@@ -94,7 +99,7 @@ def find_4d_adjacents(pocket, pos):
         for j in range(z - 1, z + 2):
             for k in range(y - 1, y + 2):
                 for l in range(x - 1, x + 2):
-                    if (i, j, k, l) != pos and - 1 < i < len(pocket) and - 1 < j < len(pocket[0]) and - 1 < k < len(pocket[0][0]) and - 1 < l < len(pocket[0][0]):
+                    if (i, j, k, l) != pos and - 1 < i < time and - 1 < j < depth and - 1 < k < width and - 1 < l < width:
                         adjacents.append((i, j, k, l))
 
     return adjacents

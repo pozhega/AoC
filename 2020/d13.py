@@ -19,8 +19,8 @@ def part1(data: List[str]) -> int:
 def part2(data: List[str]) -> int:
     """ O(n) solution """
 
-    data = list(map(lambda x: int(x) if x != "x" else x, data[1].split(",")))
-    buses = dict((i, x) for i, x in enumerate(data) if x != "x")
+    data = list(map(lambda x: int(x) if x != "x" else "x", data[1].split(",")))
+    buses = {offset: bus for offset, bus in enumerate(data) if bus != "x"}
     for i, bus in enumerate(data):
         if bus != "x":
             for j in range(i + bus, len(data), bus):
@@ -33,24 +33,23 @@ def part2(data: List[str]) -> int:
                     buses[j] *= bus
                     del buses[i]
 
-    bc_offset, biggest_cycle = list(
-        sorted(buses.items(), key=lambda x: -x[1]))[0]
-    del buses[bc_offset]
+    mc_offset, max_cycle = list(sorted(buses.items(), key=lambda x: -x[1]))[0]
+    del buses[mc_offset]
 
-    ts = biggest_cycle
+    ts = max_cycle
     while True:
         match = 0
 
         for offset in buses:
-            if offset > bc_offset:
-                match += ((ts + (offset - bc_offset)) % buses[offset] == 0)
+            if offset > mc_offset:
+                match += ((ts + (offset - mc_offset)) % buses[offset] == 0)
             else:
-                match += ((ts - (bc_offset - offset)) % buses[offset] == 0)
+                match += ((ts - (mc_offset - offset)) % buses[offset] == 0)
 
         if match == len(buses):
-            return ts - bc_offset
+            return ts - mc_offset
 
-        ts += biggest_cycle
+        ts += max_cycle
 
 
 if __name__ == "__main__":
@@ -62,7 +61,7 @@ if __name__ == "__main__":
     TEST6 = [line.strip() for line in open("tests/d13_6.txt", "r")]
     PUZZLE = [line.strip() for line in open("puzzles/d13.txt", "r")]
 
-    assert part1(TEST1) == 171
+    assert part1(TEST1) == 295
     assert part2(TEST1) == 1068781
     assert part2(TEST2) == 3417
     assert part2(TEST3) == 754018

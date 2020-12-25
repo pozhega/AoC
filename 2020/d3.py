@@ -29,7 +29,8 @@ if __name__ == "__main__":
     PART_1_STEP = (3, 1)
     PART_2_STEPS = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]
 
-    print(part1(TEST, PART_1_STEP))
-    print(part1(PUZZLE, PART_1_STEP))
-    print(part2(TEST, PART_2_STEPS))
-    print(part2(PUZZLE, PART_2_STEPS))
+    assert part1(TEST, PART_1_STEP) == 7
+    assert part2(TEST, PART_2_STEPS) == 336
+
+    print(f"Part 1: {part1(PUZZLE, PART_1_STEP)}")
+    print(f"Part 2: {part2(PUZZLE, PART_2_STEPS)}")

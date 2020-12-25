@@ -32,8 +32,6 @@ def part2(nodes: List[Edge]) -> int:
 
 
 def parse_input(line: str) -> Edge:
-    """ Maybe use regex for this or find more sexy solution ?! """
-    print(re.search(INPUT_PATTERN, line).group(3))
     rule = line.strip().split(" bags contain ")
     parent = rule[0].strip().rstrip("s")
 
@@ -63,15 +61,14 @@ def count_individual_bags(bag_tree: BagTree, child: str) -> int:
 
 
 if __name__ == "__main__":
-    INPUT_PATTERN = re.compile(
-        r"(.+) bags contain (?:no other bags\.|(?:(\d) (.+) bags?(?:\.|,))+)")
     TEST = [parse_input(line) for line in open("tests/d7.txt", "r")]
     TEST2 = [parse_input(line) for line in open("tests/d7_2.txt", "r")]
     PUZZLE = [parse_input(line) for line in open("puzzles/d7.txt", "r")]
     BAG = "shiny gold"
 
-    print(part1(TEST))
-    print(part1(PUZZLE))
-    print(part2(TEST))
-    print(part2(TEST2))
-    print(part2(PUZZLE))
+    assert part1(TEST) == 4
+    assert part2(TEST) == 32
+    assert part2(TEST2) == 126
+
+    print(f"Part 1: {part1(PUZZLE)}")
+    print(f"Part 2: {part2(PUZZLE)}")
