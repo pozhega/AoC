@@ -39,3 +39,7 @@ Solutions for [Advent of Code](https://adventofcode.com) puzzles.
 * [Day 5](https://github.com/pozhega/AoC/blob/master/2019/lib/aoc/d5.ex)
 * [Day 6](https://github.com/pozhega/AoC/blob/master/2019/lib/aoc/d6.ex)
 * [Day 8](https://github.com/pozhega/AoC/blob/master/2019/lib/aoc/d8.ex)
+
+## [2015](https://adventofcode.com/2015) in [Crystal](https://crystal-lang.org/) and [Ruby](https://www.ruby-lang.org/en/)
+
+* [Day 1](https://github.com/pozhega/AoC/blob/master/2015/d1.cr)
