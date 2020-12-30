@@ -1,3 +1,5 @@
+# https://adventofcode.com/2015/day/1
+
 def part_1(dirs : String) : Int
   dirs.each_char.reduce(0) { |floor, dir| dir == '(' ? floor + 1 : floor - 1 }
 end
