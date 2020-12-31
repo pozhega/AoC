@@ -43,3 +43,4 @@ Solutions for [Advent of Code](https://adventofcode.com) puzzles.
 ## [2015](https://adventofcode.com/2015) in [Crystal](https://crystal-lang.org/) and [Ruby](https://www.ruby-lang.org/en/)
 
 * [Day 1](https://github.com/pozhega/AoC/blob/master/2015/d1.cr)
+* [Day 2](https://github.com/pozhega/AoC/blob/master/2015/d2.cr)
