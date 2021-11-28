@@ -2,6 +2,34 @@
 
 Solutions for [Advent of Code](https://adventofcode.com) puzzles.
 
+## [2021](https://adventofcode.com/2021) in [Clojure](https://clojure.org/)
+
+* [Day 1](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d1.clj)
+* [Day 2](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d2.clj)
+* [Day 3](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d3.clj)
+* [Day 4](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d4.clj)
+* [Day 5](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d5.clj)
+* [Day 6](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d6.clj)
+* [Day 7](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d7.clj)
+* [Day 8](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d8.clj)
+* [Day 9](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d9.clj)
+* [Day 10](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d10.clj)
+* [Day 11](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d11.clj)
+* [Day 12](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d12.clj)
+* [Day 13](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d13.clj)
+* [Day 14](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d14.clj)
+* [Day 15](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d15.clj)
+* [Day 16](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d16.clj)
+* [Day 17](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d17.clj)
+* [Day 18](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d18.clj)
+* [Day 19](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d19.clj)
+* [Day 20](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d20.clj)
+* [Day 21](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d21.clj)
+* [Day 22](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d22.clj)
+* [Day 23](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d23.clj)
+* [Day 24](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d24.clj)
+* [Day 25](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d25.clj)
+
 ## [2020](https://adventofcode.com/2020) in [Python](https://www.python.org/)
 
 * [Day 1](https://github.com/pozhega/AoC/blob/master/2020/d1.py)
