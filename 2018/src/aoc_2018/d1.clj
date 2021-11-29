@@ -2,22 +2,16 @@
                  [clojure.string :as str]))
 
 (defn- parse-input [path]
-  (map #(vector (subs % 0 1) (Integer/parseInt (subs % 1)))
+  (map #(Integer/parseInt %)
        (str/split-lines (slurp path))))
 
-(defn- apply-freq-change [op freq val]
-  (case op
-    "+" (+ freq val)
-    "-" (- freq val)))
-
-(defn- apply-freq-changes [changes]
-  (reduce (fn [freq [op val]] (apply-freq-change op freq val)) 0 changes))
+(defn- apply-freq-changes [changes] (reduce + changes))
 
 (defn- detect-duplicate-freq
   "Tracks changes in hash-set and detects first repetition"
   [changes]
-  (reduce (fn [[freqs last-freq] [op val]]
-            (let [new-freq (apply-freq-change op last-freq val)]
+  (reduce (fn [[freqs last-freq] change]
+            (let [new-freq (+ last-freq change)]
               (if (freqs new-freq)
                 (reduced new-freq)
                 [(conj freqs new-freq) new-freq])))
@@ -25,7 +19,7 @@
           (cycle changes)))
 
 (defn part-1
-  "what is the resulting frequency after all of the changes?"
+  "What is the resulting frequency after all of the changes?"
   [changes]
   (apply-freq-changes changes))
 
