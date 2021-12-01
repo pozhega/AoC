@@ -71,6 +71,8 @@ Solutions for [Advent of Code](https://adventofcode.com) puzzles.
 ## [2018](https://adventofcode.com/2018) in [Clojure](https://clojure.org/)
 
 * [Day 1](https://github.com/pozhega/AoC/blob/master/2018/src/aoc_2018/d1.clj)
+* [Day 2](https://github.com/pozhega/AoC/blob/master/2018/src/aoc_2018/d2.clj)
+* [Day 3](https://github.com/pozhega/AoC/blob/master/2018/src/aoc_2018/d3.clj)
 
 ## [2015](https://adventofcode.com/2015) in [Crystal](https://crystal-lang.org/) and [Ruby](https://www.ruby-lang.org/en/)
 
