@@ -9,12 +9,10 @@
 
 (defn- count-increases [coll]
   (->> coll
-       (reduce (fn [[cnt last] elem]
-                 (if (and last (> elem last))
-                   [(inc cnt) elem]
-                   [cnt elem]))
-               [0 nil])
-       (first)))
+       (partition 2 1)
+       (map (partial apply <))
+       (filter true?)
+       (count)))
 
 (defn part-1
   "How many measurements are larger than the previous measurement?"
@@ -35,7 +33,7 @@
 (def input (parse-input "resources/puzzles/d1.txt"))
 
 (= (part-1 test-input) 7)
-(part-1 input)
+(part-1 test-input)
 
 (= (part-2 test-input) 5)
 (part-2 input)
