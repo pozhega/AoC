@@ -10,8 +10,7 @@
 (defn- count-increases [coll]
   (->> coll
        (partition 2 1)
-       (map (partial apply <))
-       (filter true?)
+       (filter (partial apply <))
        (count)))
 
 (defn part-1
