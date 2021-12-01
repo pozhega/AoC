@@ -32,7 +32,7 @@
 (def input (parse-input "resources/puzzles/d1.txt"))
 
 (= (part-1 test-input) 7)
-(part-1 test-input)
+(part-1 input)
 
 (= (part-2 test-input) 5)
 (part-2 input)
