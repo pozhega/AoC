@@ -38,8 +38,8 @@
        (filter false?)
        (count)))
 
-(defn- no-overlap? [fabric-freq [id _ _ width height]]
-  (= (* width height) (fabric-freq id)))
+(defn- no-overlap? [fabric-freqs [id _ _ width height]]
+  (= (* width height) (fabric-freqs id)))
 
 (defn part-1
   "How many square inches of fabric are within two or more claims?"
@@ -52,13 +52,12 @@
 (defn part-2
   "What is the ID of the only claim that doesn't overlap?"
   [claims]
-  (let [freqs (-> (generate-fabric)
-                  (apply-claims claims)
-                  (flatten)
-                  (frequencies))]
+  (let [fabric-freqs (-> (generate-fabric)
+                         (apply-claims claims)
+                         (flatten)
+                         (frequencies))]
     (->> claims
-         (filter (partial no-overlap? freqs))
-         (first)
+         (some #(if (no-overlap? fabric-freqs %) %))
          (first))))
 
 ;; Puzzle: https://adventofcode.com/2018/day/3
@@ -70,4 +69,4 @@
 (part-1 input)
 
 (= (part-2 test-input) 3)
-(part-2 test-input)
+(part-2 input)
