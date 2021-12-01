@@ -24,7 +24,8 @@
 (defn part-2
   "How many sums are larger than the previous sum?"
   [measurements]
-  (->> (partition 3 1 measurements measurements)
+  (->> measurements
+       (partition 3 1)
        (map (partial apply +))
        (count-increases)))
 
