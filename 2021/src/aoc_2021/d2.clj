@@ -10,14 +10,14 @@
 
 (defn- naive-interpreter [[v-pos h-pos] [dir val]]
   (case dir
-    "up" [v-pos (- h-pos val)]
-    "down" [v-pos (+ h-pos val)]
+    "up"      [v-pos (- h-pos val)]
+    "down"    [v-pos (+ h-pos val)]
     "forward" [(+ v-pos val) h-pos]))
 
 (defn- manual-interpreter [[v-pos h-pos aim] [dir val]]
   (case dir
-    "up" [v-pos h-pos (- aim val)]
-    "down" [v-pos h-pos (+ aim val)]
+    "up"      [v-pos h-pos (- aim val)]
+    "down"    [v-pos h-pos (+ aim val)]
     "forward" [(+ v-pos (* aim val)) (+ h-pos val) aim]))
 
 (defn part-1

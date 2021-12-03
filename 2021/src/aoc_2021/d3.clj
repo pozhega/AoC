@@ -12,22 +12,19 @@
        (map flip-bit)
        (apply str)))
 
-(defn- bit-freq [binaries pos]
-  (let [binary (map #(nth % pos) binaries)]
-    (merge {\0 0, \1 0} (frequencies binary))))
-
 (defn- most-common-bit [binaries pos]
-  (let [{ones \1 zeros \0} (bit-freq binaries pos)]
+  (let [col-binary         (map #(nth % pos) binaries)
+        col-bit-freq       (frequencies col-binary)
+        {ones \1 zeros \0} (merge {\0 0, \1 0} col-bit-freq)]
     (if (>= ones zeros) \1 \0)))
 
 (defn- least-common-bit [binaries pos]
   (flip-bit (most-common-bit binaries pos)))
 
 (defn- calc-gamma-rate [binaries]
-  (reduce (fn [gamma-rate pos]
-            (conj gamma-rate (most-common-bit binaries pos)))
-          []
-          (range (count (first binaries)))))
+  (->> (count (first binaries))
+       (range)
+       (map (partial most-common-bit binaries))))
 
 (defn- calc-gas-rating [binaries common-bit-fun]
   (reduce (fn [binaries pos]
@@ -40,14 +37,14 @@
 (defn part-1
   "What is the power consumption of the submarine?"
   [binaries]
-  (let [gamma-rate (calc-gamma-rate binaries)
+  (let [gamma-rate   (calc-gamma-rate binaries)
         epsilon-rate (flip-bits gamma-rate)]
     (* (bin-to-int gamma-rate) (bin-to-int epsilon-rate))))
 
 (defn part-2
   "What is the life support rating of the submarine?"
   [binaries]
-  (let [o2-rating (calc-gas-rating binaries most-common-bit)
+  (let [o2-rating  (calc-gas-rating binaries most-common-bit)
         co2-rating (calc-gas-rating binaries least-common-bit)]
     (* (bin-to-int o2-rating) (bin-to-int co2-rating))))
 
