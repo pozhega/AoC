@@ -5,9 +5,11 @@
 
 (defn- bin-to-int [binary] (Integer/parseInt (apply str binary) 2))
 
+(defn- flip-bit [bit] (if (= \1 bit) \0 \1))
+
 (defn- flip-bits [binary]
   (->> binary
-       (map #(if (= \1 %) \0 \1))
+       (map flip-bit)
        (apply str)))
 
 (defn- bit-freq [binaries pos]
@@ -19,8 +21,7 @@
     (if (>= ones zeros) \1 \0)))
 
 (defn- least-common-bit [binaries pos]
-  (let [{ones \1 zeros \0} (bit-freq binaries pos)]
-    (if (<= zeros ones) \0 \1)))
+  (flip-bit (most-common-bit binaries pos)))
 
 (defn- calc-gamma-rate [binaries]
   (reduce (fn [gamma-rate pos]
