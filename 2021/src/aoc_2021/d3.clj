@@ -13,13 +13,16 @@
        (apply str)))
 
 (defn- most-common-bit [binaries pos]
-  (let [col-binary         (map #(nth % pos) binaries)
-        col-bit-freq       (frequencies col-binary)
-        {ones \1 zeros \0} (merge {\0 0, \1 0} col-bit-freq)]
+  (let [{ones \1 zeros \0} (->> binaries
+                                (map #(nth % pos))
+                                (frequencies)
+                                (merge {\0 0, \1 0}))]
     (if (>= ones zeros) \1 \0)))
 
 (defn- least-common-bit [binaries pos]
-  (flip-bit (most-common-bit binaries pos)))
+  (-> binaries
+      (most-common-bit pos)
+      (flip-bit)))
 
 (defn- calc-gamma-rate [binaries]
   (->> (count (first binaries))
