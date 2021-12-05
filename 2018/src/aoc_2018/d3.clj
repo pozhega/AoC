@@ -11,9 +11,7 @@
                    (re-matcher #"#(\d+) @ (\d+),(\d+): (\d+)x(\d+)")
                    (re-find)
                    (rest)
-                   (map #(Integer/parseInt %))
-                   (vec))))))
-
+                   (mapv #(Integer/parseInt %)))))))
 
 (defn- generate-fabric []
   (vec (repeat 1000 (vec (repeat 1000 nil)))))
