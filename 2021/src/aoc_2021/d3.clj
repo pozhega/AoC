@@ -57,7 +57,7 @@
 (def input (parse-input "resources/puzzles/d3.txt"))
 
 (= (part-1 test-input) 198)
-(part-1 input)
+(time (part-1 input))
 
 (= (part-2 test-input) 230)
-(part-2 input)
+(time (part-2 input))

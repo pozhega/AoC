@@ -1,14 +1,12 @@
 (ns aoc-2021.d9 (:require
                  [clojure.string :as str]))
 
-(defn- parse-input [path] (str/split-lines (slurp path)))
+(defn- parse-input [path]
+  (->> path
+       (slurp)
+       (str/split-lines)))
 
 (defn part-1
-  "Problem description"
-  [data]
-  nil)
-
-(defn part-2
   "Problem description"
   [data]
   nil)
@@ -19,9 +17,5 @@
 (def input (parse-input "resources/puzzles/d9.txt"))
 
 (= (part-1 test-input) nil)
-(part-1 input)
-
-(= (part-2 test-input) nil)
-(part-2 input)
-
+(time (part-1 test-input))
 

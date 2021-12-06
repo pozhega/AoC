@@ -9,7 +9,6 @@
        (first)
        (map #(Integer/parseInt %))))
 
-
 (def child-fishes
   (memoize (fn [fish days]
              (if (< days fish)
@@ -36,7 +35,7 @@
 (def input (parse-input "resources/puzzles/d6.txt"))
 
 (= (part-1 test-input) 5934)
-(part-1 input)
+(time (part-1 input))
 
 (= (part-2 test-input) 26984457539)
-(part-2 input)
+(time (part-2 input))

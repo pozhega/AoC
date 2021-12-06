@@ -36,7 +36,7 @@
                                         (range (min y1 y2) (inc (max y1 y2))))))
 
 (defn- calc-mixed-line [point-1 point-2]
-  (or (calc-simple-line point-1 point-2)
+  (or (calc-straight-line point-1 point-2)
       (calc-diagonal-line point-1 point-2)))
 
 (defn- draw-line [vent-map points calc-fun]
@@ -66,7 +66,7 @@
 (def input (parse-input "resources/puzzles/d5.txt"))
 
 (= (part-1 test-input) 5)
-(part-1 input)
+(time (part-1 input))
 
 (= (part-2 test-input) 12)
-(part-2 input)
+(time (part-2 input))

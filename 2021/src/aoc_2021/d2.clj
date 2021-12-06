@@ -41,7 +41,7 @@
 (def input (parse-input "resources/puzzles/d2.txt"))
 
 (= (part-1 test-input) 150)
-(part-1 input)
+(time (part-1 input))
 
 (= (part-2 test-input) 900)
-(part-2 input)
+(time (part-2 input))
