@@ -15,10 +15,14 @@
 (defn- update-vent-map [vent-map point]
   (update vent-map point (fnil inc 0)))
 
-(defn- calc-simple-line [[x1 y1] [x2 y2]]
+(defn- calc-straight-line [[x1 y1] [x2 y2]]
   (cond
-    (= x1 x2) (map vector (repeat x1) (range (min y1 y2) (inc (max y1 y2))))
-    (= y1 y2) (map vector (range (min x1 x2) (inc (max x1 x2))) (repeat y1))))
+    (= x1 x2) (map vector
+                   (repeat x1)
+                   (range (min y1 y2) (inc (max y1 y2))))
+    (= y1 y2) (map vector
+                   (range (min x1 x2) (inc (max x1 x2)))
+                   (repeat y1))))
 
 (defn- calc-diagonal-line [[x1 y1] [x2 y2]]
   (cond
@@ -31,7 +35,7 @@
                                         (range (min x1 x2) (inc (max x1 x2)))
                                         (range (min y1 y2) (inc (max y1 y2))))))
 
-(defn- calc-complex-line [point-1 point-2]
+(defn- calc-mixed-line [point-1 point-2]
   (or (calc-simple-line point-1 point-2)
       (calc-diagonal-line point-1 point-2)))
 
@@ -49,12 +53,12 @@
 (defn part-1
   "At how many points do at least two lines overlap?"
   [lines]
-  (count-overlaps lines calc-simple-line))
+  (count-overlaps lines calc-straight-line))
 
 (defn part-2
   "At how many points do at least two lines overlap?"
   [lines]
-  (count-overlaps lines calc-complex-line))
+  (count-overlaps lines calc-mixed-line))
 
 ;; Puzzle: https://adventofcode.com/2021/day/5
 
