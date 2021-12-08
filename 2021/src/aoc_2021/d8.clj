@@ -48,18 +48,16 @@
     (every? #(str/includes? string (str %)) pool)))
 
 (defn- decode-signals [signals]
-  (reduce #(let [setting    (apply str (vec %2))
-                 masks      (mask-signals signals setting)
-                 signal-map (map-mask-numbers signals masks)]
-             (when (valid-mapping? signal-map)
-               (reduced signal-map)))
-          (combo/permutations "abcdefg")))
+  (some #(let [setting    (apply str (vec %))
+               masks      (mask-signals signals setting)
+               signal-map (map-mask-numbers signals masks)]
+           (when (valid-mapping? signal-map) signal-map))
+        (combo/permutations "abcdefg")))
 
 (defn- assoc-output-nums [[signal-map outputs]]
-  (map #(->> signal-map
-             (map (fn [[signal num]] (when (is-permutation signal %) num)))
-             (remove nil?)
-             (first))
+  (map #(some (fn [[signal num]]
+                (when (is-permutation signal %) num))
+              signal-map)
        outputs))
 
 (defn part-1
