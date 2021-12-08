@@ -25,7 +25,7 @@
 (defn- linear-sum [n]
   (/ (* n (+ n 1)) 2))
 
-(defn- mean [coll]
+(defn mean [coll]
   (int (/ (reduce + coll) (count coll))))
 
 (defn part-1
