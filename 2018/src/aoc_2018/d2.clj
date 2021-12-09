@@ -7,7 +7,8 @@
 (defn- count-ids-metrics [ids]
   (reduce (fn [[twos threes] id]
             (cond
-              (and (id 2) (id 3)) [(inc twos) (inc threes)]
+              (and
+               (id 2) (id 3)) [(inc twos) (inc threes)]
               (id 2) [(inc twos) threes]
               (id 3) [twos (inc threes)]
               :else [twos threes]))
@@ -25,7 +26,6 @@
              :let [diff (set/difference x y)]
              :when (= (count diff) 1)]
          (set/difference x diff))
-       (take 1)
        (first)
        (map vec)
        (sort-by first)
