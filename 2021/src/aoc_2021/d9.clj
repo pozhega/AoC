@@ -10,12 +10,11 @@
 
 (defn- adjacent-positions [[row coll]]
   [[(dec row) coll]
-   [row (dec coll)]
-   [row (inc coll)]
+   [row (dec coll)] [row (inc coll)]
    [(inc row) coll]])
 
-(defn- find-adjacents-vals [heightmap [row coll]]
-  (->> (adjacent-positions [row coll])
+(defn- find-adjacents-vals [heightmap pos]
+  (->> (adjacent-positions pos)
        (map (partial get-in heightmap))
        (remove nil?)))
 
@@ -24,26 +23,24 @@
      (apply min (find-adjacents-vals heightmap pos))))
 
 (defn- iterate-heightmap [heightmap]
-  (for [row  (range 0 (count heightmap))
-        coll (range 0 (count (first heightmap)))]
+  (for [row  (range (count heightmap))
+        coll (range (count (first heightmap)))]
     [row coll]))
 
-(defn- discover [heightmap seen [row coll]]
-  (if (or
-       (seen [row coll])
-       (= 9 (get-in heightmap [row coll]))
-       (nil? (get-in heightmap [row coll])))
-    seen
-    (reduce (partial discover heightmap)
-            (conj seen [row coll])
-            (adjacent-positions [row coll]))))
+(defn- discover-basin [heightmap basin pos]
+  (if (or (basin pos)
+          (contains? #{9 nil} (get-in heightmap pos)))
+    basin
+    (reduce #(discover-basin heightmap %1 %2)
+            (conj basin pos)
+            (adjacent-positions pos))))
 
 (defn part-1
   "What is the sum of the risk levels of all low points on your heightmap?"
   [heightmap]
   (->> heightmap
        (iterate-heightmap)
-       (filter (partial is-low-point? heightmap))
+       (filter #(is-low-point? heightmap %))
        (map (partial get-in heightmap))
        (map inc)
        (reduce +)))
@@ -53,8 +50,8 @@
   [heightmap]
   (->> heightmap
        (iterate-heightmap)
-       (filter (partial is-low-point? heightmap))
-       (map #(discover heightmap #{} %))
+       (filter #(is-low-point? heightmap %))
+       (map #(discover-basin heightmap #{} %))
        (map count)
        (sort)
        (take-last 3)
