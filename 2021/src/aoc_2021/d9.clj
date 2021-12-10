@@ -13,14 +13,14 @@
    [row (dec coll)] [row (inc coll)]
    [(inc row) coll]])
 
-(defn- find-adjacents-vals [heightmap pos]
+(defn- find-adjacents-heights [heightmap pos]
   (->> (adjacent-positions pos)
        (map (partial get-in heightmap))
        (remove nil?)))
 
 (defn- is-low-point? [heightmap pos]
   (< (get-in heightmap pos)
-     (apply min (find-adjacents-vals heightmap pos))))
+     (apply min (find-adjacents-heights heightmap pos))))
 
 (defn- iterate-heightmap [heightmap]
   (for [row  (range (count heightmap))
@@ -53,7 +53,6 @@
        (filter #(is-low-point? heightmap %))
        (map #(discover-basin heightmap #{} %))
        (map count)
-       (sort)
        (take-last 3)
        (reduce *)))
 

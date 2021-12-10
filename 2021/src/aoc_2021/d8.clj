@@ -13,8 +13,8 @@
 (defn replace-chars [string chars]
   (str/replace string (re-pattern (str "[" chars "]")) "x"))
 
-(defn- decode-naive-signal [signal]
-  (case (count signal) 2 1, 3 7, 4 4, 7 8, nil))
+(defn- simple-decode-output [output]
+  (case (count output) 2 1, 3 7, 4 4, 7 8, nil))
 
 (def one #"[^x]xx[^x][^x][^x][^x]")
 (def two #"xx[^x]xx[^x]x")
@@ -66,7 +66,7 @@
   (->> input
        (map second)
        (flatten)
-       (map decode-naive-signal)
+       (map simple-decode-output)
        (filter int?)
        (count)))
 

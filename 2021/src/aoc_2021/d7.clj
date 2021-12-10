@@ -13,28 +13,24 @@
 
 (defn- median [coll]
   (let [coll (sort coll)
-        cnt (count coll)
-        mid (bit-shift-right cnt 1)]
+        cnt  (count coll)
+        mid  (bit-shift-right cnt 1)]
     (if (odd? cnt)
       (nth coll mid)
       (/ (+ (nth coll mid) (nth coll (dec mid))) 2))))
 
-(defn- diff [n1 n2]
-  (abs (- n1 n2)))
+(defn- diff [n1 n2] (abs (- n1 n2)))
 
-(defn- linear-sum [n]
-  (/ (* n (+ n 1)) 2))
+(defn- linear-sum [n] (/ (* n (+ n 1)) 2))
 
-(defn mean [coll]
-  (int (/ (reduce + coll) (count coll))))
+(defn mean [coll] (int (/ (reduce + coll) (count coll))))
 
 (defn part-1
   "How much fuel must they spend to align to that position?"
   [crabs]
-  (let [align-at (median crabs)]
-    (->> crabs
-         (map #(diff % align-at))
-         (reduce +))))
+  (->> crabs
+       (map #(diff % (median crabs)))
+       (reduce +)))
 
 (defn part-2
   "How much fuel must they spend to align to that position?"
