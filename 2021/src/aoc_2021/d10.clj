@@ -18,7 +18,7 @@
 
 (def char-points-2 {\) 1, \] 2, \} 3, \> 4})
 
-(defn- find-illegal-char [line]
+(defn- validate-line [line]
   (reduce (fn [open-stack char]
             (if (openning-chars char)
               (conj open-stack char)
@@ -39,7 +39,7 @@
   "What is the total syntax error score for those errors?"
   [lines]
   (->> lines
-       (map find-illegal-char)
+       (map validate-line)
        (filter char?)
        (map char-points-1)
        (reduce +)))
@@ -48,7 +48,7 @@
   "What is the middle score?"
   [lines]
   (->> lines
-       (map find-illegal-char)
+       (map validate-line)
        (filter vector?)
        (map score-incomplete-line)
        (sort)
