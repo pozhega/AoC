@@ -69,12 +69,11 @@
 
 ;; Puzzle: https://adventofcode.com/2021/day/11
 
-(def test-input-1 (parse-input "resources/tests/d11_1.txt"))
-(def test-input-2 (parse-input "resources/tests/d11_2.txt"))
+(def test-input (parse-input "resources/tests/d11.txt"))
 (def input (parse-input "resources/puzzles/d11.txt"))
 
-(= (part-1 test-input-1) 1656)
+(= (part-1 test-input) 1656)
 (time (part-1 input))
 
-(= (part-2 test-input-1) 195)
+(= (part-2 test-input) 195)
 (time (part-2 input))
