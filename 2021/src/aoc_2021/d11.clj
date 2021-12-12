@@ -8,17 +8,19 @@
        (map vec)
        (mapv (partial mapv #(Integer/parseInt (str %))))))
 
+(def octopus-map-fields
+  (for [row (range 10) coll (range 10)] [row coll]))
+
+(def steps (range 100))
+
+(def infinite-steps (iterate inc 1))
+
 (defn- adjacent-positions [octopus-map [row coll]]
   (for [adj-row  (range (dec row) (+ row 2))
         adj-coll (range (dec coll) (+ coll 2))
         :when (and (get-in octopus-map [adj-row adj-coll])
                    (not= [row coll] [adj-row adj-coll]))]
     [adj-row adj-coll]))
-
-(defn- iterate-octopus-map [octopus-map]
-  (for [row  (range (count octopus-map))
-        coll (range (count (first octopus-map)))]
-    [row coll]))
 
 (defn- detect-flash [octopus-map pos]
   (let [val (get-in octopus-map pos)]
@@ -30,9 +32,7 @@
       (update-in octopus-map pos inc))))
 
 (defn- apply-step [octopus-map]
-  (reduce detect-flash
-          octopus-map
-          (iterate-octopus-map octopus-map)))
+  (reduce detect-flash octopus-map octopus-map-fields))
 
 (defn- count-flashes [octopus-map]
   (->> octopus-map
@@ -51,7 +51,8 @@
                           flash-cnt   (+ flash-cnt (count-flashes octopus-map))
                           octopus-map (reset-flashes octopus-map)]
                       [octopus-map flash-cnt]))
-                  [octopus-map 0] (range 100))))
+                  [octopus-map 0]
+                  steps)))
 
 (defn part-2
   "What is the first step during which all octopuses flash?"
@@ -63,7 +64,8 @@
               (if (zero? octopus-cnt)
                 (reduced step)
                 octopus-map)))
-          octopus-map (iterate inc 1)))
+          octopus-map
+          infinite-steps))
 
 ;; Puzzle: https://adventofcode.com/2021/day/11
 
