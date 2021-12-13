@@ -15,29 +15,29 @@
 (defn small-cave? [cave]
   (= cave (str/lower-case cave)))
 
-(defn- small-cave-duplicate? [path cave]
-  (and (small-cave? cave) (some #{cave} path)))
+(defn- small-cave-duplicate? [visited cave]
+  (and (small-cave? cave) (visited cave)))
 
-(defn- path-with-duplicate? [path]
-  (->> path
-       (filter small-cave?)
-       (frequencies)
+(defn- duplicate-exists? [visited]
+  (->> visited
+       (filter #(small-cave? (first %)))
        (vals)
        (some #(= 2 %))))
 
-(defn- find-paths [cave-system condition curr-path]
-  (let [curr-cave (last curr-path)]
-    (if (= curr-cave "end")
-      curr-path
-      (->> (cave-system curr-cave)
-           (remove #{"start"})
-           (remove #(condition curr-path %))
-           (map #(find-paths cave-system condition (conj curr-path %)))))))
+(defn- find-paths [cave-system condition visited cave]
+  (if (= cave "end")
+    visited
+    (->> (cave-system cave)
+         (remove #{"start"})
+         (remove #(condition visited %))
+         (map #(find-paths cave-system
+                           condition
+                           (update visited % (fnil inc 0))
+                           %)))))
 
 (defn- count-paths [cave-system condition]
-  (->> (find-paths cave-system condition ["start"])
+  (->> (find-paths cave-system condition {"start" 1} "start")
        (flatten)
-       (filter #(= "start" %))
        (count)))
 
 (defn part-1
@@ -50,7 +50,7 @@
   [cave-system]
   (count-paths cave-system
                #(and (small-cave-duplicate? %1 %2)
-                     (path-with-duplicate? %1))))
+                     (duplicate-exists? %1))))
 
 ;; Puzzle: https://adventofcode.com/2021/day/12
 
