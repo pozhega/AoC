@@ -7,24 +7,21 @@
                    (str/split-lines))
         parts (partition-by empty? lines)
         dots  (->> (first parts)
-                   (mapv #(str/split % #","))
+                   (map #(str/split % #","))
                    (mapv (partial mapv #(Integer/parseInt %)))
                    (set))
         folds (->> (last parts)
                    (map #(str/split % #"="))
-                   (map #(vector
+                   (mapv #(vector
                           (last (first %))
                           (Integer/parseInt (last %)))))]
     [dots folds]))
 
 (defn- translate-dot [[dot-x dot-y] axis val]
-  (if (= axis \x)
-    (cond
-      (< dot-x val) [dot-x dot-y]
-      (> dot-x val) [(- val (- dot-x val)) dot-y])
-    (cond
-      (< dot-y val) [dot-x dot-y]
-      (> dot-y val) [dot-x (- val (- dot-y val))])))
+  (cond
+    (and (= axis \x) (> dot-x val)) [(- val (- dot-x val)) dot-y]
+    (and (= axis \y) (> dot-y val)) [dot-x (- val (- dot-y val))]
+    :else [dot-x dot-y]))
 
 (defn- apply-fold [dots [axis val]]
   (->> dots
