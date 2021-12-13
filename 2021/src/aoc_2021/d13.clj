@@ -1,8 +1,6 @@
 (ns aoc-2021.d13 (:require
                   [clojure.string :as str]))
 
-(def debug #(do (println "DEBUG:" %) %))
-
 (defn- parse-input [path]
   (let [lines (->> path
                    (slurp)
