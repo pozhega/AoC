@@ -1,5 +1,6 @@
 (ns aoc-2021.d11 (:require
-                  [clojure.string :as str]))
+                  [clojure.string :as str]
+                  [aoc-2021.core :refer [star-neighbours]]))
 
 (defn- parse-input [path]
   (->> path
@@ -15,19 +16,12 @@
 
 (def infinite-steps (iterate inc 1))
 
-(defn- adjacent-positions [octopus-map [row coll]]
-  (for [adj-row  (range (dec row) (+ row 2))
-        adj-coll (range (dec coll) (+ coll 2))
-        :when (and (get-in octopus-map [adj-row adj-coll])
-                   (not= [row coll] [adj-row adj-coll]))]
-    [adj-row adj-coll]))
-
 (defn- detect-flash [octopus-map pos]
   (let [val (get-in octopus-map pos)]
     (case val
       9 (reduce detect-flash
                 (assoc-in octopus-map pos nil)
-                (adjacent-positions octopus-map pos))
+                (star-neighbours octopus-map pos))
       nil octopus-map
       (update-in octopus-map pos inc))))
 

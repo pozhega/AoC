@@ -1,6 +1,10 @@
-(ns aoc-2021.d15 (:require
-                  [clojure.string :as str]
-                  [clojure.data.priority-map :as priority-map]))
+(ns aoc-2021.d15
+  (:require
+   [clojure.string :as str]
+   [clojure.data.priority-map :refer [priority-map]]
+   [aoc-2021.core :refer [cross-neighbours iterate-matrix]]))
+
+(def inf Double/POSITIVE_INFINITY)
 
 (defn- parse-input [path]
   (->> path
@@ -8,54 +12,43 @@
        (str/split-lines)
        (mapv (partial mapv #(Integer/parseInt (str %))))))
 
-(defn- neighbours [cave [row coll]]
-  (->> [[(dec row) coll]
-        [row (dec coll)]
-        [row (inc coll)]
-        [(inc row) coll]]
-       (filter (partial get-in cave))))
-
-(defn- iterate-cave [cave]
-  (for [row  (range (count cave))
-        coll (range (count (first cave)))]
-    [row coll]))
-
 (defn- get-end-node [cave]
   [(dec (count cave)) (dec (count (first cave)))])
 
 (defn- create-graph [cave]
   (reduce (fn [graph node]
-            (assoc graph node (->> (neighbours cave node)
+            (assoc graph node (->> (cross-neighbours cave node)
                                    (map #(vector % (get-in cave %)))
                                    (into {}))))
           {}
-          (iterate-cave cave)))
+          (iterate-matrix cave)))
 
-(def ^:private inf Double/POSITIVE_INFINITY)
+(defn- create-costs [graph start]
+  (as-> (keys graph) costs
+    (zipmap costs (repeat inf))
+    (assoc costs start 0)
+    (into (priority-map) costs)))
 
-(defn update-costs
-  [graph costs unvisited node]
+(defn- update-costs
+  [graph costs node]
   (let [node-cost (costs node)]
     (reduce-kv
-     (fn [[costs unvisited] neighbour neighbour-cost]
-       (if (unvisited neighbour)
-         [(update-in costs [neighbour] min (+ node-cost neighbour-cost))
-          (update-in unvisited [neighbour] min (+ node-cost neighbour-cost))]
-         [costs unvisited]))
-     [costs unvisited]
+     (fn [costs neighbour neighbour-cost]
+       (if (costs neighbour)
+         (update costs neighbour #(min % (+ node-cost neighbour-cost)))
+         costs))
+     (dissoc costs node)
      (graph node))))
 
-(defn dijkstra [graph start end]
-  (loop [costs     (assoc (zipmap (keys graph) (repeat inf)) start 0)
-         node      start
-         unvisited (into (priority-map/priority-map) (dissoc costs start))]
+(defn- dijkstra [graph start end]
+  (loop [costs (create-costs graph start)
+         node  start]
     (cond
-      (= node end)      (costs node)
-      (empty? unvisited) nil
-      :else              (let [[costs unvisited] (update-costs graph costs unvisited node)
-                               node              (key (peek unvisited))
-                               unvisited         (pop unvisited)]
-                           (recur costs node unvisited)))))
+      (= node end)   (costs node)
+      (empty? costs) nil
+      :else          (let [costs (update-costs graph costs node)
+                           node  (key (peek costs))]
+                       (recur costs node)))))
 
 (defn- expand-cave [cave]
   (->> (reduce (fn [expanded-cave _]

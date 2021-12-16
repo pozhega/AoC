@@ -1,5 +1,6 @@
 (ns aoc-2021.d9 (:require
-                 [clojure.string :as str]))
+                 [clojure.string :as str]
+                 [aoc-2021.core :refer [cross-neighbours iterate-matrix]]))
 
 (defn- parse-input [path]
   (->> path
@@ -8,24 +9,9 @@
        (map vec)
        (mapv (partial mapv #(Integer/parseInt (str %))))))
 
-(defn- adjacent-positions [[row coll]]
-  [[(dec row) coll]
-   [row (dec coll)] [row (inc coll)]
-   [(inc row) coll]])
-
-(defn- find-adjacents-heights [heightmap pos]
-  (->> (adjacent-positions pos)
-       (map (partial get-in heightmap))
-       (remove nil?)))
-
 (defn- is-low-point? [heightmap pos]
   (< (get-in heightmap pos)
-     (apply min (find-adjacents-heights heightmap pos))))
-
-(defn- iterate-heightmap [heightmap]
-  (for [row  (range (count heightmap))
-        coll (range (count (first heightmap)))]
-    [row coll]))
+     (apply min (map #(get-in heightmap %) (cross-neighbours heightmap pos)))))
 
 (defn- discover-basin [heightmap basin pos]
   (if (or (basin pos)
@@ -33,13 +19,13 @@
     basin
     (reduce #(discover-basin heightmap %1 %2)
             (conj basin pos)
-            (adjacent-positions pos))))
+            (cross-neighbours heightmap pos))))
 
 (defn part-1
   "What is the sum of the risk levels of all low points on your heightmap?"
   [heightmap]
   (->> heightmap
-       (iterate-heightmap)
+       (iterate-matrix)
        (filter #(is-low-point? heightmap %))
        (map (partial get-in heightmap))
        (map inc)
@@ -49,7 +35,7 @@
   "What do you get if you multiply together the sizes of the three largest basins?"
   [heightmap]
   (->> heightmap
-       (iterate-heightmap)
+       (iterate-matrix)
        (filter #(is-low-point? heightmap %))
        (map #(discover-basin heightmap #{} %))
        (map count)
@@ -58,13 +44,11 @@
 
 ;; Puzzle: https://adventofcode.com/2021/day/9
 
-(def test-input-1 (parse-input "resources/tests/d9_1.txt"))
-(def test-input-2 (parse-input "resources/tests/d9_2.txt"))
+(def test-input-1 (parse-input "resources/tests/d9.txt"))
 (def input (parse-input "resources/puzzles/d9.txt"))
 
 (= (part-1 test-input-1) 15)
 (time (part-1 input))
 
 (= (part-2 test-input-1) 1134)
-(= (part-2 test-input-2) 13)
 (time (part-2 input))
