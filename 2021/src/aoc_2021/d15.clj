@@ -44,11 +44,10 @@
   (loop [costs (create-costs graph start)
          node  start]
     (cond
-      (= node end)   (costs node)
-      (empty? costs) nil
-      :else          (let [costs (update-costs graph costs node)
-                           node  (key (peek costs))]
-                       (recur costs node)))))
+      (= node end) (costs node)
+      (seq? costs) (let [costs (update-costs graph costs node)
+                         node  (key (peek costs))]
+                     (recur costs node)))))
 
 (defn- expand-cave [cave]
   (->> (reduce (fn [expanded-cave _]
