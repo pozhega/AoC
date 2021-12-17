@@ -12,22 +12,10 @@
        (cons f (take-while+ pred r))
        [f]))))
 
-(def hex-bin-map {\0 "0000"
-                  \1 "0001"
-                  \2 "0010"
-                  \3 "0011"
-                  \4 "0100"
-                  \5 "0101"
-                  \6 "0110"
-                  \7 "0111"
-                  \8 "1000"
-                  \9 "1001"
-                  \A "1010"
-                  \B "1011"
-                  \C "1100"
-                  \D "1101"
-                  \E "1110"
-                  \F "1111"})
+(def hex-bin-map {\0 "0000" \1 "0001" \2 "0010" \3 "0011"
+                  \4 "0100" \5 "0101" \6 "0110" \7 "0111"
+                  \8 "1000" \9 "1001" \A "1010" \B "1011"
+                  \C "1100" \D "1101" \E "1110" \F "1111"})
 
 (defn- hex-to-bin [hex]
   (->> hex
@@ -37,13 +25,15 @@
 (defn- bin-to-int [binary]
   (Long/parseLong (apply str binary) 2))
 
+(defn- bool-to-int [bool] (if bool 1 0))
+
 (def operation-map {0 +
                     1 *
                     2 min
                     3 max
-                    5 (comp #(if % 1 0) >)
-                    6 (comp #(if % 1 0) <)
-                    7 (comp #(if % 1 0) =)})
+                    5 (comp bool-to-int >)
+                    6 (comp bool-to-int <)
+                    7 (comp bool-to-int =)})
 
 (defn- parse-literal-packet [bin version]
   (let [num-bin     (->> bin
@@ -56,7 +46,7 @@
         num-bit-len (* 5 (count num-bin))
         bin         (subvec bin num-bit-len)]
     [bin {:version version
-          :len     (+ 3 3 num-bit-len)
+          :len     (+ 6 num-bit-len)
           :num     num}]))
 
 (defn- parse-operation-packet [[len-type & bin] version id]
@@ -67,7 +57,7 @@
           [bin packets] (parse-n-packets bin packet-num)]
       [bin {:version   version
             :operation (operation-map id)
-            :len       (+ 3 3 1 11 (reduce + (map :len packets)))
+            :len       (+ 7 11 (reduce + (map :len packets)))
             :packets   packets}])
 
     (let [bit-len       (bin-to-int (take 15 bin))
@@ -75,7 +65,7 @@
           [bin packets] (parse-n-bits bin bit-len)]
       [bin {:version   version
             :operation (operation-map id)
-            :len       (+ 3 3 1 15 (reduce + (map :len packets)))
+            :len       (+ 7 15 (reduce + (map :len packets)))
             :packets   packets}])))
 
 (defn- parse-n-bits [bin n]
@@ -131,7 +121,6 @@
        (last)
        (evaluate-expression)))
 
-
 ;; Puzzle: https://adventofcode.com/2021/day/16
 
 (def test-input (parse-input "resources/tests/d16_1.txt"))
@@ -142,3 +131,5 @@
 
 (= (part-2 test-input) 31)
 (time (part-2 input))
+
+
