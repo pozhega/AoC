@@ -53,12 +53,14 @@
              (cond
                (>= p1-score 21) [1 0]
                (>= p2-score 21) [0 1]
-               :else (apply map
-                            +
-                            (map #(apply quantum-play (concat
-                                                       (update-scores p1-score p2-score p1-pos p2-pos % turn)
-                                                       [(inc turn)]))
-                                 (combo/selections [1 2 3] 3)))))))
+
+               :else
+               (apply map
+                      +
+                      (map #(apply quantum-play (concat
+                                                 (update-scores p1-score p2-score p1-pos p2-pos % turn)
+                                                 [(inc turn)]))
+                           (combo/selections [1 2 3] 3)))))))
 
 (defn part-1
   "What do you get if you multiply the score of the losing player by the number of times the die was rolled during the game?"

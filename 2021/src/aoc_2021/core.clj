@@ -21,3 +21,12 @@
   (for [row  (range (count matrix))
         coll (range (count (first matrix)))]
     [row coll]))
+
+(defn matrix-to-map [matrix]
+  (->> matrix
+       (iterate-matrix)
+       (map #(vector % (get-in matrix %)))
+       (into {})))
+
+(defn bin-to-int [binary]
+  (Long/parseLong (apply str binary) 2))
