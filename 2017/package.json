@@ -1,0 +1,24 @@
+{
+  "name": "aoc_2017",
+  "version": "1.0.0",
+  "description": "Solutions for Advent of Code 2017",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf ./dist && tsc",
+    "start": "npm run build && node dist/index.js"
+  },
+  "keywords": [
+    "AOC",
+    "Advent",
+    "Code",
+    "2017"
+  ],
+  "author": "Marko Požega",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "commander": "^9.4.1",
+    "typescript": "^4.9.3"
+  }
+}

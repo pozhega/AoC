@@ -2,6 +2,10 @@
 
 Solutions for [Advent of Code](https://adventofcode.com) puzzles.
 
+## [2022](https://adventofcode.com/2022) in [TypeScript](https://www.typescriptlang.org/)
+
+* [Day 1](https://github.com/pozhega/AoC/blob/master/2022/src/days/d1.ts)
+
 ## [2021](https://adventofcode.com/2021) in [Clojure](https://clojure.org/)
 
 * [Day 1](https://github.com/pozhega/AoC/blob/master/2021/src/aoc_2021/d1.clj)
@@ -73,6 +77,13 @@ Solutions for [Advent of Code](https://adventofcode.com) puzzles.
 * [Day 1](https://github.com/pozhega/AoC/blob/master/2018/src/aoc_2018/d1.clj)
 * [Day 2](https://github.com/pozhega/AoC/blob/master/2018/src/aoc_2018/d2.clj)
 * [Day 3](https://github.com/pozhega/AoC/blob/master/2018/src/aoc_2018/d3.clj)
+
+## [2017](https://adventofcode.com/2017) in [TypeScript](https://www.typescriptlang.org/)
+
+* [Day 1](https://github.com/pozhega/AoC/blob/master/2017/src/days/d1.ts)
+* [Day 2](https://github.com/pozhega/AoC/blob/master/2017/src/days/d2.ts)
+* [Day 3](https://github.com/pozhega/AoC/blob/master/2017/src/days/d3.ts)
+
 
 ## [2015](https://adventofcode.com/2015) in [Crystal](https://crystal-lang.org/) and [Ruby](https://www.ruby-lang.org/en/)
 
