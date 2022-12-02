@@ -29,45 +29,53 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.runPart2 = exports.runPart1 = void 0;
 const fs = __importStar(require("fs"));
 const assert_1 = __importDefault(require("assert"));
-// -----------------------------------------------------------------------------
-// PRIVATE
-//------------------------------------------------------------------------------
 const parseInput = (path) => {
     return fs.readFileSync(path, 'utf-8')
-        .split('\n\n')
-        .map(line => line
-        .split('\n')
-        .filter(val => val !== '')
-        .map(val => parseInt(val)));
+        .split('\n')[0]
+        .split('\t')
+        .map(val => parseInt(val));
 };
-const part1 = (elfCalories) => {
-    return Math.max(...elfCalories
-        .map(calories => calories
-        .reduce((total, calorie) => total + calorie, 0)));
+const findMaxBlockIdx = (memory) => {
+    let maxIndex = 0;
+    memory.forEach((val, index) => { if (val > memory[maxIndex])
+        maxIndex = index; });
+    return maxIndex;
 };
-const part2 = (elfCalories) => {
-    return elfCalories
-        .map(calories => calories.reduce((total, calorie) => total + calorie, 0))
-        .sort((a, b) => b - a)
-        .slice(0, 3)
-        .reduce((total, calories) => total + calories, 0);
+const runCycles = (memory) => {
+    let history = new Map(), currentIdx, reallocationCnt, cycleCnt = 0;
+    while (!history.has(memory.toString())) {
+        history.set(memory.toString(), cycleCnt);
+        currentIdx = findMaxBlockIdx(memory);
+        reallocationCnt = memory[currentIdx];
+        memory[currentIdx] = 0;
+        for (let i = 0; i < reallocationCnt; i++) {
+            currentIdx = (currentIdx + 1) % memory.length;
+            memory[currentIdx]++;
+        }
+        cycleCnt++;
+    }
+    return [memory, history, cycleCnt];
+};
+const part1 = (memory) => {
+    return runCycles(memory).at(-1);
+};
+const part2 = (memory) => {
+    let history, cycleCnt;
+    [memory, history, cycleCnt] = runCycles(memory);
+    return cycleCnt - history.get(memory.toString());
 };
 // -----------------------------------------------------------------------------
 // EXPORTS
 //------------------------------------------------------------------------------
-const inputPath = './src/inputs/d1.txt';
-const inputTestPath1 = './src/inputs/d1-t1.txt';
+const inputPath = './src/inputs/d6.txt';
+const inputTestPath = './src/inputs/d6-t1.txt';
 const runPart1 = () => {
-    (0, assert_1.default)(part1(parseInput(inputTestPath1)) === 24000);
-    console.time('Time');
+    (0, assert_1.default)(part1(parseInput(inputTestPath)) === 5);
     console.log('Part 1: ', part1(parseInput(inputPath)));
-    console.timeEnd('Time');
 };
 exports.runPart1 = runPart1;
 const runPart2 = () => {
-    (0, assert_1.default)(part2(parseInput(inputTestPath1)) === 45000);
-    console.time('Time');
+    (0, assert_1.default)(part2(parseInput(inputTestPath)) === 4);
     console.log('Part 2: ', part2(parseInput(inputPath)));
-    console.timeEnd('Time');
 };
 exports.runPart2 = runPart2;

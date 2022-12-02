@@ -29,9 +29,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.runPart2 = exports.runPart1 = void 0;
 const fs = __importStar(require("fs"));
 const assert_1 = __importDefault(require("assert"));
-// -----------------------------------------------------------------------------
-// PRIVATE
-//------------------------------------------------------------------------------
 const parseInput = (path) => {
     return fs.readFileSync(path, 'utf-8')
         .split('\n\n')
@@ -59,15 +56,11 @@ const inputPath = './src/inputs/d1.txt';
 const inputTestPath1 = './src/inputs/d1-t1.txt';
 const runPart1 = () => {
     (0, assert_1.default)(part1(parseInput(inputTestPath1)) === 24000);
-    console.time('Time');
     console.log('Part 1: ', part1(parseInput(inputPath)));
-    console.timeEnd('Time');
 };
 exports.runPart1 = runPart1;
 const runPart2 = () => {
     (0, assert_1.default)(part2(parseInput(inputTestPath1)) === 45000);
-    console.time('Time');
     console.log('Part 2: ', part2(parseInput(inputPath)));
-    console.timeEnd('Time');
 };
 exports.runPart2 = runPart2;

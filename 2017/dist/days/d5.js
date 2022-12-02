@@ -29,45 +29,40 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.runPart2 = exports.runPart1 = void 0;
 const fs = __importStar(require("fs"));
 const assert_1 = __importDefault(require("assert"));
-// -----------------------------------------------------------------------------
-// PRIVATE
-//------------------------------------------------------------------------------
 const parseInput = (path) => {
     return fs.readFileSync(path, 'utf-8')
-        .split('\n\n')
-        .map(line => line
         .split('\n')
-        .filter(val => val !== '')
-        .map(val => parseInt(val)));
+        .filter(line => line !== '')
+        .map(line => parseInt(line));
 };
-const part1 = (elfCalories) => {
-    return Math.max(...elfCalories
-        .map(calories => calories
-        .reduce((total, calorie) => total + calorie, 0)));
+const parseInstructions = (instructions, condition) => {
+    let i = 0, steps = 0, temp = 0;
+    while (i > -1 && i < instructions.length) {
+        temp = i;
+        i += instructions[temp];
+        condition(instructions[temp]) ? instructions[temp]-- : instructions[temp]++;
+        steps++;
+    }
+    return steps;
 };
-const part2 = (elfCalories) => {
-    return elfCalories
-        .map(calories => calories.reduce((total, calorie) => total + calorie, 0))
-        .sort((a, b) => b - a)
-        .slice(0, 3)
-        .reduce((total, calories) => total + calories, 0);
+const part1 = (instructions) => {
+    return parseInstructions(instructions, (_) => false);
+};
+const part2 = (instructions) => {
+    return parseInstructions(instructions, (offset) => offset > 2);
 };
 // -----------------------------------------------------------------------------
 // EXPORTS
 //------------------------------------------------------------------------------
-const inputPath = './src/inputs/d1.txt';
-const inputTestPath1 = './src/inputs/d1-t1.txt';
+const inputPath = './src/inputs/d5.txt';
+const inputTestPath = './src/inputs/d5-t1.txt';
 const runPart1 = () => {
-    (0, assert_1.default)(part1(parseInput(inputTestPath1)) === 24000);
-    console.time('Time');
+    (0, assert_1.default)(part1(parseInput(inputTestPath)) === 5);
     console.log('Part 1: ', part1(parseInput(inputPath)));
-    console.timeEnd('Time');
 };
 exports.runPart1 = runPart1;
 const runPart2 = () => {
-    (0, assert_1.default)(part2(parseInput(inputTestPath1)) === 45000);
-    console.time('Time');
+    (0, assert_1.default)(part2(parseInput(inputTestPath)) === 10);
     console.log('Part 2: ', part2(parseInput(inputPath)));
-    console.timeEnd('Time');
 };
 exports.runPart2 = runPart2;

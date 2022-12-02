@@ -29,50 +29,56 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.runPart2 = exports.runPart1 = void 0;
 const fs = __importStar(require("fs"));
 const assert_1 = __importDefault(require("assert"));
+// -----------------------------------------------------------------------------
+// PRIVATE
+//------------------------------------------------------------------------------
 const parseInput = (path) => {
     return fs.readFileSync(path, 'utf-8')
         .split('\n')
         .filter(line => line !== '')
-        .map(row => row
-        .split('\t')
-        .map(val => parseInt(val)));
+        .map(line => line.split(' '));
 };
-const part1 = (spreadsheet) => {
-    return spreadsheet.reduce((sum, row) => {
-        return sum + (Math.max(...row) - Math.min(...row));
+const rules = {
+    'win': { 'A': 'Z', 'B': 'X', 'C': 'Y' },
+    'draw': { 'A': 'X', 'B': 'Y', 'C': 'Z' },
+    'loss': { 'A': 'Y', 'B': 'Z', 'C': 'X' }
+};
+const outcomeScores = { 'win': 0, 'draw': 3, 'loss': 6 };
+const shapeScores = { 'X': 1, 'Y': 2, 'Z': 3 };
+const outcomeRules = { 'X': 'win', 'Y': 'draw', 'Z': 'loss' };
+const part1 = (strategy) => {
+    return strategy.reduce((score, [shape1, shape2]) => {
+        score += shapeScores[shape2];
+        if (rules['win'][shape1] === shape2)
+            return score += outcomeScores['win'];
+        if (rules['loss'][shape1] === shape2)
+            return score += outcomeScores['loss'];
+        return score += outcomeScores['draw'];
     }, 0);
 };
-const findDividers = (row) => {
-    for (let i = 0; i < row.length; i++) {
-        for (let j = 1; j < row.length; j++) {
-            if (row[i] === row[j])
-                continue;
-            if (row[i] % row[j] === 0)
-                return row[i] / row[j];
-            if (row[j] % row[i] === 0)
-                return row[j] / row[i];
-        }
-    }
-    return 0;
-};
-const part2 = (spreadsheet) => {
-    return spreadsheet.reduce((sum, row) => {
-        return sum + findDividers(row);
+const part2 = (strategy) => {
+    return strategy.reduce((score, [shape1, rule]) => {
+        let outcome = outcomeRules[rule];
+        let shape2 = rules[outcome][shape1];
+        return score += outcomeScores[outcome] + shapeScores[shape2];
     }, 0);
 };
 // -----------------------------------------------------------------------------
 // EXPORTS
 //------------------------------------------------------------------------------
 const inputPath = './src/inputs/d2.txt';
-const testInputPath1 = './src/inputs/d2-t1.txt';
-const testInputPath2 = './src/inputs/d2-t2.txt';
+const inputTestPath1 = './src/inputs/d2-t1.txt';
 const runPart1 = () => {
-    (0, assert_1.default)(part1(parseInput(testInputPath1)) === 18);
-    console.log('Part 1: ', part1(parseInput(inputPath)));
+    (0, assert_1.default)(part1(parseInput(inputTestPath1)) === 15);
+    console.time('Time');
+    console.log('Part 1:', part1(parseInput(inputPath)));
+    console.timeEnd('Time');
 };
 exports.runPart1 = runPart1;
 const runPart2 = () => {
-    (0, assert_1.default)(part2(parseInput(testInputPath2)) === 9);
+    (0, assert_1.default)(part2(parseInput(inputTestPath1)) === 12);
+    console.time('Time');
     console.log('Part 2: ', part2(parseInput(inputPath)));
+    console.timeEnd('Time');
 };
 exports.runPart2 = runPart2;
