@@ -1,104 +1,82 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.runPart2 = exports.runPart1 = void 0;
+const fs = __importStar(require("fs"));
 const assert_1 = __importDefault(require("assert"));
-const getMatrixNeighbours = (matrix, [xPos, yPos]) => {
-    let neighbours = [];
-    for (let i = xPos - 1; i < xPos + 2; i++) {
-        for (let j = yPos - 1; j < yPos + 2; j++) {
-            if (xPos === i && yPos === j)
-                continue;
-            neighbours.push([i, j]);
-        }
-    }
-    return neighbours;
+const lodash_1 = require("lodash");
+// -----------------------------------------------------------------------------
+// PRIVATE
+//------------------------------------------------------------------------------
+const parsePart1Input = (path) => {
+    return fs.readFileSync(path, 'utf-8')
+        .split('\n')
+        .filter(line => line !== '')
+        .map(val => [
+        val.substring(0, val.length / 2).split(''),
+        val.substring(val.length / 2).split('')
+    ]);
 };
-const calcPointVal = (matrix, point) => {
-    return getMatrixNeighbours(matrix, point)
-        .reduce((sum, point) => {
-        let pointVal = matrix.get(JSON.stringify(point));
-        if (pointVal === undefined)
-            return sum;
-        return sum + pointVal;
-    }, 0);
+const parsePart2Input = (path) => {
+    return (0, lodash_1.chunk)(fs.readFileSync(path, 'utf-8')
+        .split('\n')
+        .filter(line => line !== '')
+        .map(val => val.split('')), 3);
 };
-const getSpiralDistance = (limit) => {
-    let matrix = new Map;
-    matrix.set(JSON.stringify([0, 0]), 1);
-    let xRange = 1;
-    let yRange = 1;
-    let xPos = 0;
-    let yPos = 0;
-    let counter = 1;
-    while (true) {
-        for (let i = 0; i < xRange; i++) {
-            // if (counter === limit) return Math.abs(xPos) + Math.abs(yPos)
-            xPos++;
-            counter++;
-            let pointVal = calcPointVal(matrix, [xPos, yPos]);
-            if (pointVal > limit)
-                return pointVal;
-            matrix.set(JSON.stringify([xPos, yPos]), pointVal);
-        }
-        xRange++;
-        for (let i = 0; i < yRange; i++) {
-            // if (counter === limit) return Math.abs(xPos) + Math.abs(yPos)
-            yPos++;
-            counter++;
-            let pointVal = calcPointVal(matrix, [xPos, yPos]);
-            if (pointVal > limit)
-                return pointVal;
-            matrix.set(JSON.stringify([xPos, yPos]), pointVal);
-        }
-        yRange++;
-        for (let i = 0; i < xRange; i++) {
-            // if (counter === limit) return Math.abs(xPos) + Math.abs(yPos)
-            xPos--;
-            counter++;
-            let pointVal = calcPointVal(matrix, [xPos, yPos]);
-            if (pointVal > limit)
-                return pointVal;
-            matrix.set(JSON.stringify([xPos, yPos]), pointVal);
-        }
-        xRange++;
-        for (let i = 0; i < yRange; i++) {
-            // if (counter === limit) return Math.abs(xPos) + Math.abs(yPos)
-            yPos--;
-            counter++;
-            let pointVal = calcPointVal(matrix, [xPos, yPos]);
-            if (pointVal > limit)
-                return pointVal;
-            matrix.set(JSON.stringify([xPos, yPos]), pointVal);
-        }
-        yRange++;
-    }
+const isLowerCase = (string) => {
+    return string == string.toLowerCase() && string != string.toUpperCase();
 };
-const part1 = (data) => {
-    return getSpiralDistance(data);
+const getItemPriority = (item) => {
+    let charCode = item.charCodeAt(0);
+    return isLowerCase(item) ? charCode - 96 : charCode - 38;
 };
-const part2 = (data) => {
-    return getSpiralDistance(data);
+const part1 = (rucksacks) => {
+    return rucksacks.reduce((sum, rucksack) => sum += getItemPriority((0, lodash_1.intersection)(...rucksack)[0]), 0);
+};
+const part2 = (groups) => {
+    return groups.reduce((sum, group) => sum += getItemPriority((0, lodash_1.intersection)(...group)[0]), 0);
 };
 // -----------------------------------------------------------------------------
 // EXPORTS
 //------------------------------------------------------------------------------
+const inputPath = './src/inputs/d3.txt';
+const inputTestPath1 = './src/inputs/d3-t1.txt';
 const runPart1 = () => {
-    (0, assert_1.default)(part1(1) === 0);
-    (0, assert_1.default)(part1(12) === 3);
-    (0, assert_1.default)(part1(23) === 2);
-    (0, assert_1.default)(part1(1024) === 31);
-    console.log('Part 1: ', part1(312051));
+    (0, assert_1.default)(part1(parsePart1Input(inputTestPath1)) === 157);
+    console.time('Time');
+    console.log('Part 1: ', part1(parsePart1Input(inputPath)));
+    console.timeEnd('Time');
 };
 exports.runPart1 = runPart1;
 const runPart2 = () => {
-    // assert(part2(1) === 1)
-    // assert(part2(2) === 1)
-    // assert(part2(3) === 2)
-    // assert(part2(4) === 4)
-    // assert(part2(4) === 4)
-    console.log('Part 2: ', part2(312051));
+    (0, assert_1.default)(part2(parsePart2Input(inputTestPath1)) === 70);
+    console.time('Time');
+    console.log('Part 2: ', part2(parsePart2Input(inputPath)));
+    console.timeEnd('Time');
 };
 exports.runPart2 = runPart2;
