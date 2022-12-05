@@ -11,7 +11,7 @@ type Calories = number[]
 // PRIVATE
 //------------------------------------------------------------------------------
 
-const parseInput = (path: string): any[] => {
+function parseInput(path: string): any[] {
     return fs.readFileSync(path, 'utf-8')
         .split('\n\n')
         .map(line => line
@@ -20,13 +20,13 @@ const parseInput = (path: string): any[] => {
             .map(val => parseInt(val)))
 }
 
-const part1 = (elfCalories: Calories[]): number => {
+function part1(elfCalories: Calories[]): number {
     return Math.max(...elfCalories
         .map(calories => calories
             .reduce((total, calorie) => total + calorie, 0)))
 }
 
-const part2 = (elfCalories: Calories[]): number => {
+function part2(elfCalories: Calories[]): number {
     return elfCalories
         .map(calories => calories.reduce((total, calorie) => total + calorie, 0))
         .sort((a, b) => b - a)
@@ -41,7 +41,7 @@ const part2 = (elfCalories: Calories[]): number => {
 const inputPath = './src/inputs/d1.txt'
 const inputTestPath1 = './src/inputs/d1-t1.txt'
 
-export const runPart1 = () => {
+export function runPart1() {
     assert(part1(parseInput(inputTestPath1)) === 24000)
 
     console.time('Time');
@@ -49,7 +49,7 @@ export const runPart1 = () => {
     console.timeEnd('Time');
 }
 
-export const runPart2 = () => {
+export function runPart2() {
     assert(part2(parseInput(inputTestPath1)) === 45000)
 
     console.time('Time');

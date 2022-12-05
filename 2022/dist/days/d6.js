@@ -32,50 +32,33 @@ const assert_1 = __importDefault(require("assert"));
 // -----------------------------------------------------------------------------
 // PRIVATE
 //------------------------------------------------------------------------------
-function parseInput(path) {
+const parseInput = (path) => {
     return fs.readFileSync(path, 'utf-8')
         .split('\n')
-        .filter(line => line !== '')
-        .map(line => line
-        .split(',')
-        .map(section => section
-        .split('-')
-        .map(val => parseInt(val))));
-}
-function part1(pairs) {
-    return pairs.reduce((count, [section1, section2]) => {
-        let [s1From, s1To] = section1;
-        let [s2From, s2To] = section2;
-        if ((s1From >= s2From && s1To <= s2To) || (s2From >= s1From && s2To <= s1To))
-            return count += 1;
-        return count;
-    }, 0);
-}
-function part2(pairs) {
-    return pairs.reduce((count, [section1, section2]) => {
-        let [s1From, s1To] = section1;
-        let [s2From, s2To] = section2;
-        if (!(s1To < s2From || s2To < s1From))
-            return count += 1;
-        return count;
-    }, 0);
-}
+        .filter(line => line !== '');
+};
+const part1 = (data) => {
+    return 0;
+};
+const part2 = (data) => {
+    return 0;
+};
 // -----------------------------------------------------------------------------
 // EXPORTS
 //------------------------------------------------------------------------------
-const inputPath = './src/inputs/d4.txt';
-const inputTestPath1 = './src/inputs/d4-t1.txt';
-function runPart1() {
-    (0, assert_1.default)(part1(parseInput(inputTestPath1)) === 2);
+const inputPath = './src/inputs/d6.txt';
+const inputTestPath1 = './src/inputs/d6-t1.txt';
+const runPart1 = () => {
+    (0, assert_1.default)(part1(parseInput(inputTestPath1)) === 0);
     console.time('Time');
     console.log('Part 1: ', part1(parseInput(inputPath)));
     console.timeEnd('Time');
-}
+};
 exports.runPart1 = runPart1;
-function runPart2() {
-    (0, assert_1.default)(part2(parseInput(inputTestPath1)) === 4);
+const runPart2 = () => {
+    (0, assert_1.default)(part2(parseInput(inputTestPath1)) === 0);
     console.time('Time');
     console.log('Part 2: ', part2(parseInput(inputPath)));
     console.timeEnd('Time');
-}
+};
 exports.runPart2 = runPart2;

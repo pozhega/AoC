@@ -29,36 +29,67 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.runPart2 = exports.runPart1 = void 0;
 const fs = __importStar(require("fs"));
 const assert_1 = __importDefault(require("assert"));
+const lodash_1 = require("lodash");
 // -----------------------------------------------------------------------------
 // PRIVATE
 //------------------------------------------------------------------------------
-const parseInput = (path) => {
-    return fs.readFileSync(path, 'utf-8')
+function parseStacks(stacksInput) {
+    return (0, lodash_1.zip)(...stacksInput
         .split('\n')
-        .filter(line => line !== '');
-};
-const part1 = (data) => {
-    return 0;
-};
-const part2 = (data) => {
-    return 0;
-};
+        .reverse()
+        .splice(1)
+        .map(line => line
+        .replace(/\[|\]/g, '')
+        .replace(/     /g, ' # ')
+        .replace(/    /g, '#')
+        .replace(/ /g, '')
+        .split('')))
+        .map(stack => stack
+        .filter(crate => crate != '#'));
+}
+function parseSteps(stepsInput) {
+    return stepsInput
+        .split('\n')
+        .filter(line => line != '')
+        .map(line => line
+        .split(' ')
+        .map(val => parseInt(val))
+        .filter(val => !isNaN(val)));
+}
+function parseInput(path) {
+    let [stacksInput, stepsInput] = fs.readFileSync(path, 'utf-8').split('\n\n');
+    return [parseStacks(stacksInput), parseSteps(stepsInput)];
+}
+function part1([stacks, steps]) {
+    steps.forEach(([count, from, to]) => {
+        stacks[to - 1].push(...stacks[from - 1]
+            .splice(-count, count)
+            .reverse());
+    });
+    return stacks.map(stack => stack.pop()).join('');
+}
+function part2([stacks, steps]) {
+    steps.forEach(([count, from, to]) => {
+        stacks[to - 1].push(...stacks[from - 1].splice(-count, count));
+    });
+    return stacks.map(stack => stack.pop()).join('');
+}
 // -----------------------------------------------------------------------------
 // EXPORTS
 //------------------------------------------------------------------------------
 const inputPath = './src/inputs/d5.txt';
 const inputTestPath1 = './src/inputs/d5-t1.txt';
-const runPart1 = () => {
-    (0, assert_1.default)(part1(parseInput(inputTestPath1)) === 0);
+function runPart1() {
+    (0, assert_1.default)(part1(parseInput(inputTestPath1)) === 'CMZ');
     console.time('Time');
     console.log('Part 1: ', part1(parseInput(inputPath)));
     console.timeEnd('Time');
-};
+}
 exports.runPart1 = runPart1;
-const runPart2 = () => {
-    (0, assert_1.default)(part2(parseInput(inputTestPath1)) === 0);
+function runPart2() {
+    (0, assert_1.default)(part2(parseInput(inputTestPath1)) === 'MCD');
     console.time('Time');
     console.log('Part 2: ', part2(parseInput(inputPath)));
     console.timeEnd('Time');
-};
+}
 exports.runPart2 = runPart2;

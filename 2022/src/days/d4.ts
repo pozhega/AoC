@@ -12,7 +12,7 @@ type ElfPair = [ElfSection, ElfSection]
 // PRIVATE
 //------------------------------------------------------------------------------
 
-const parseInput = (path: string): any[] => {
+function parseInput(path: string): any[] {
     return fs.readFileSync(path, 'utf-8')
         .split('\n')
         .filter(line => line !== '')
@@ -23,24 +23,23 @@ const parseInput = (path: string): any[] => {
                 .map(val => parseInt(val))))
 }
 
-const part1 = (pairs: ElfPair[]): number => {
+function part1(pairs: ElfPair[]): number {
     return pairs.reduce((count, [section1, section2]) => {
         let [s1From, s1To] = section1
         let [s2From, s2To] = section2
 
-        if (s1From >= s2From && s1To <= s2To) return count += 1
-        if (s2From >= s1From && s2To <= s1To) return count += 1
+        if ((s1From >= s2From && s1To <= s2To) || (s2From >= s1From && s2To <= s1To))
+            return count += 1
         return count
     }, 0)
 }
 
-const part2 = (pairs: ElfPair[]): number => {
+function part2(pairs: ElfPair[]): number {
     return pairs.reduce((count, [section1, section2]) => {
         let [s1From, s1To] = section1
         let [s2From, s2To] = section2
 
-        if (s1To >= s2From && s2To >= s1To) return count += 1
-        if (s2To >= s1From && s1To >= s2To) return count += 1
+        if (!(s1To < s2From || s2To < s1From)) return count += 1
         return count
     }, 0)
 }
@@ -52,7 +51,7 @@ const part2 = (pairs: ElfPair[]): number => {
 const inputPath = './src/inputs/d4.txt'
 const inputTestPath1 = './src/inputs/d4-t1.txt'
 
-export const runPart1 = () => {
+export function runPart1() {
     assert(part1(parseInput(inputTestPath1)) === 2)
 
     console.time('Time');
@@ -60,7 +59,7 @@ export const runPart1 = () => {
     console.timeEnd('Time');
 }
 
-export const runPart2 = () => {
+export function runPart2() {
     assert(part2(parseInput(inputTestPath1)) === 4)
 
     console.time('Time');

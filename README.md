@@ -9,6 +9,7 @@ Solutions for [Advent of Code](https://adventofcode.com) puzzles.
 * [Day 3](https://github.com/pozhega/AoC/blob/master/2022/src/days/d3.ts)
 * [Day 4](https://github.com/pozhega/AoC/blob/master/2022/src/days/d4.ts)
 * [Day 5](https://github.com/pozhega/AoC/blob/master/2022/src/days/d5.ts)
+* [Day 6](https://github.com/pozhega/AoC/blob/master/2022/src/days/d6.ts)
 
 ## [2021](https://adventofcode.com/2021) in [Clojure](https://clojure.org/)
 

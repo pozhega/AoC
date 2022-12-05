@@ -32,42 +32,42 @@ const assert_1 = __importDefault(require("assert"));
 // -----------------------------------------------------------------------------
 // PRIVATE
 //------------------------------------------------------------------------------
-const parseInput = (path) => {
+function parseInput(path) {
     return fs.readFileSync(path, 'utf-8')
         .split('\n\n')
         .map(line => line
         .split('\n')
         .filter(val => val !== '')
         .map(val => parseInt(val)));
-};
-const part1 = (elfCalories) => {
+}
+function part1(elfCalories) {
     return Math.max(...elfCalories
         .map(calories => calories
         .reduce((total, calorie) => total + calorie, 0)));
-};
-const part2 = (elfCalories) => {
+}
+function part2(elfCalories) {
     return elfCalories
         .map(calories => calories.reduce((total, calorie) => total + calorie, 0))
         .sort((a, b) => b - a)
         .slice(0, 3)
         .reduce((total, calories) => total + calories, 0);
-};
+}
 // -----------------------------------------------------------------------------
 // EXPORTS
 //------------------------------------------------------------------------------
 const inputPath = './src/inputs/d1.txt';
 const inputTestPath1 = './src/inputs/d1-t1.txt';
-const runPart1 = () => {
+function runPart1() {
     (0, assert_1.default)(part1(parseInput(inputTestPath1)) === 24000);
     console.time('Time');
     console.log('Part 1: ', part1(parseInput(inputPath)));
     console.timeEnd('Time');
-};
+}
 exports.runPart1 = runPart1;
-const runPart2 = () => {
+function runPart2() {
     (0, assert_1.default)(part2(parseInput(inputTestPath1)) === 45000);
     console.time('Time');
     console.log('Part 2: ', part2(parseInput(inputPath)));
     console.timeEnd('Time');
-};
+}
 exports.runPart2 = runPart2;

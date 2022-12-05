@@ -13,7 +13,7 @@ type Group = [string[], string[], string[]]
 // PRIVATE
 //------------------------------------------------------------------------------
 
-const parsePart1Input = (path: string): any[] => {
+function parsePart1Input(path: string): any[] {
     return fs.readFileSync(path, 'utf-8')
         .split('\n')
         .filter(line => line !== '')
@@ -22,28 +22,28 @@ const parsePart1Input = (path: string): any[] => {
             val.substring(val.length / 2).split('')])
 }
 
-const parsePart2Input = (path: string): any[] => {
+function parsePart2Input(path: string): any[] {
     return chunk(fs.readFileSync(path, 'utf-8')
         .split('\n')
         .filter(line => line !== '')
         .map(val => val.split('')), 3)
 }
 
-const isLowerCase = (string: string): boolean => {
+function isLowerCase(string: string): boolean {
     return string == string.toLowerCase() && string != string.toUpperCase();
 }
 
-const getItemPriority = (item: string): number => {
+function getItemPriority(item: string): number {
     let charCode = item.charCodeAt(0)
     return isLowerCase(item) ? charCode - 96 : charCode - 38
 }
 
-const part1 = (rucksacks: Rucksack[]): number => {
+function part1(rucksacks: Rucksack[]): number {
     return rucksacks.reduce((sum, rucksack) =>
         sum += getItemPriority(intersection(...rucksack)[0]), 0)
 }
 
-const part2 = (groups: Group[]): number => {
+function part2(groups: Group[]): number {
     return groups.reduce((sum, group) =>
         sum += getItemPriority(intersection(...group)[0]), 0)
 }
@@ -55,7 +55,7 @@ const part2 = (groups: Group[]): number => {
 const inputPath = './src/inputs/d3.txt'
 const inputTestPath1 = './src/inputs/d3-t1.txt'
 
-export const runPart1 = () => {
+export function runPart1() {
     assert(part1(parsePart1Input(inputTestPath1)) === 157)
 
     console.time('Time');
@@ -63,7 +63,7 @@ export const runPart1 = () => {
     console.timeEnd('Time');
 }
 
-export const runPart2 = () => {
+export function runPart2() {
     assert(part2(parsePart2Input(inputTestPath1)) === 70)
 
     console.time('Time');
