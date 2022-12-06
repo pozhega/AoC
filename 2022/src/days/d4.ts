@@ -1,5 +1,5 @@
-import * as fs from 'fs';
-import assert from 'assert';
+import * as fs from 'fs'
+import assert from 'assert'
 
 // -----------------------------------------------------------------------------
 // TYPES
@@ -14,8 +14,8 @@ type ElfPair = [ElfSection, ElfSection]
 
 function parseInput(path: string): any[] {
     return fs.readFileSync(path, 'utf-8')
+        .trimEnd()
         .split('\n')
-        .filter(line => line !== '')
         .map(line => line
             .split(',')
             .map(section => section
@@ -27,10 +27,9 @@ function part1(pairs: ElfPair[]): number {
     return pairs.reduce((count, [section1, section2]) => {
         let [s1From, s1To] = section1
         let [s2From, s2To] = section2
+        let isOverlapping = (s1From >= s2From && s1To <= s2To) || (s2From >= s1From && s2To <= s1To)
 
-        if ((s1From >= s2From && s1To <= s2To) || (s2From >= s1From && s2To <= s1To))
-            return count += 1
-        return count
+        return count += Number(isOverlapping)
     }, 0)
 }
 
@@ -38,9 +37,9 @@ function part2(pairs: ElfPair[]): number {
     return pairs.reduce((count, [section1, section2]) => {
         let [s1From, s1To] = section1
         let [s2From, s2To] = section2
+        let isOverlapping = !(s1To < s2From || s2To < s1From)
 
-        if (!(s1To < s2From || s2To < s1From)) return count += 1
-        return count
+        return count += Number(isOverlapping)
     }, 0)
 }
 

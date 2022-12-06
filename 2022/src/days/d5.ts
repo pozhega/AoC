@@ -1,6 +1,7 @@
-import * as fs from 'fs';
-import assert from 'assert';
-import { zip } from 'lodash';
+import * as fs from 'fs'
+import assert from 'assert'
+import { chain } from 'lodash'
+
 
 // -----------------------------------------------------------------------------
 // TYPES
@@ -14,29 +15,28 @@ type Step = [number, number, number]
 //------------------------------------------------------------------------------
 
 function parseStacks(stacksInput: string): any[] {
-    return zip(...
-        stacksInput
-            .split('\n')
-            .reverse()
-            .splice(1)
-            .map(line => line
-                .replace(/\[|\]/g, '')
-                .replace(/     /g, ' # ')
-                .replace(/    /g, '#')
-                .replace(/ /g, '')
-                .split('')))
-        .map(stack => stack
-            .filter(crate => crate != '#'))
+    return chain(stacksInput)
+        .split('\n')
+        .reverse()
+        .tail()
+        .map(line => line
+            .replace(/\[|\]/g, '')
+            .replace(/     /g, ' # ')
+            .replace(/    /g, '#')
+            .replace(/ /g, '')
+            .split(''))
+        .unzip()
+        .map(stack => stack.filter(crate => crate != '#'))
+        .value()
 }
 
 function parseSteps(stepsInput: string): any[] {
     return stepsInput
+        .trimEnd()
         .split('\n')
-        .filter(line => line != '')
-        .map(line => line
-            .split(' ')
-            .map(val => parseInt(val))
-            .filter(val => !isNaN(val)))
+        .map(line => Array
+            .from(line.matchAll(/\d+/g))
+            .map(digit => parseInt(digit.toString())))
 }
 
 function parseInput(path: string): [any[], any[]] {
@@ -44,7 +44,7 @@ function parseInput(path: string): [any[], any[]] {
     return [parseStacks(stacksInput), parseSteps(stepsInput)]
 }
 
-function part1([stacks, steps]: [Stack[], Step[]]): string {
+function part1(stacks: Stack[], steps: Step[]): string {
     steps.forEach(([count, from, to]) => {
         stacks[to - 1].push(...
             stacks[from - 1]
@@ -55,7 +55,7 @@ function part1([stacks, steps]: [Stack[], Step[]]): string {
     return stacks.map(stack => stack.pop()).join('')
 }
 
-function part2([stacks, steps]: [Stack[], Step[]]): string {
+function part2(stacks: Stack[], steps: Step[]): string {
     steps.forEach(([count, from, to]) => {
         stacks[to - 1].push(...
             stacks[from - 1].splice(-count, count))
@@ -72,17 +72,17 @@ const inputPath = './src/inputs/d5.txt'
 const inputTestPath1 = './src/inputs/d5-t1.txt'
 
 export function runPart1() {
-    assert(part1(parseInput(inputTestPath1)) === 'CMZ')
+    assert(part1(...parseInput(inputTestPath1)) === 'CMZ')
 
     console.time('Time');
-    console.log('Part 1: ', part1(parseInput(inputPath)))
+    console.log('Part 1: ', part1(...parseInput(inputPath)))
     console.timeEnd('Time');
 }
 
 export function runPart2() {
-    assert(part2(parseInput(inputTestPath1)) === 'MCD')
+    assert(part2(...parseInput(inputTestPath1)) === 'MCD')
 
     console.time('Time');
-    console.log('Part 2: ', part2(parseInput(inputPath)))
+    console.log('Part 2: ', part2(...parseInput(inputPath)))
     console.timeEnd('Time');
 }

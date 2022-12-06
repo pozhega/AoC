@@ -1,12 +1,11 @@
-import * as fs from 'fs'
-import assert from 'assert'
-import { add } from 'lodash'
+import * as fs from 'fs';
+import assert from 'assert';
 
 // -----------------------------------------------------------------------------
 // TYPES
 //------------------------------------------------------------------------------
 
-type Calories = number[]
+type Data = any
 
 // -----------------------------------------------------------------------------
 // PRIVATE
@@ -15,35 +14,26 @@ type Calories = number[]
 function parseInput(path: string): any[] {
     return fs.readFileSync(path, 'utf-8')
         .trimEnd()
-        .split('\n\n')
-        .map(line => line
-            .split('\n')
-            .map(val => parseInt(val)))
+        .split('\n')
 }
 
-function part1(elfCalories: Calories[]): number {
-    return Math.max(...elfCalories
-        .map(calories => calories
-            .reduce(add)))
+function part1(data: Data): number {
+    return 0
 }
 
-function part2(elfCalories: Calories[]): number {
-    return elfCalories
-        .map(calories => calories.reduce(add))
-        .sort((a, b) => b - a)
-        .slice(0, 3)
-        .reduce(add, 0)
+function part2(data: Data): number {
+    return 0
 }
 
 // -----------------------------------------------------------------------------
 // EXPORTS
 //------------------------------------------------------------------------------
 
-const inputPath = './src/inputs/d1.txt'
-const inputTestPath1 = './src/inputs/d1-t1.txt'
+const inputPath = './src/inputs/d7.txt'
+const inputTestPath1 = './src/inputs/d7-t1.txt'
 
 export function runPart1() {
-    assert(part1(parseInput(inputTestPath1)) === 24000)
+    assert(part1(parseInput(inputTestPath1)) === 0)
 
     console.time('Time');
     console.log('Part 1: ', part1(parseInput(inputPath)))
@@ -51,7 +41,7 @@ export function runPart1() {
 }
 
 export function runPart2() {
-    assert(part2(parseInput(inputTestPath1)) === 45000)
+    assert(part2(parseInput(inputTestPath1)) === 0)
 
     console.time('Time');
     console.log('Part 2: ', part2(parseInput(inputPath)))

@@ -1,5 +1,5 @@
-import * as fs from 'fs';
-import assert from 'assert';
+import * as fs from 'fs'
+import assert from 'assert'
 
 // -----------------------------------------------------------------------------
 // TYPES
@@ -42,8 +42,8 @@ interface GameRule {
 
 const parseInput = (path: string): any[] => {
     return fs.readFileSync(path, 'utf-8')
+        .trimEnd()
         .split('\n')
-        .filter(line => line !== '')
         .map(line => line.split(' '))
 }
 

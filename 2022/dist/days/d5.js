@@ -34,33 +34,33 @@ const lodash_1 = require("lodash");
 // PRIVATE
 //------------------------------------------------------------------------------
 function parseStacks(stacksInput) {
-    return (0, lodash_1.zip)(...stacksInput
+    return (0, lodash_1.chain)(stacksInput)
         .split('\n')
         .reverse()
-        .splice(1)
+        .tail()
         .map(line => line
         .replace(/\[|\]/g, '')
         .replace(/     /g, ' # ')
         .replace(/    /g, '#')
         .replace(/ /g, '')
-        .split('')))
-        .map(stack => stack
-        .filter(crate => crate != '#'));
+        .split(''))
+        .unzip()
+        .map(stack => stack.filter(crate => crate != '#'))
+        .value();
 }
 function parseSteps(stepsInput) {
     return stepsInput
+        .trimEnd()
         .split('\n')
-        .filter(line => line != '')
-        .map(line => line
-        .split(' ')
-        .map(val => parseInt(val))
-        .filter(val => !isNaN(val)));
+        .map(line => Array
+        .from(line.matchAll(/\d+/g))
+        .map(digit => parseInt(digit.toString())));
 }
 function parseInput(path) {
     let [stacksInput, stepsInput] = fs.readFileSync(path, 'utf-8').split('\n\n');
     return [parseStacks(stacksInput), parseSteps(stepsInput)];
 }
-function part1([stacks, steps]) {
+function part1(stacks, steps) {
     steps.forEach(([count, from, to]) => {
         stacks[to - 1].push(...stacks[from - 1]
             .splice(-count, count)
@@ -68,7 +68,7 @@ function part1([stacks, steps]) {
     });
     return stacks.map(stack => stack.pop()).join('');
 }
-function part2([stacks, steps]) {
+function part2(stacks, steps) {
     steps.forEach(([count, from, to]) => {
         stacks[to - 1].push(...stacks[from - 1].splice(-count, count));
     });
@@ -80,16 +80,16 @@ function part2([stacks, steps]) {
 const inputPath = './src/inputs/d5.txt';
 const inputTestPath1 = './src/inputs/d5-t1.txt';
 function runPart1() {
-    (0, assert_1.default)(part1(parseInput(inputTestPath1)) === 'CMZ');
+    (0, assert_1.default)(part1(...parseInput(inputTestPath1)) === 'CMZ');
     console.time('Time');
-    console.log('Part 1: ', part1(parseInput(inputPath)));
+    console.log('Part 1: ', part1(...parseInput(inputPath)));
     console.timeEnd('Time');
 }
 exports.runPart1 = runPart1;
 function runPart2() {
-    (0, assert_1.default)(part2(parseInput(inputTestPath1)) === 'MCD');
+    (0, assert_1.default)(part2(...parseInput(inputTestPath1)) === 'MCD');
     console.time('Time');
-    console.log('Part 2: ', part2(parseInput(inputPath)));
+    console.log('Part 2: ', part2(...parseInput(inputPath)));
     console.timeEnd('Time');
 }
 exports.runPart2 = runPart2;

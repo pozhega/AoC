@@ -34,8 +34,8 @@ const assert_1 = __importDefault(require("assert"));
 //------------------------------------------------------------------------------
 const parseInput = (path) => {
     return fs.readFileSync(path, 'utf-8')
+        .trimEnd()
         .split('\n')
-        .filter(line => line !== '')
         .map(line => line.split(' '));
 };
 const rules = {

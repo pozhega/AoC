@@ -29,44 +29,34 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.runPart2 = exports.runPart1 = void 0;
 const fs = __importStar(require("fs"));
 const assert_1 = __importDefault(require("assert"));
-const lodash_1 = require("lodash");
 // -----------------------------------------------------------------------------
 // PRIVATE
 //------------------------------------------------------------------------------
 function parseInput(path) {
     return fs.readFileSync(path, 'utf-8')
         .trimEnd()
-        .split('\n\n')
-        .map(line => line
-        .split('\n')
-        .map(val => parseInt(val)));
+        .split('\n');
 }
-function part1(elfCalories) {
-    return Math.max(...elfCalories
-        .map(calories => calories
-        .reduce(lodash_1.add)));
+function part1(data) {
+    return 0;
 }
-function part2(elfCalories) {
-    return elfCalories
-        .map(calories => calories.reduce(lodash_1.add))
-        .sort((a, b) => b - a)
-        .slice(0, 3)
-        .reduce(lodash_1.add, 0);
+function part2(data) {
+    return 0;
 }
 // -----------------------------------------------------------------------------
 // EXPORTS
 //------------------------------------------------------------------------------
-const inputPath = './src/inputs/d1.txt';
-const inputTestPath1 = './src/inputs/d1-t1.txt';
+const inputPath = './src/inputs/d7.txt';
+const inputTestPath1 = './src/inputs/d7-t1.txt';
 function runPart1() {
-    (0, assert_1.default)(part1(parseInput(inputTestPath1)) === 24000);
+    (0, assert_1.default)(part1(parseInput(inputTestPath1)) === 0);
     console.time('Time');
     console.log('Part 1: ', part1(parseInput(inputPath)));
     console.timeEnd('Time');
 }
 exports.runPart1 = runPart1;
 function runPart2() {
-    (0, assert_1.default)(part2(parseInput(inputTestPath1)) === 45000);
+    (0, assert_1.default)(part2(parseInput(inputTestPath1)) === 0);
     console.time('Time');
     console.log('Part 2: ', part2(parseInput(inputPath)));
     console.timeEnd('Time');

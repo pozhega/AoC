@@ -34,8 +34,8 @@ const assert_1 = __importDefault(require("assert"));
 //------------------------------------------------------------------------------
 function parseInput(path) {
     return fs.readFileSync(path, 'utf-8')
+        .trimEnd()
         .split('\n')
-        .filter(line => line !== '')
         .map(line => line
         .split(',')
         .map(section => section
@@ -46,18 +46,16 @@ function part1(pairs) {
     return pairs.reduce((count, [section1, section2]) => {
         let [s1From, s1To] = section1;
         let [s2From, s2To] = section2;
-        if ((s1From >= s2From && s1To <= s2To) || (s2From >= s1From && s2To <= s1To))
-            return count += 1;
-        return count;
+        let isOverlapping = (s1From >= s2From && s1To <= s2To) || (s2From >= s1From && s2To <= s1To);
+        return count += Number(isOverlapping);
     }, 0);
 }
 function part2(pairs) {
     return pairs.reduce((count, [section1, section2]) => {
         let [s1From, s1To] = section1;
         let [s2From, s2To] = section2;
-        if (!(s1To < s2From || s2To < s1From))
-            return count += 1;
-        return count;
+        let isOverlapping = !(s1To < s2From || s2To < s1From);
+        return count += Number(isOverlapping);
     }, 0);
 }
 // -----------------------------------------------------------------------------

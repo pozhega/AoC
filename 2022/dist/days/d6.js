@@ -32,33 +32,48 @@ const assert_1 = __importDefault(require("assert"));
 // -----------------------------------------------------------------------------
 // PRIVATE
 //------------------------------------------------------------------------------
-const parseInput = (path) => {
+function parseInput(path) {
     return fs.readFileSync(path, 'utf-8')
-        .split('\n')
-        .filter(line => line !== '');
-};
-const part1 = (data) => {
-    return 0;
-};
-const part2 = (data) => {
-    return 0;
-};
+        .trimEnd()
+        .split('\n')[0];
+}
+function runSubroutine(signal, bufferSize) {
+    for (let i = 0; i < signal.length; i++) {
+        let uniqueBuffer = new Set(signal.substring(i, i + bufferSize));
+        if (uniqueBuffer.size === bufferSize)
+            return i + bufferSize;
+    }
+    return -1;
+}
+function part1(signal) {
+    return runSubroutine(signal, 4);
+}
+function part2(signal) {
+    return runSubroutine(signal, 14);
+}
 // -----------------------------------------------------------------------------
 // EXPORTS
 //------------------------------------------------------------------------------
 const inputPath = './src/inputs/d6.txt';
-const inputTestPath1 = './src/inputs/d6-t1.txt';
-const runPart1 = () => {
-    (0, assert_1.default)(part1(parseInput(inputTestPath1)) === 0);
+function runPart1() {
+    (0, assert_1.default)(part1('mjqjpqmgbljsphdztnvjfqwrcgsmlb') === 7);
+    (0, assert_1.default)(part1('bvwbjplbgvbhsrlpgdmjqwftvncz') === 5);
+    (0, assert_1.default)(part1('nppdvjthqldpwncqszvftbrmjlhg') === 6);
+    (0, assert_1.default)(part1('nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg') === 10);
+    (0, assert_1.default)(part1('zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw') === 11);
     console.time('Time');
     console.log('Part 1: ', part1(parseInput(inputPath)));
     console.timeEnd('Time');
-};
+}
 exports.runPart1 = runPart1;
-const runPart2 = () => {
-    (0, assert_1.default)(part2(parseInput(inputTestPath1)) === 0);
+function runPart2() {
+    (0, assert_1.default)(part2('mjqjpqmgbljsphdztnvjfqwrcgsmlb') === 19);
+    (0, assert_1.default)(part2('bvwbjplbgvbhsrlpgdmjqwftvncz') === 23);
+    (0, assert_1.default)(part2('nppdvjthqldpwncqszvftbrmjlhg') === 23);
+    (0, assert_1.default)(part2('nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg') === 29);
+    (0, assert_1.default)(part2('zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw') === 26);
     console.time('Time');
     console.log('Part 2: ', part2(parseInput(inputPath)));
     console.timeEnd('Time');
-};
+}
 exports.runPart2 = runPart2;

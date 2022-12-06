@@ -1,28 +1,31 @@
-import * as fs from 'fs';
-import assert from 'assert';
-
-// -----------------------------------------------------------------------------
-// TYPES
-//------------------------------------------------------------------------------
-
-type Data = any
+import * as fs from 'fs'
+import assert from 'assert'
 
 // -----------------------------------------------------------------------------
 // PRIVATE
 //------------------------------------------------------------------------------
 
-const parseInput = (path: string): any[] => {
+function parseInput(path: string): string {
     return fs.readFileSync(path, 'utf-8')
-        .split('\n')
-        .filter(line => line !== '')
+        .trimEnd()
+        .split('\n')[0]
 }
 
-const part1 = (data: Data): number => {
-    return 0
+function runSubroutine(signal: string, bufferSize: number): number {
+    for (let i = 0; i < signal.length; i++) {
+        let uniqueBuffer = new Set(signal.substring(i, i + bufferSize))
+        if (uniqueBuffer.size === bufferSize) return i + bufferSize
+    }
+
+    return -1
 }
 
-const part2 = (data: Data): number => {
-    return 0
+function part1(signal: string): number {
+    return runSubroutine(signal, 4)
+}
+
+function part2(signal: string): number {
+    return runSubroutine(signal, 14)
 }
 
 // -----------------------------------------------------------------------------
@@ -30,18 +33,25 @@ const part2 = (data: Data): number => {
 //------------------------------------------------------------------------------
 
 const inputPath = './src/inputs/d6.txt'
-const inputTestPath1 = './src/inputs/d6-t1.txt'
 
-export const runPart1 = () => {
-    assert(part1(parseInput(inputTestPath1)) === 0)
+export function runPart1() {
+    assert(part1('mjqjpqmgbljsphdztnvjfqwrcgsmlb') === 7)
+    assert(part1('bvwbjplbgvbhsrlpgdmjqwftvncz') === 5)
+    assert(part1('nppdvjthqldpwncqszvftbrmjlhg') === 6)
+    assert(part1('nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg') === 10)
+    assert(part1('zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw') === 11)
 
     console.time('Time');
     console.log('Part 1: ', part1(parseInput(inputPath)))
     console.timeEnd('Time');
 }
 
-export const runPart2 = () => {
-    assert(part2(parseInput(inputTestPath1)) === 0)
+export function runPart2() {
+    assert(part2('mjqjpqmgbljsphdztnvjfqwrcgsmlb') === 19)
+    assert(part2('bvwbjplbgvbhsrlpgdmjqwftvncz') === 23)
+    assert(part2('nppdvjthqldpwncqszvftbrmjlhg') === 23)
+    assert(part2('nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg') === 29)
+    assert(part2('zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw') === 26)
 
     console.time('Time');
     console.log('Part 2: ', part2(parseInput(inputPath)))
