@@ -6,7 +6,8 @@ import assert from 'assert'
 //------------------------------------------------------------------------------
 
 function parseInput(path: string): string {
-    return fs.readFileSync(path, 'utf-8')
+    return fs
+        .readFileSync(path, 'utf-8')
         .trimEnd()
         .split('\n')[0]
 }
