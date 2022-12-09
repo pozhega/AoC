@@ -29,6 +29,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.runPart2 = exports.runPart1 = void 0;
 const fs = __importStar(require("fs"));
 const assert_1 = __importDefault(require("assert"));
+const lodash_1 = require("lodash");
 // -----------------------------------------------------------------------------
 // PRIVATE
 //------------------------------------------------------------------------------
@@ -40,56 +41,28 @@ function parseInput(path) {
         .map(line => line.split(' '))
         .map(([dir, num]) => [dir, parseInt(num)]);
 }
-function updateHead(head, dir) {
-    if (dir === 'R')
-        head[0]++;
-    else if (dir === 'U')
-        head[1]++;
-    else if (dir === 'L')
-        head[0]--;
-    else
-        head[1]--;
+function moveHead([headX, headY], dir) {
+    headX += Number(dir === 'R') - Number(dir === 'L');
+    headY += Number(dir === 'U') - Number(dir === 'D');
+    return [headX, headY];
 }
-function updateTail(head, tail) {
-    if (head[0] - tail[0] === 2) {
-        tail[0]++;
-        if (head[1] > tail[1])
-            tail[1]++;
-        if (head[1] < tail[1])
-            tail[1]--;
+function followHead([headX, headY], [tailX, tailY]) {
+    if (Math.abs(headX - tailX) > 1 || Math.abs(headY - tailY) > 1) {
+        tailY += Number(headY > tailY) - Number(headY < tailY);
+        tailX += Number(headX > tailX) - Number(headX < tailX);
     }
-    else if (head[0] - tail[0] === -2) {
-        tail[0]--;
-        if (head[1] > tail[1])
-            tail[1]++;
-        if (head[1] < tail[1])
-            tail[1]--;
-    }
-    else if (head[1] - tail[1] === 2) {
-        tail[1]++;
-        if (head[0] > tail[0])
-            tail[0]++;
-        if (head[0] < tail[0])
-            tail[0]--;
-    }
-    else if (head[1] - tail[1] === -2) {
-        tail[1]--;
-        if (head[0] > tail[0])
-            tail[0]++;
-        if (head[0] < tail[0])
-            tail[0]--;
-    }
+    return [tailX, tailY];
 }
 function part1(moves) {
     let head = [0, 0];
     let tail = [0, 0];
     let tailLog = new Set([[0, 0].toString()]);
     moves.forEach(([dir, num]) => {
-        for (let i = 0; i < num; i++) {
-            updateHead(head, dir);
-            updateTail(head, tail);
+        (0, lodash_1.range)(num).forEach(_ => {
+            head = moveHead(head, dir);
+            tail = followHead(head, tail);
             tailLog.add(tail.toString());
-        }
+        });
     });
     return tailLog.size;
 }
@@ -97,12 +70,11 @@ function part2(moves, knotNum) {
     let knots = Array.from({ length: knotNum }, e => Array(2).fill(0));
     let tailLog = new Set([[0, 0].toString()]);
     moves.forEach(([dir, num]) => {
-        for (let _ = 0; _ < num; _++) {
-            updateHead(knots[0], dir);
-            for (let i = 1; i < knotNum; i++)
-                updateTail(knots[i - 1], knots[i]);
+        (0, lodash_1.range)(num).forEach(_ => {
+            knots[0] = moveHead(knots[0], dir);
+            (0, lodash_1.range)(knotNum).slice(1).forEach(i => knots[i] = followHead(knots[i - 1], knots[i]));
             tailLog.add(knots[knotNum - 1].toString());
-        }
+        });
     });
     return tailLog.size;
 }

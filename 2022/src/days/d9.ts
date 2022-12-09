@@ -1,12 +1,12 @@
 import * as fs from 'fs'
 import assert from 'assert'
-import { zip } from 'lodash'
+import { range } from 'lodash'
 
 // -----------------------------------------------------------------------------
 // TYPES
 //------------------------------------------------------------------------------
 
-type Dir = 'R' | 'U' | 'L' | 'R'
+type Dir = 'R' | 'U' | 'L' | 'D'
 type Knot = [number, number]
 type Move = [Dir, number]
 
@@ -23,31 +23,19 @@ function parseInput(path: string): any[] {
         .map(([dir, num]) => [dir, parseInt(num)])
 }
 
-function updateHead(head: Knot, dir: Dir): void {
-    if (dir === 'R') head[0]++
-    else if (dir === 'U') head[1]++
-    else if (dir === 'L') head[0]--
-    else head[1]--
+function moveHead([headX, headY]: Knot, dir: Dir): Knot {
+    headX += Number(dir === 'R') - Number(dir === 'L')
+    headY += Number(dir === 'U') - Number(dir === 'D')
+    return [headX, headY]
 }
 
-function updateTail(head: Knot, tail: Knot): void {
-    if (head[0] - tail[0] === 2) {
-        tail[0]++
-        if (head[1] > tail[1]) tail[1]++
-        if (head[1] < tail[1]) tail[1]--
-    } else if (head[0] - tail[0] === -2) {
-        tail[0]--
-        if (head[1] > tail[1]) tail[1]++
-        if (head[1] < tail[1]) tail[1]--
-    } else if (head[1] - tail[1] === 2) {
-        tail[1]++
-        if (head[0] > tail[0]) tail[0]++
-        if (head[0] < tail[0]) tail[0]--
-    } else if (head[1] - tail[1] === -2) {
-        tail[1]--
-        if (head[0] > tail[0]) tail[0]++
-        if (head[0] < tail[0]) tail[0]--
+function followHead([headX, headY]: Knot, [tailX, tailY]: Knot): Knot {
+    if (Math.abs(headX - tailX) > 1 || Math.abs(headY - tailY) > 1) {
+        tailY += Number(headY > tailY) - Number(headY < tailY)
+        tailX += Number(headX > tailX) - Number(headX < tailX)
     }
+
+    return [tailX, tailY]
 }
 
 function part1(moves: Move[]): number {
@@ -56,11 +44,11 @@ function part1(moves: Move[]): number {
     let tailLog = new Set([[0, 0].toString()])
 
     moves.forEach(([dir, num]) => {
-        for (let i = 0; i < num; i++) {
-            updateHead(head, dir)
-            updateTail(head, tail)
+        range(num).forEach(_ => {
+            head = moveHead(head, dir)
+            tail = followHead(head, tail)
             tailLog.add(tail.toString())
-        }
+        })
     })
 
     return tailLog.size
@@ -71,11 +59,11 @@ function part2(moves: Move[], knotNum: number): number {
     let tailLog = new Set([[0, 0].toString()])
 
     moves.forEach(([dir, num]) => {
-        for (let _ = 0; _ < num; _++) {
-            updateHead(knots[0], dir)
-            for (let i = 1; i < knotNum; i++) updateTail(knots[i - 1], knots[i])
+        range(num).forEach(_ => {
+            knots[0] = moveHead(knots[0], dir)
+            range(knotNum).slice(1).forEach(i => knots[i] = followHead(knots[i - 1], knots[i]))
             tailLog.add(knots[knotNum - 1].toString())
-        }
+        })
     })
 
     return tailLog.size
