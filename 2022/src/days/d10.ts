@@ -30,8 +30,8 @@ function part2(data: Data): number {
 // EXPORTS
 //------------------------------------------------------------------------------
 
-const inputPath = './src/inputs/dX.txt'
-const inputTestPath1 = './src/inputs/dX-t1.txt'
+const inputPath = './src/inputs/d10.txt'
+const inputTestPath1 = './src/inputs/d10-t1.txt'
 
 export function runPart1() {
     console.log(part1(parseInput(inputTestPath1)))

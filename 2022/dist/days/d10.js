@@ -29,7 +29,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.runPart2 = exports.runPart1 = void 0;
 const fs = __importStar(require("fs"));
 const assert_1 = __importDefault(require("assert"));
-const lodash_1 = require("lodash");
 // -----------------------------------------------------------------------------
 // PRIVATE
 //------------------------------------------------------------------------------
@@ -37,49 +36,30 @@ function parseInput(path) {
     return fs
         .readFileSync(path, 'utf-8')
         .trimEnd()
-        .split('\n')
-        .map(line => line.split('').map(num => parseInt(num)));
+        .split('\n');
 }
-function part1(horizontalMap) {
-    let mapHeight = horizontalMap.length, mapWidth = horizontalMap[0].length, verticalMap = (0, lodash_1.zip)(...horizontalMap), visibleCnt = 0;
-    horizontalMap.forEach((horizontalLine, row) => {
-        horizontalLine.forEach((tree, col) => {
-            visibleCnt += Number(horizontalLine.slice(0, col).every(lineTree => lineTree < tree) ||
-                verticalMap[col].slice(0, row).every(lineTree => lineTree < tree) ||
-                horizontalLine.slice(col + 1, mapWidth).every(lineTree => lineTree < tree) ||
-                verticalMap[col].slice(row + 1, mapHeight).every(lineTree => lineTree < tree));
-        });
-    });
-    return visibleCnt;
+function part1(data) {
+    return 0;
 }
-function part2(horizontalMap) {
-    let mapHeight = horizontalMap.length, mapWidth = horizontalMap[0].length, verticalMap = (0, lodash_1.zip)(...horizontalMap), maxScenicScore = 0;
-    horizontalMap.forEach((horizontalLine, row) => {
-        horizontalLine.forEach((tree, col) => {
-            let scenicScore = 1;
-            scenicScore *= horizontalLine.slice(0, col).reverse().findIndex(lineTree => lineTree >= tree) + 1 || col;
-            scenicScore *= verticalMap[col].slice(0, row).reverse().findIndex(lineTree => lineTree >= tree) + 1 || row;
-            scenicScore *= horizontalLine.slice(col + 1, mapWidth).findIndex(lineTree => lineTree >= tree) + 1 || mapWidth - col - 1;
-            scenicScore *= verticalMap[col].slice(row + 1, mapHeight).findIndex(lineTree => lineTree >= tree) + 1 || mapWidth - row - 1;
-            maxScenicScore = Math.max(maxScenicScore, scenicScore);
-        });
-    });
-    return maxScenicScore;
+function part2(data) {
+    return 0;
 }
 // -----------------------------------------------------------------------------
 // EXPORTS
 //------------------------------------------------------------------------------
-const inputPath = './src/inputs/d8.txt';
-const inputTestPath1 = './src/inputs/d8-t1.txt';
+const inputPath = './src/inputs/d10.txt';
+const inputTestPath1 = './src/inputs/d10-t1.txt';
 function runPart1() {
-    (0, assert_1.default)(part1(parseInput(inputTestPath1)) === 21);
+    console.log(part1(parseInput(inputTestPath1)));
+    (0, assert_1.default)(part1(parseInput(inputTestPath1)) === 0);
     console.time('Time');
     console.log('Part 1: ', part1(parseInput(inputPath)));
     console.timeEnd('Time');
 }
 exports.runPart1 = runPart1;
 function runPart2() {
-    (0, assert_1.default)(part2(parseInput(inputTestPath1)) === 8);
+    console.log(part2(parseInput(inputTestPath1)));
+    (0, assert_1.default)(part2(parseInput(inputTestPath1)) === 0);
     console.time('Time');
     console.log('Part 2: ', part2(parseInput(inputPath)));
     console.timeEnd('Time');
