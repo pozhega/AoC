@@ -29,7 +29,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.runPart2 = exports.runPart1 = void 0;
 const fs = __importStar(require("fs"));
 const assert_1 = __importDefault(require("assert"));
-const lodash_1 = require("lodash");
+require("../helpers/array");
 // -----------------------------------------------------------------------------
 // PRIVATE
 //------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ function parseInput(path) {
         .map(line => line.split('').map(num => parseInt(num)));
 }
 function part1(horizontalMap) {
-    let mapHeight = horizontalMap.length, mapWidth = horizontalMap[0].length, verticalMap = (0, lodash_1.zip)(...horizontalMap), visibleCnt = 0;
+    let mapHeight = horizontalMap.length, mapWidth = horizontalMap[0].length, verticalMap = horizontalMap.zip(), visibleCnt = 0;
     horizontalMap.forEach((horizontalLine, row) => {
         horizontalLine.forEach((tree, col) => {
             visibleCnt += Number(horizontalLine.slice(0, col).every(lineTree => lineTree < tree) ||
@@ -53,7 +53,7 @@ function part1(horizontalMap) {
     return visibleCnt;
 }
 function part2(horizontalMap) {
-    let mapHeight = horizontalMap.length, mapWidth = horizontalMap[0].length, verticalMap = (0, lodash_1.zip)(...horizontalMap), maxScenicScore = 0;
+    let mapHeight = horizontalMap.length, mapWidth = horizontalMap[0].length, verticalMap = horizontalMap.zip(), maxScenicScore = 0;
     horizontalMap.forEach((horizontalLine, row) => {
         horizontalLine.forEach((tree, col) => {
             let scenicScore = 1;

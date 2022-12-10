@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import assert from 'assert'
-import { zip } from 'lodash'
+import '../helpers/array'
 
 // -----------------------------------------------------------------------------
 // TYPES
@@ -23,7 +23,7 @@ function parseInput(path: string): any[] {
 function part1(horizontalMap: Map): number {
     let mapHeight = horizontalMap.length,
         mapWidth = horizontalMap[0].length,
-        verticalMap = zip(...horizontalMap),
+        verticalMap = horizontalMap.zip(),
         visibleCnt = 0
 
     horizontalMap.forEach((horizontalLine, row) => {
@@ -42,7 +42,7 @@ function part1(horizontalMap: Map): number {
 function part2(horizontalMap: Map): number {
     let mapHeight = horizontalMap.length,
         mapWidth = horizontalMap[0].length,
-        verticalMap = zip(...horizontalMap),
+        verticalMap = horizontalMap.zip(),
         maxScenicScore = 0
 
     horizontalMap.forEach((horizontalLine, row) => {

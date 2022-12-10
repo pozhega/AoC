@@ -1,7 +1,6 @@
 import * as fs from 'fs'
 import assert from 'assert'
-import { chain, intersection } from 'lodash'
-
+import '../helpers/array'
 
 // -----------------------------------------------------------------------------
 // TYPES
@@ -24,12 +23,11 @@ function parsePart1Input(path: string): any[] {
 }
 
 function parsePart2Input(path: string): any[] {
-    return chain(fs.readFileSync(path, 'utf-8'))
+    return fs.readFileSync(path, 'utf-8')
         .trimEnd()
         .split('\n')
         .map(val => val.split(''))
         .chunk(3)
-        .value()
 }
 
 function isLowerCase(string: string): boolean {
@@ -43,21 +41,13 @@ function getItemPriority(item: string): number {
 
 function part1(rucksacks: Rucksack[]): number {
     return rucksacks.reduce((sum, rucksack) => {
-        return sum += chain(rucksack)
-            .thru(rucksack => intersection(...rucksack))
-            .head()
-            .thru(item => getItemPriority(item))
-            .value()
+        return sum += getItemPriority(rucksack.intersections()[0])
     }, 0)
 }
 
 function part2(groups: Group[]): number {
     return groups.reduce((sum, group) => {
-        return sum += chain(group)
-            .thru(group => intersection(...group))
-            .head()
-            .thru(item => getItemPriority(item))
-            .value()
+        return sum += getItemPriority(group.intersections()[0])
     }, 0)
 }
 

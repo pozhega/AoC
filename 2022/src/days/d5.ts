@@ -1,7 +1,6 @@
 import * as fs from 'fs'
 import assert from 'assert'
-import { chain } from 'lodash'
-
+import '../helpers/array'
 
 // -----------------------------------------------------------------------------
 // TYPES
@@ -15,7 +14,7 @@ type Step = [number, number, number]
 //------------------------------------------------------------------------------
 
 function parseStacks(stacksInput: string): any[] {
-    return chain(stacksInput)
+    return stacksInput
         .split('\n')
         .reverse()
         .tail()
@@ -25,9 +24,8 @@ function parseStacks(stacksInput: string): any[] {
             .replace(/    /g, '#')
             .replace(/ /g, '')
             .split(''))
-        .unzip()
+        .zip()
         .map(stack => stack.filter(crate => crate != '#'))
-        .value()
 }
 
 function parseSteps(stepsInput: string): any[] {

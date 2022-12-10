@@ -29,7 +29,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.runPart2 = exports.runPart1 = void 0;
 const fs = __importStar(require("fs"));
 const assert_1 = __importDefault(require("assert"));
-const lodash_1 = require("lodash");
+require("../helpers/array");
 // -----------------------------------------------------------------------------
 // PRIVATE
 //------------------------------------------------------------------------------
@@ -43,12 +43,11 @@ function parsePart1Input(path) {
     ]);
 }
 function parsePart2Input(path) {
-    return (0, lodash_1.chain)(fs.readFileSync(path, 'utf-8'))
+    return fs.readFileSync(path, 'utf-8')
         .trimEnd()
         .split('\n')
         .map(val => val.split(''))
-        .chunk(3)
-        .value();
+        .chunk(3);
 }
 function isLowerCase(string) {
     return string == string.toLowerCase() && string != string.toUpperCase();
@@ -59,20 +58,12 @@ function getItemPriority(item) {
 }
 function part1(rucksacks) {
     return rucksacks.reduce((sum, rucksack) => {
-        return sum += (0, lodash_1.chain)(rucksack)
-            .thru(rucksack => (0, lodash_1.intersection)(...rucksack))
-            .head()
-            .thru(item => getItemPriority(item))
-            .value();
+        return sum += getItemPriority(rucksack.intersections()[0]);
     }, 0);
 }
 function part2(groups) {
     return groups.reduce((sum, group) => {
-        return sum += (0, lodash_1.chain)(group)
-            .thru(group => (0, lodash_1.intersection)(...group))
-            .head()
-            .thru(item => getItemPriority(item))
-            .value();
+        return sum += getItemPriority(group.intersections()[0]);
     }, 0);
 }
 // -----------------------------------------------------------------------------
