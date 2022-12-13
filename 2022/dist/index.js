@@ -36,7 +36,7 @@ const runDay = (day, part) => {
 };
 // -----------------------------------------------------------------------------
 // Advent of Code CLI
-//------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 commander_1.program
     .requiredOption('-d, --day <number>', 'Day must be in range 1-25.')
     .option('-p, --part <number>', 'Part must be in range 1-2. By default it will run both parts.');

@@ -1,18 +1,18 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function (o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);
     if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
+        desc = { enumerable: true, get: function () { return m[k]; } };
     }
     Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
+}) : (function (o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
 }));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function (o, v) {
     Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
+}) : function (o, v) {
     o["default"] = v;
 });
 var __importStar = (this && this.__importStar) || function (mod) {
@@ -33,14 +33,14 @@ const parseInput = (path) => {
     return fs.readFileSync(path, 'utf-8')
         .split('\n\n')
         .map(line => line
-        .split('\n')
-        .filter(val => val !== '')
-        .map(val => parseInt(val)));
+            .split('\n')
+            .filter(val => val !== '')
+            .map(val => parseInt(val)));
 };
 const part1 = (elfCalories) => {
     return Math.max(...elfCalories
         .map(calories => calories
-        .reduce((total, calorie) => total + calorie, 0)));
+            .reduce((total, calorie) => total + calorie, 0)));
 };
 const part2 = (elfCalories) => {
     return elfCalories
@@ -51,7 +51,7 @@ const part2 = (elfCalories) => {
 };
 // -----------------------------------------------------------------------------
 // EXPORTS
-//------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 const inputPath = './src/inputs/d1.txt';
 const inputTestPath1 = './src/inputs/d1-t1.txt';
 const runPart1 = () => {

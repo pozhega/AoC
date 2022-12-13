@@ -31,7 +31,7 @@ const fs = __importStar(require("fs"));
 const assert_1 = __importDefault(require("assert"));
 // -----------------------------------------------------------------------------
 // PRIVATE
-//------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 function parseInput(path) {
     return fs
         .readFileSync(path, 'utf-8')
@@ -57,8 +57,7 @@ function part1(instructions) {
             cycleLog.push(x);
         }
         else {
-            cycleLog.push(x);
-            cycleLog.push(x);
+            cycleLog.push(x, x);
             x += instruction[1];
         }
     });
@@ -85,7 +84,7 @@ function part2(instructions) {
 }
 // -----------------------------------------------------------------------------
 // EXPORTS
-//------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 const inputPath = './src/inputs/d10.txt';
 const inputTestPath1 = './src/inputs/d10-t1.txt';
 function runPart1() {
