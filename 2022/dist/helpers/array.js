@@ -9,6 +9,11 @@ if (!Array.prototype.chunk) {
         return lodash_1.default.chunk(this, size);
     };
 }
+if (!Array.prototype.dropWhile) {
+    Array.prototype.dropWhile = function dropWhile(predicate) {
+        return lodash_1.default.dropWhile(this, predicate);
+    };
+}
 if (!Array.prototype.head) {
     Array.prototype.head = function head() {
         return lodash_1.default.head(this);

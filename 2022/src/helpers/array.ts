@@ -4,18 +4,25 @@ export { }
 declare global {
     interface Array<T> {
         chunk(size: number): T[][]
+        dropWhile(predicate: (value: T) => boolean): T[]
         head(): T | undefined
         tail(): T[]
         zip(): T[]
         tap(interceptor: (value: T[]) => void): T[]
         intersections(): any[]
-        thru(interceptor: (value: T[]) => any): T[]
+        thru(interceptor: (value: T[]) => any): any
     }
 }
 
 if (!Array.prototype.chunk) {
     Array.prototype.chunk = function chunk<T>(this: T[], size: number): T[][] {
         return _.chunk(this, size)
+    };
+}
+
+if (!Array.prototype.dropWhile) {
+    Array.prototype.dropWhile = function dropWhile<T>(this: T[], predicate: (value: T) => boolean): T[] {
+        return _.dropWhile(this, predicate)
     };
 }
 
