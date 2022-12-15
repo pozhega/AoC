@@ -30,20 +30,92 @@ exports.runPart2 = exports.runPart1 = void 0;
 const fs = __importStar(require("fs"));
 const assert_1 = __importDefault(require("assert"));
 require("../helpers/array");
+const lodash_1 = require("lodash");
 // -----------------------------------------------------------------------------
 // PRIVATE
 // -----------------------------------------------------------------------------
 function parseInput(path) {
-    return fs
-        .readFileSync(path, 'utf-8')
+    let cave = new Map();
+    fs.readFileSync(path, 'utf-8')
         .trimEnd()
-        .split('\n');
+        .split('\n')
+        .map(line => line
+        .split(' -> ')
+        .map(point => point
+        .split(',')
+        .map(val => parseInt(val))))
+        .forEach(polygon => {
+        for (let idx = 1; idx < polygon.length; idx++) {
+            let [xFrom, yFrom] = polygon[idx - 1], [xTo, yTo] = polygon[idx];
+            if (xFrom === xTo) {
+                (0, lodash_1.range)(Math.min(yFrom, yTo), Math.max(yFrom, yTo) + 1).forEach(y => {
+                    cave.get(xFrom) ? cave.get(xFrom)?.set(y, '#') : cave.set(xFrom, new Map([[y, '#']]));
+                });
+            }
+            else {
+                (0, lodash_1.range)(Math.min(xFrom, xTo), Math.max(xFrom, xTo) + 1).forEach(x => {
+                    cave.get(x) ? cave.get(x)?.set(yFrom, '#') : cave.set(x, new Map([[yFrom, '#']]));
+                });
+            }
+        }
+    });
+    return cave;
 }
-function part1(data) {
-    return 0;
+function findMaxY(cave) {
+    let yVals = Array.from(cave.entries())
+        .map(entry => Array.from(entry[1].keys()))
+        .flat();
+    return Math.max(...yVals);
 }
-function part2(data) {
-    return 0;
+function part1(cave) {
+    let yMax = findMaxY(cave);
+    let sandUnits = 0, x = 500, y = 0;
+    while (y <= yMax) {
+        if (!cave.get(x)?.get(y))
+            y++;
+        else if (cave.get(x)?.get(y) &&
+            cave.get(x - 1)?.get(y) &&
+            cave.get(x + 1)?.get(y)) {
+            cave.get(x)?.set(y - 1, 'o');
+            sandUnits++, x = 500, y = 0;
+        }
+        else if (!cave.get(x - 1)?.get(y))
+            x--, y++;
+        else if (!cave.get(x + 1)?.get(y))
+            x++, y++;
+        else {
+            cave.get(x - 1)?.set(y - 1, 'o');
+            sandUnits++, x = 500, y = 0;
+        }
+    }
+    return sandUnits;
+}
+function part2(cave) {
+    let yMax = findMaxY(cave) + 2;
+    let sandUnits = 0, x = 500, y = 0;
+    while (!cave.get(500)?.get(0)) {
+        if (y === yMax) {
+            cave.get(x) ? cave.get(x)?.set(y - 1, 'o') : cave.set(x, new Map([[y - 1, 'o']]));
+            sandUnits++, x = 500, y = 0;
+        }
+        else if (!cave.get(x)?.get(y))
+            y++;
+        else if (cave.get(x)?.get(y) &&
+            cave.get(x - 1)?.get(y) &&
+            cave.get(x + 1)?.get(y)) {
+            cave.get(x) ? cave.get(x)?.set(y - 1, 'o') : cave.set(x, new Map([[y - 1, 'o']]));
+            sandUnits++, x = 500, y = 0;
+        }
+        else if (!cave.get(x - 1)?.get(y))
+            x--, y++;
+        else if (!cave.get(x + 1)?.get(y))
+            x++, y++;
+        else {
+            cave.get(x) ? cave.get(x)?.set(y - 1, 'o') : cave.set(x, new Map([[y - 1, 'o']]));
+            sandUnits++, x = 500, y = 0;
+        }
+    }
+    return sandUnits;
 }
 // -----------------------------------------------------------------------------
 // EXPORTS
@@ -51,16 +123,14 @@ function part2(data) {
 const inputPath = './src/inputs/d14.txt';
 const inputTestPath1 = './src/inputs/d14-t1.txt';
 function runPart1() {
-    console.log(part1(parseInput(inputTestPath1)));
-    (0, assert_1.default)(part1(parseInput(inputTestPath1)) === 0);
+    (0, assert_1.default)(part1(parseInput(inputTestPath1)) === 24);
     console.time('Time');
     console.log('Part 1: ', part1(parseInput(inputPath)));
     console.timeEnd('Time');
 }
 exports.runPart1 = runPart1;
 function runPart2() {
-    console.log(part2(parseInput(inputTestPath1)));
-    (0, assert_1.default)(part2(parseInput(inputTestPath1)) === 0);
+    (0, assert_1.default)(part2(parseInput(inputTestPath1)) === 93);
     console.time('Time');
     console.log('Part 2: ', part2(parseInput(inputPath)));
     console.timeEnd('Time');
