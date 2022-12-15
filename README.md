@@ -17,6 +17,7 @@ Solutions for [Advent of Code](https://adventofcode.com) puzzles.
 * [Day 11](https://github.com/pozhega/AoC/blob/master/2022/src/days/d11.ts)
 * [Day 12](https://github.com/pozhega/AoC/blob/master/2022/src/days/d12.ts)
 * [Day 13](https://github.com/pozhega/AoC/blob/master/2022/src/days/d13.ts)
+* [Day 14](https://github.com/pozhega/AoC/blob/master/2022/src/days/d14.ts)
 
 
 ## [2021](https://adventofcode.com/2021) in [Clojure](https://clojure.org/)
