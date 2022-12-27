@@ -45,7 +45,7 @@ function parseInput(path) {
         .split(',')
         .map(val => parseInt(val))))
         .forEach(polygon => {
-        for (let idx = 1; idx < polygon.length; idx++) {
+        (0, lodash_1.range)(1, polygon.length).forEach(idx => {
             let [xFrom, yFrom] = polygon[idx - 1], [xTo, yTo] = polygon[idx];
             if (xFrom === xTo) {
                 (0, lodash_1.range)(Math.min(yFrom, yTo), Math.max(yFrom, yTo) + 1).forEach(y => {
@@ -57,7 +57,7 @@ function parseInput(path) {
                     cave.get(x) ? cave.get(x)?.set(yFrom, '#') : cave.set(x, new Map([[yFrom, '#']]));
                 });
             }
-        }
+        });
     });
     return cave;
 }
@@ -83,10 +83,6 @@ function part1(cave) {
             x--, y++;
         else if (!cave.get(x + 1)?.get(y))
             x++, y++;
-        else {
-            cave.get(x - 1)?.set(y - 1, 'o');
-            sandUnits++, x = 500, y = 0;
-        }
     }
     return sandUnits;
 }
@@ -110,10 +106,6 @@ function part2(cave) {
             x--, y++;
         else if (!cave.get(x + 1)?.get(y))
             x++, y++;
-        else {
-            cave.get(x) ? cave.get(x)?.set(y - 1, 'o') : cave.set(x, new Map([[y - 1, 'o']]));
-            sandUnits++, x = 500, y = 0;
-        }
     }
     return sandUnits;
 }

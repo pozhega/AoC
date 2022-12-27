@@ -18,7 +18,11 @@ Solutions for [Advent of Code](https://adventofcode.com) puzzles.
 * [Day 12](https://github.com/pozhega/AoC/blob/master/2022/src/days/d12.ts)
 * [Day 13](https://github.com/pozhega/AoC/blob/master/2022/src/days/d13.ts)
 * [Day 14](https://github.com/pozhega/AoC/blob/master/2022/src/days/d14.ts)
-
+* [Day 16](https://github.com/pozhega/AoC/blob/master/2022/src/days/d16.ts)
+* [Day 18](https://github.com/pozhega/AoC/blob/master/2022/src/days/d18.ts)
+* [Day 19](https://github.com/pozhega/AoC/blob/master/2022/src/days/d19.ts)
+* [Day 20](https://github.com/pozhega/AoC/blob/master/2022/src/days/d20.ts)
+* [Day 21](https://github.com/pozhega/AoC/blob/master/2022/src/days/d21.ts)
 
 ## [2021](https://adventofcode.com/2021) in [Clojure](https://clojure.org/)
 

@@ -10,6 +10,7 @@ declare global {
         zip(): T[]
         tap(interceptor: (value: T[]) => void): T[]
         intersections(): any[]
+        uniqWith(comparator?: (a: T, b: T) => boolean): T[]
         thru(interceptor: (value: T[]) => any): any
     }
 }
@@ -35,6 +36,12 @@ if (!Array.prototype.head) {
 if (!Array.prototype.tail) {
     Array.prototype.tail = function tail<T>(this: T[]): T[] {
         return _.tail(this)
+    };
+}
+
+if (!Array.prototype.uniqWith) {
+    Array.prototype.uniqWith = function uniqWith<T>(this: T[], comparator?: (a: T, b: T) => boolean): T[] {
+        return _.uniqWith(this, comparator)
     };
 }
 

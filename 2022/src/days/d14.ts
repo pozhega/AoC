@@ -26,7 +26,7 @@ function parseInput(path: string): Cave {
                 .split(',')
                 .map(val => parseInt(val))))
         .forEach(polygon => {
-            for (let idx = 1; idx < polygon.length; idx++) {
+            range(1, polygon.length).forEach(idx => {
                 let [xFrom, yFrom] = polygon[idx - 1], [xTo, yTo] = polygon[idx]
 
                 if (xFrom === xTo) {
@@ -39,7 +39,7 @@ function parseInput(path: string): Cave {
                         cave.get(x) ? cave.get(x)?.set(yFrom, '#') : cave.set(x, new Map([[yFrom, '#']]))
                     })
                 }
-            }
+            })
         })
 
     return cave
@@ -67,10 +67,6 @@ function part1(cave: Cave): number {
         }
         else if (!cave.get(x - 1)?.get(y)) x--, y++
         else if (!cave.get(x + 1)?.get(y)) x++, y++
-        else {
-            cave.get(x - 1)?.set(y - 1, 'o')
-            sandUnits++, x = 500, y = 0
-        }
     }
 
     return sandUnits
@@ -94,10 +90,6 @@ function part2(cave: Cave): number {
         }
         else if (!cave.get(x - 1)?.get(y)) x--, y++
         else if (!cave.get(x + 1)?.get(y)) x++, y++
-        else {
-            cave.get(x) ? cave.get(x)?.set(y - 1, 'o') : cave.set(x, new Map([[y - 1, 'o']]))
-            sandUnits++, x = 500, y = 0
-        }
     }
 
     return sandUnits

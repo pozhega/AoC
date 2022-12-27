@@ -36,6 +36,7 @@ const inputTestPath1 = './src/inputs/dX-t1.txt'
 
 export function runPart1() {
     console.log(part1(parseInput(inputTestPath1)))
+    assert(false)
     assert(part1(parseInput(inputTestPath1)) === 0)
 
     console.time('Time');
@@ -45,6 +46,7 @@ export function runPart1() {
 
 export function runPart2() {
     console.log(part2(parseInput(inputTestPath1)))
+    assert(false)
     assert(part2(parseInput(inputTestPath1)) === 0)
 
     console.time('Time');

@@ -24,6 +24,11 @@ if (!Array.prototype.tail) {
         return lodash_1.default.tail(this);
     };
 }
+if (!Array.prototype.uniqWith) {
+    Array.prototype.uniqWith = function uniqWith(comparator) {
+        return lodash_1.default.uniqWith(this, comparator);
+    };
+}
 if (!Array.prototype.tap) {
     Array.prototype.tap = function tap(interceptor) {
         return lodash_1.default.tap(this, interceptor);
