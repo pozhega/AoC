@@ -23,6 +23,7 @@ Solutions for [Advent of Code](https://adventofcode.com) puzzles.
 * [Day 19](https://github.com/pozhega/AoC/blob/master/2022/src/days/d19.ts)
 * [Day 20](https://github.com/pozhega/AoC/blob/master/2022/src/days/d20.ts)
 * [Day 21](https://github.com/pozhega/AoC/blob/master/2022/src/days/d21.ts)
+* [Day 23](https://github.com/pozhega/AoC/blob/master/2022/src/days/d23.ts)
 * [Day 24](https://github.com/pozhega/AoC/blob/master/2022/src/days/d24.ts)
 
 ## [2021](https://adventofcode.com/2021) in [Clojure](https://clojure.org/)
