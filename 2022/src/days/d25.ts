@@ -36,8 +36,6 @@ function numToSnafu(num: number): string {
     let snafu = []
     let mod = 0
     while (num > 0) {
-        console.log(num)
-
         mod = num % 5
         num = Math.floor(num / 5)
 
