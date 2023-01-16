@@ -20,6 +20,7 @@ Solutions for [Advent of Code](https://adventofcode.com) puzzles.
 * [Day 14](https://github.com/pozhega/AoC/blob/master/2022/src/days/d14.ts)
 * [Day 15](https://github.com/pozhega/AoC/blob/master/2022/src/days/d15.ts)
 * [Day 16](https://github.com/pozhega/AoC/blob/master/2022/src/days/d16.ts)
+* [Day 17](https://github.com/pozhega/AoC/blob/master/2022/src/days/d17.ts)
 * [Day 18](https://github.com/pozhega/AoC/blob/master/2022/src/days/d18.ts)
 * [Day 19](https://github.com/pozhega/AoC/blob/master/2022/src/days/d19.ts)
 * [Day 20](https://github.com/pozhega/AoC/blob/master/2022/src/days/d20.ts)
