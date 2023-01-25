@@ -110,6 +110,13 @@ Solutions for [Advent of Code](https://adventofcode.com) puzzles.
 * [Day 5](https://github.com/pozhega/AoC/blob/master/2017/src/days/d5.ts)
 * [Day 6](https://github.com/pozhega/AoC/blob/master/2017/src/days/d6.ts)
 
+## [2016](https://adventofcode.com/2017) in [TypeScript](https://www.typescriptlang.org/)
+
+* [Day 1](https://github.com/pozhega/AoC/blob/master/2016/src/days/d1.ts)
+* [Day 2](https://github.com/pozhega/AoC/blob/master/2016/src/days/d2.ts)
+* [Day 3](https://github.com/pozhega/AoC/blob/master/2016/src/days/d3.ts)
+* [Day 4](https://github.com/pozhega/AoC/blob/master/2016/src/days/d4.ts)
+
 ## [2015](https://adventofcode.com/2015) in [Crystal](https://crystal-lang.org/) and [Ruby](https://www.ruby-lang.org/en/)
 
 * [Day 1](https://github.com/pozhega/AoC/blob/master/2015/d1.cr)
