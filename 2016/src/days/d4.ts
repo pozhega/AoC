@@ -55,7 +55,7 @@ function isRealRoom([letterGroups, _, checksum]: Room): boolean {
 }
 
 function cesarShift(letter: String, shift: number): string {
-    let shiftedCode = Number(letter.charCodeAt(0)) + (shift % 26)
+    let shiftedCode = letter.charCodeAt(0) + (shift % 26)
 
     if (shiftedCode > 'z'.charCodeAt(0)) {
         shiftedCode -= 26
