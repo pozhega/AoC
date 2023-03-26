@@ -125,3 +125,4 @@ Solutions for [Advent of Code](https://adventofcode.com) puzzles.
 * [Day 1](https://github.com/pozhega/AoC/blob/master/2015/d1.cr)
 * [Day 2](https://github.com/pozhega/AoC/blob/master/2015/d2.cr)
 * [Day 3](https://github.com/pozhega/AoC/blob/master/2015/d3.cr)
+* [Day 4](https://github.com/pozhega/AoC/blob/master/2015/d4.cr)
