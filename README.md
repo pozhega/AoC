@@ -6,6 +6,8 @@ Solutions for [Advent of Code](https://adventofcode.com) puzzles.
 
 - [Day 1](https://github.com/pozhega/AoC/blob/master/2023/src/days/d1.ts)
 - [Day 2](https://github.com/pozhega/AoC/blob/master/2023/src/days/d2.ts)
+- [Day 3](https://github.com/pozhega/AoC/blob/master/2023/src/days/d3.ts)
+- [Day 4](https://github.com/pozhega/AoC/blob/master/2023/src/days/d4.ts)
 
 ## [2022](https://adventofcode.com/2022) in [TypeScript](https://www.typescriptlang.org/)
 
