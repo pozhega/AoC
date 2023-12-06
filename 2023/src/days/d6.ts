@@ -50,11 +50,18 @@ function parseInput2(path: string): Data2 {
 }
 
 function calcWinnings(time: number, distance: number): number {
-  return _.range(1, time).filter((holdFor) => {
-    const speed = holdFor
-    const maxDistance = (time - holdFor) * speed
-    return maxDistance > distance
-  }).length
+  let count = 0
+  for (let holdFor = 1; holdFor <= time; holdFor++) {
+    const maxDistance = (time - holdFor) * holdFor
+    if (maxDistance > distance) {
+      count++
+      continue
+    }
+
+    if (count > 0) {
+      return count
+    }
+  }
 }
 
 function part1(data: Data): number {

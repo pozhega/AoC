@@ -2,7 +2,7 @@
 
 Solutions for [Advent of Code](https://adventofcode.com) puzzles.
 
-## [2023](https://adventofcode.com/2023) in [TypeScript](https://www.typescriptlang.org/)
+## [2023](https://adventofcode.com/2023) in [TypeScript](https://www.typescriptlang.org/) and [Bun](https://bun.sh/)
 
 - [Day 1](https://github.com/pozhega/AoC/blob/master/2023/src/days/d1.ts)
 - [Day 2](https://github.com/pozhega/AoC/blob/master/2023/src/days/d2.ts)
