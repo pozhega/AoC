@@ -20,23 +20,19 @@ function parseInput1(path: string): Data {
   fs.readFileSync(path, "utf-8")
     .trimEnd()
     .split("\n")
-    .forEach((line, index) => {
-      if (index === 0) {
-        times = line
-          .trim()
-          .split(":")[1]
-          .trim()
-          .match(/[0-9]+/g)
-          .map(Number)
+    .forEach((line) => {
+      const [name, values] = line.split(":")
+      const numbers = values
+        .trim()
+        .match(/[0-9]+/g)
+        .map(Number)
+
+      if (name.trim() === "Time") {
+        times = numbers
       }
 
-      if (index === 1) {
-        distances = line
-          .trim()
-          .split(":")[1]
-          .trim()
-          .match(/[0-9]+/g)
-          .map(Number)
+      if (name.trim() === "Distance") {
+        distances = numbers
       }
     })
 
