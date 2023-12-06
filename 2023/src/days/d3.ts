@@ -133,7 +133,9 @@ const inputPath = "./src/inputs/d3.txt"
 const inputTestPath1 = "./src/inputs/d3-t1.txt"
 
 export function runPart1() {
-  console.log(part1(parseInput(inputTestPath1)))
+  console.time("Time")
+  console.log("Test 1: ", part1(parseInput(inputTestPath1)))
+  console.timeEnd("Time")
   assert(part1(parseInput(inputTestPath1)) === 4361)
 
   console.time("Time")
@@ -142,8 +144,10 @@ export function runPart1() {
 }
 
 export function runPart2() {
-  console.log(part2(parseInput(inputTestPath1)))
+  console.time("Time")
+  console.log("Test 2: ", part2(parseInput(inputTestPath1)))
   assert(part2(parseInput(inputTestPath1)) === 467835)
+  console.timeEnd("Time")
 
   console.time("Time")
   console.log("Part 2: ", part2(parseInput(inputPath)))
