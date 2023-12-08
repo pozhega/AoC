@@ -23,7 +23,7 @@ function compareCards(a: Card, b: Card, joker = false): number {
   return order.indexOf(b) - order.indexOf(a)
 }
 
-function sortByRank(hands: Hand[], joker = false): Hand[] {
+function sortByRank(hands: Hand[], joker = false) {
   const handTypeOrder: HandType[] = ["fiveOAK", "fourOAK", "full", "threeOAK", "twoOAK", "oneOAK", "high"]
 
   return hands.sort((a, b) => {
