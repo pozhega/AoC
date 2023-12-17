@@ -11,15 +11,15 @@ type Data = any
 // PRIVATE
 // -----------------------------------------------------------------------------
 
-function parseInput(path: string): any[] {
+function parseInput(path: string): Data {
   return fs.readFileSync(path, "utf-8").trimEnd().split("\n")
 }
 
-function part1(data: Data): number {
+function part1(data: Data) {
   return 0
 }
 
-function part2(data: Data): number {
+function part2(data: Data) {
   return 0
 }
 
