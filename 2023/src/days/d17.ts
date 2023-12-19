@@ -23,6 +23,10 @@ function parseInput(path: string): Data {
     .map((row) => row.split("").map(Number))
 }
 
+function manhattanDistance(a: Pos, b: Pos) {
+  return Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1])
+}
+
 function part1(map: Data) {
   const startingPoint: Point = { pos: [0, 0], heatLoss: 0, consecutive: 0, dir: null }
   const endingPos: Pos = [map.length - 1, map[0].length - 1]
@@ -86,7 +90,10 @@ function part2(map: Data) {
   const startingPoint: Point = { pos: [0, 0], heatLoss: 0, consecutive: 0, dir: null }
   const endingPos: Pos = [map.length - 1, map[0].length - 1]
   const visited = new Set<string>()
-  const queue = new PriorityQueue<Point>((a, b) => a.heatLoss - b.heatLoss, [startingPoint])
+  const queue = new PriorityQueue<Point>(
+    (a, b) => a.heatLoss + manhattanDistance(a.pos, endingPos) - (b.heatLoss + manhattanDistance(b.pos, endingPos)),
+    [startingPoint]
+  )
 
   while (!_.isEqual(queue.front().pos, endingPos)) {
     const point = queue.dequeue()
