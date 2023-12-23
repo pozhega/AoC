@@ -25,8 +25,9 @@ Solutions for [Advent of Code](https://adventofcode.com) puzzles.
 - [Day 19](https://github.com/pozhega/AoC/blob/master/2023/src/days/d19.ts)
 - [Day 20](https://github.com/pozhega/AoC/blob/master/2023/src/days/d20.ts)
 - [Day 21](https://github.com/pozhega/AoC/blob/master/2023/src/days/d21.ts)
-- [Day 22](https://github.com/pozhega/AoC/blob/master/2023/src/days/d21.ts)
-- [Day 23](https://github.com/pozhega/AoC/blob/master/2023/src/days/d21.ts)
+- [Day 22](https://github.com/pozhega/AoC/blob/master/2023/src/days/d22.ts)
+- [Day 23](https://github.com/pozhega/AoC/blob/master/2023/src/days/d23.ts)
+- [Day 24](https://github.com/pozhega/AoC/blob/master/2023/src/days/d24.ts)
 
 ## [2022](https://adventofcode.com/2022) in [TypeScript](https://www.typescriptlang.org/)
 
