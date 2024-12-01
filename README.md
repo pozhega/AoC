@@ -2,6 +2,10 @@
 
 Solutions for [Advent of Code](https://adventofcode.com) puzzles.
 
+## [2024](https://adventofcode.com/2024) in [TypeScript](https://www.typescriptlang.org/) and [Bun](https://bun.sh/)
+
+- [Day 1](https://github.com/pozhega/AoC/blob/master/2024/src/days/d1.ts)
+
 ## [2023](https://adventofcode.com/2023) in [TypeScript](https://www.typescriptlang.org/) and [Bun](https://bun.sh/)
 
 - [Day 1](https://github.com/pozhega/AoC/blob/master/2023/src/days/d1.ts)
