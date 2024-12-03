@@ -19,12 +19,13 @@ function part1(data: Data) {
   return data
     .map((line) => line.match(/mul\(\d\d?\d?,\d\d?\d?\)/g))
     .flat()
-    .map((line) => line.replace("mul(", "").replace(")", "").split(","))
+    .map((instruction) => instruction.replace("mul(", "").replace(")", "").split(","))
     .map(([a, b]) => parseInt(a) * parseInt(b))
-    .reduce((acc, val) => acc + val, 0)
+    .reduce((count, val) => count + val, 0)
 }
 
 function part2(data: Data) {
+  // prettier-ignore
   return data
     .map((line) => line.match(/do\(\)|don't\(\)|mul\(\d\d?\d?,\d\d?\d?\)/g))
     .flat()
@@ -37,9 +38,10 @@ function part2(data: Data) {
       },
       { instructions: [], condition: true }
     )
-    .instructions.map((line) => line.replace("mul(", "").replace(")", "").split(","))
+    .instructions
+    .map((instruction) => instruction.replace("mul(", "").replace(")", "").split(","))
     .map(([a, b]) => parseInt(a) * parseInt(b))
-    .reduce((acc, val) => acc + val, 0)
+    .reduce((count, val) => count + val, 0)
 }
 
 // -----------------------------------------------------------------------------
@@ -51,9 +53,7 @@ const inputTestPath1 = "./src/inputs/d3-t1.txt"
 const inputTestPath2 = "./src/inputs/d3-t2.txt"
 
 export function runPart1() {
-  console.time("Time")
   console.log("Test 1: ", part1(parseInput(inputTestPath1)))
-  console.time("Time")
   assert(part1(parseInput(inputTestPath1)) === 161)
 
   console.time("Time")
@@ -62,9 +62,7 @@ export function runPart1() {
 }
 
 export function runPart2() {
-  console.time("Time")
   console.log("Test 2: ", part2(parseInput(inputTestPath2)))
-  console.time("Time")
   assert(part2(parseInput(inputTestPath2)) === 48)
 
   console.time("Time")

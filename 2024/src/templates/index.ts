@@ -31,9 +31,7 @@ const inputPath = "./src/inputs/dX.txt"
 const inputTestPath1 = "./src/inputs/dX-t1.txt"
 
 export function runPart1() {
-  console.time("Time")
   console.log("Test 1: ", part1(parseInput(inputTestPath1)))
-  console.time("Time")
   assert(part1(parseInput(inputTestPath1)) === 0)
 
   console.time("Time")
@@ -42,9 +40,7 @@ export function runPart1() {
 }
 
 export function runPart2() {
-  console.time("Time")
   console.log("Test 2: ", part2(parseInput(inputTestPath1)))
-  console.time("Time")
   assert(part2(parseInput(inputTestPath1)) === 0)
 
   console.time("Time")

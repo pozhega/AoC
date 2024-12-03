@@ -1,32 +1,34 @@
 {
-  "name": "advent-of-code-2023",
+  "name": "advent-of-code-2024",
   "version": "1.0.0",
-  "description": "Solutions for Advent of Code 2023 in TypeScript",
+  "description": "Solutions for Advent of Code 2024 in TypeScript",
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
     "dev": "bun --watch ./src/index.ts",
-    "solve": "bun run ./src/index.ts"
+    "solve": "bun run ./src/index.ts",
+    "solve-node": "node --loader ts-node/esm ./src/index.ts"
   },
   "keywords": [
     "AOC",
     "Advent",
     "Code",
-    "2023"
+    "2024"
   ],
   "author": "Marko Požega",
   "license": "ISC",
   "devDependencies": {
-    "bun-types": "latest",
     "@types/lodash": "^4.14.191",
+    "bun-types": "latest",
     "commander": "^9.4.1",
     "lodash": "^4.17.21",
     "prettier": "3.1.0"
   },
   "dependencies": {
-    "datastructures-js": "^13.0.0"
+    "datastructures-js": "^13.0.0",
+    "ts-node": "^10.9.2"
   },
   "peerDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.7.2"
   }
 }

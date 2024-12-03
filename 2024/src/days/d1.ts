@@ -30,9 +30,8 @@ function parseInput(path: string): Data {
 }
 
 function part1(data: Data) {
-  const [left, right] = data
-  left.sort()
-  right.sort()
+  const left = data[0].toSorted()
+  const right = data[1].toSorted()
   return left.reduce((acc, curr, idx) => (acc += Math.abs(curr - right[idx])), 0)
 }
 
@@ -50,9 +49,7 @@ const inputPath = "./src/inputs/d1.txt"
 const inputTestPath1 = "./src/inputs/d1-t1.txt"
 
 export function runPart1() {
-  console.time("Time")
   console.log("Test 1: ", part1(parseInput(inputTestPath1)))
-  console.time("Time")
   assert(part1(parseInput(inputTestPath1)) === 11)
 
   console.time("Time")
@@ -61,9 +58,7 @@ export function runPart1() {
 }
 
 export function runPart2() {
-  console.time("Time")
   console.log("Test 2: ", part2(parseInput(inputTestPath1)))
-  console.time("Time")
   assert(part2(parseInput(inputTestPath1)) === 31)
 
   console.time("Time")
