@@ -18,7 +18,7 @@ function parseInput(path: string): Data {
 }
 
 function countXMAS(matrix: string[][]) {
-  return matrix.map((row) => row.join("").match(/(?=XMAS|SAMX)/g)?.length ?? 0).reduce((sum, val) => sum + val, 0)
+  return matrix.map((row) => row.join("").match(/(?=XMAS|SAMX)/g)?.length ?? 0).reduce((sum, val) => sum + val)
 }
 
 function findA(matrix: string[][][]) {

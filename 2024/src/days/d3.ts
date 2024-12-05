@@ -21,7 +21,7 @@ function part1(data: Data) {
     .flat()
     .map((instruction) => instruction.replace("mul(", "").replace(")", "").split(","))
     .map(([a, b]) => parseInt(a) * parseInt(b))
-    .reduce((count, val) => count + val, 0)
+    .reduce((count, val) => count + val)
 }
 
 function part2(data: Data) {
@@ -41,7 +41,7 @@ function part2(data: Data) {
     .instructions
     .map((instruction) => instruction.replace("mul(", "").replace(")", "").split(","))
     .map(([a, b]) => parseInt(a) * parseInt(b))
-    .reduce((count, val) => count + val, 0)
+    .reduce((count, val) => count + val)
 }
 
 // -----------------------------------------------------------------------------
