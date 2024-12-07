@@ -7,14 +7,18 @@ import _ from "lodash"
 // TYPES
 // -----------------------------------------------------------------------------
 
-type Data = string[]
+type Data = string[][]
 
 // -----------------------------------------------------------------------------
 // PRIVATE
 // -----------------------------------------------------------------------------
 
 function parseInput(path: string): Data {
-  return fs.readFileSync(path, "utf-8").trimEnd().split("\n")
+  return fs
+    .readFileSync(path, "utf-8")
+    .trimEnd()
+    .split("\n")
+    .map((line) => line.split(""))
 }
 
 function countXMAS(matrix: string[][]) {
@@ -28,7 +32,7 @@ function findA(matrix: string[][][]) {
     const diagonal = line.map((cell) => cell[1] || " ").join("")
     const indexes = []
     let match: RegExpExecArray | null
-    while ((match = regex.exec(diagonal)) !== null) {
+    while ((match = regex.exec(diagonal))) {
       indexes.push(match.index + 1)
       regex.lastIndex = match.index + 1
     }
@@ -37,8 +41,7 @@ function findA(matrix: string[][][]) {
   })
 }
 
-function part1(data: Data) {
-  const rows = data.map((line) => line.split(""))
+function part1(rows: Data) {
   const colls = rows[0].map((_, i) => rows.map((row) => row[i]))
   const diagonalRange = _.range(0, rows[0].length * 2)
   const rightDiagonals = diagonalRange.map((_, i) => rows.map((row, j) => row[i - j]))
@@ -51,8 +54,7 @@ function countIntersections(array1: string[], array2: string[]) {
   return new EnhancedSet(array1).intersect(new EnhancedSet(array2)).size
 }
 
-function part2(data: Data) {
-  const rows = data.map((line) => line.split(""))
+function part2(rows: Data) {
   const width = rows[0].length
   const diagonalRange = _.range(0, width * 2)
   const rightDiagonals = diagonalRange.map((_, i) => rows.map((row, j) => [`${j},${j - i + width - 1}`, row[i - j]]))

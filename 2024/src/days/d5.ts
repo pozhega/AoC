@@ -30,9 +30,7 @@ function parseInput(path: string): Data {
     )
 }
 
-function part1(data: Data) {
-  const { rules, updates } = data
-
+function part1({ rules, updates }: Data) {
   return updates
     .map((update) => [update, update.toSorted((a, b) => (rules.get(a)?.includes(b) ? -1 : 1))])
     .filter(([update, sorted]) => update.join("") === sorted.join(""))
@@ -40,9 +38,7 @@ function part1(data: Data) {
     .reduce((a, b) => a + b)
 }
 
-function part2(data: Data) {
-  const { rules, updates } = data
-
+function part2({ rules, updates }: Data) {
   return updates
     .map((update) => [update, update.toSorted((a, b) => (rules.get(a)?.includes(b) ? -1 : 1))])
     .filter(([update, sorted]) => update.join("") !== sorted.join(""))
