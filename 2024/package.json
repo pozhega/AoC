@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "datastructures-js": "^13.0.0",
+    "multithreading": "^0.2.1",
     "ts-node": "^10.9.2"
   },
   "peerDependencies": {

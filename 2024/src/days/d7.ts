@@ -28,16 +28,21 @@ function parseInput(path: string): Data {
 function canEvaluate({ result, operands, concat }: Equation & { concat?: boolean }) {
   let results = new Set([operands[0]])
   operands.slice(1).forEach((operand) => {
-    const operatorResults = new Set<number>()
+    const stepResults = new Set<number>()
     results.forEach((value) => {
-      operatorResults.add(value + operand)
-      operatorResults.add(value * operand)
-      if (concat) operatorResults.add(Number(`${value}${operand}`))
+      if (value >= result) return
+      stepResults.add(value + operand)
+      stepResults.add(value * operand)
+      if (concat) stepResults.add(Number(`${value}${operand}`))
     })
-    results = operatorResults
+    results = stepResults
   })
 
   return results.has(result)
+}
+
+function canEvaluateConcat(equation: Equation) {
+  return canEvaluate({ ...equation, concat: true })
 }
 
 function part1(data: Data) {
@@ -47,8 +52,7 @@ function part1(data: Data) {
 function part2(data: Data) {
   // prettier-ignore
   return data
-    .map((equation) => { return { ...equation, concat: true } })
-    .filter(canEvaluate)
+    .filter(canEvaluateConcat)
     .reduce((sum, { result }) => sum + result, 0)
 }
 

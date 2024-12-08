@@ -2,7 +2,7 @@ import { program } from "commander"
 
 const runDay = (day: number, part: number) => {
   import(`./days/d${day}.ts`)
-    .then((dayModule) => {
+    .then(async (dayModule) => {
       if (isNaN(part) || part === 1) dayModule.runPart1()
       if (isNaN(part) || part === 2) dayModule.runPart2()
     })

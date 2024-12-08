@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "bun --watch ./src/index.ts",
-    "solve": "bun run ./src/index.ts"
+    "solve": "bun run ./src/index.ts",
+    "solve-node": "node --loader ts-node/esm ./src/index.ts"
   },
   "keywords": [
     "AOC",

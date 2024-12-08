@@ -27,8 +27,8 @@ function part2(data: Data) {
 // EXPORTS
 // -----------------------------------------------------------------------------
 
-const inputPath = "./src/inputs/dX.txt"
-const inputTestPath1 = "./src/inputs/dX-t1.txt"
+const inputPath = "./src/inputs/d9.txt"
+const inputTestPath1 = "./src/inputs/d9-t1.txt"
 
 export function runPart1() {
   console.log("Test 1: ", part1(parseInput(inputTestPath1)))
