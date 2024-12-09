@@ -12,6 +12,7 @@ Solutions for [Advent of Code](https://adventofcode.com) puzzles.
 - [Day 6](https://github.com/pozhega/AoC/blob/master/2024/src/days/d6.ts)
 - [Day 7](https://github.com/pozhega/AoC/blob/master/2024/src/days/d7.ts)
 - [Day 8](https://github.com/pozhega/AoC/blob/master/2024/src/days/d8.ts)
+- [Day 9](https://github.com/pozhega/AoC/blob/master/2024/src/days/d9.ts)
 
 ## [2023](https://adventofcode.com/2023) in [Bun](https://bun.sh/)
 

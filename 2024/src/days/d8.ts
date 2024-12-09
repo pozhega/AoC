@@ -46,8 +46,8 @@ function getAntinodes(antennas: Antennas, width: number, height: number, from = 
         _.range(from, range).forEach((i) => {
           let shifts: number[]
           if ((y1 < y2 && x1 < x2) || (y1 > y2 && x1 > x2)) shifts = [x1 - diffX * i, x2 + diffX * i, y1 - diffY * i, y2 + diffY * i]
-          if (y1 > y2 && x1 < x2) shifts = [x1 - diffX * i, x2 + diffX * i, y1 + diffY * i, y2 - diffY * i]
-          if (y1 < y2 && x1 > x2) shifts = [x1 + diffX * i, x2 - diffX * i, y1 - diffY * i, y2 + diffY * i]
+          else if (y1 > y2 && x1 < x2) shifts = [x1 - diffX * i, x2 + diffX * i, y1 + diffY * i, y2 - diffY * i]
+          else if (y1 < y2 && x1 > x2) shifts = [x1 + diffX * i, x2 - diffX * i, y1 - diffY * i, y2 + diffY * i]
           const [lShiftX, rShiftX, lShiftY, rShiftY] = shifts
 
           if (lShiftX >= 0 && lShiftX < height && lShiftY >= 0 && lShiftY < width) antinodes.add([lShiftX, lShiftY].toString())
