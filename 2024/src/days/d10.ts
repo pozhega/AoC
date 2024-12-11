@@ -24,7 +24,7 @@ function getNeigbours(data: Data, position: Position) {
   const [x, y] = position
   // prettier-ignore
   const candidates: Position[] = [[x, y - 1], [x - 1, y], [x, y + 1], [x + 1, y]]
-  return candidates.filter(([x, y]) => Boolean(data[x] && data[x][y]))
+  return candidates.filter(([x, y]) => data[x] && data[x][y])
 }
 
 function part1(data: Data) {
