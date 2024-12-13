@@ -20,20 +20,20 @@ function parseInput(path: string): Data {
 }
 
 const cache = new Map<string, number>()
-function solve(blink: number, stone: string, endBlink: number) {
+function countRocks(blink: number, stone: string, endBlink: number) {
   if (blink === endBlink) return 1
   if (cache.has(`${stone},${blink}`)) return cache.get(`${stone},${blink}`)
 
   let result: number
   if (stone === "0") {
-    result = solve(blink + 1, "1", endBlink)
+    result = countRocks(blink + 1, "1", endBlink)
   } else if (stone.length % 2 === 0) {
     const partOne = Number(stone.slice(0, stone.length / 2)).toString()
     const partTwo = Number(stone.slice(stone.length / 2, stone.length)).toString()
-    result = solve(blink + 1, partOne, endBlink) + solve(blink + 1, partTwo, endBlink)
+    result = countRocks(blink + 1, partOne, endBlink) + countRocks(blink + 1, partTwo, endBlink)
   } else {
     const number = `${parseInt(stone) * 2024}`
-    result = solve(blink + 1, number, endBlink)
+    result = countRocks(blink + 1, number, endBlink)
   }
 
   cache.set(`${stone},${blink}`, result)
@@ -41,11 +41,11 @@ function solve(blink: number, stone: string, endBlink: number) {
 }
 
 function part1(data: Data) {
-  return data.map((stone) => solve(0, stone, 25)).reduce((total, count) => total + count)
+  return data.map((stone) => countRocks(0, stone, 25)).reduce((total, count) => total + count)
 }
 
 function part2(data: Data) {
-  return data.map((stone) => solve(0, stone, 75)).reduce((total, count) => total + count)
+  return data.map((stone) => countRocks(0, stone, 75)).reduce((total, count) => total + count)
 }
 
 // -----------------------------------------------------------------------------
