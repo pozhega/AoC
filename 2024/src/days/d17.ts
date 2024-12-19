@@ -136,9 +136,6 @@ export function runPart1() {
 }
 
 export function runPart2() {
-  // console.log("Test 2: ", part2(parseInput(inputTestPath1)))
-  // assert(part2(parseInput(inputTestPath1)) === 117440)
-
   console.time("Time")
   console.log("Part 2: ", part2(parseInput(inputPath)))
   console.timeEnd("Time")
