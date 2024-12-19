@@ -23,7 +23,7 @@ const options = program.opts()
 const day = parseInt(options.day)
 const part = parseInt(options.part)
 
-if (day < 1 || day > 25) {
+if (day < 0 || day > 25) {
   console.error("Invalid day range. Day must be in range 1-25.")
 } else if (!isNaN(part) && (part < 1 || part > 2)) {
   console.error("Invalid part range. Part must be in range 1-2.")
