@@ -138,7 +138,7 @@ export function runPart1() {
   console.log("Test 1: ", part1(parseInput(inputTestPath1)))
   assert(part1(parseInput(inputTestPath1)) === 2028)
 
-  console.log("Test 1: ", part1(parseInput(inputTestPath2)))
+  console.log("Test 2: ", part1(parseInput(inputTestPath2)))
   assert(part1(parseInput(inputTestPath2)) === 10092)
 
   console.time("Time")
@@ -148,7 +148,7 @@ export function runPart1() {
 
 export function runPart2() {
   const expand = true
-  console.log("Test 2: ", part2(parseInput(inputTestPath2, expand)))
+  console.log("Test 1: ", part2(parseInput(inputTestPath2, expand)))
   assert(part2(parseInput(inputTestPath2, expand)) === 9021)
 
   console.time("Time")

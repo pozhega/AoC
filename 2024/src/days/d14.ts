@@ -73,8 +73,8 @@ function part2(data: Data) {
 
   _.range(23, 8000, 101).forEach((second) => {
     const map = getMap(data, width, height, second)
-    printMap(map, width, height)
     console.log("\n\nSecond: ", second)
+    printMap(map, width, height)
   })
 }
 
