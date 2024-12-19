@@ -49,9 +49,15 @@ function part1(data: Data, byteSize: number, size: number) {
 }
 
 function part2(data: Data, byteStart: number, size: number) {
-  for (let byteSize = byteStart; byteSize <= data.length; byteSize++) {
-    if (!findPath(data, byteSize, size)) return data[byteSize - 1].toReversed().join(",")
+  let hi = data.length
+  let lo = byteStart
+  while (lo < hi) {
+    const mid = Math.floor((lo + hi) / 2)
+    if (findPath(data, mid, size)) lo = mid + 1
+    else hi = mid
   }
+
+  return data[hi - 1].toReversed().join(",")
 }
 
 // -----------------------------------------------------------------------------
