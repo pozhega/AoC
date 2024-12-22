@@ -83,6 +83,10 @@ function findCheats(path: Map<string, number[]>, pathSize: number, picoseconds: 
   return cheats
 }
 
+function manhattanDistance(a: number[], b: number[]) {
+  return Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1])
+}
+
 function part1(data: Data) {
   let start: number[]
   data.forEach((row, x) => row.forEach((cell, y) => (cell === "S" ? (start = [x, y]) : void 0)))
@@ -94,10 +98,6 @@ function part1(data: Data) {
     if (key >= 100) return (count += cheats.get(key))
     return count
   }, 0)
-}
-
-function manhattanDistance(a: number[], b: number[]) {
-  return Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1])
 }
 
 function part2(data: Data) {
