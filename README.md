@@ -27,6 +27,8 @@ Solutions for [Advent of Code](https://adventofcode.com) puzzles.
 - [Day 21](https://github.com/pozhega/AoC/blob/master/2024/src/days/d21.ts)
 - [Day 22](https://github.com/pozhega/AoC/blob/master/2024/src/days/d22.ts)
 - [Day 23](https://github.com/pozhega/AoC/blob/master/2024/src/days/d23.ts)
+- [Day 24](https://github.com/pozhega/AoC/blob/master/2024/src/days/d24.ts)
+- [Day 25](https://github.com/pozhega/AoC/blob/master/2024/src/days/d25.ts)
 
 ## [2023](https://adventofcode.com/2023) in [Bun](https://bun.sh/)
 
