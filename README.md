@@ -2,6 +2,21 @@
 
 Solutions for [Advent of Code](https://adventofcode.com) puzzles.
 
+## [2025](https://adventofcode.com/2025) in [Python](https://www.python.org/)
+
+- [Day 1](https://github.com/pozhega/AoC/blob/master/2025/d1.py)
+- [Day 2](https://github.com/pozhega/AoC/blob/master/2025/d2.py)
+- [Day 3](https://github.com/pozhega/AoC/blob/master/2025/d3.py)
+- [Day 4](https://github.com/pozhega/AoC/blob/master/2025/d4.py)
+- [Day 5](https://github.com/pozhega/AoC/blob/master/2025/d5.py)
+- [Day 6](https://github.com/pozhega/AoC/blob/master/2025/d6.py)
+- [Day 7](https://github.com/pozhega/AoC/blob/master/2025/d7.py)
+- [Day 8](https://github.com/pozhega/AoC/blob/master/2025/d8.py)
+- [Day 9](https://github.com/pozhega/AoC/blob/master/2025/d9.py)
+- [Day 10](https://github.com/pozhega/AoC/blob/master/2025/d10.py)
+- [Day 11](https://github.com/pozhega/AoC/blob/master/2025/d11.py)
+- [Day 12](https://github.com/pozhega/AoC/blob/master/2025/d12.py)
+
 ## [2024](https://adventofcode.com/2024) in [Bun](https://bun.sh/)
 
 - [Day 1](https://github.com/pozhega/AoC/blob/master/2024/src/days/d1.ts)
