@@ -1,9 +1,6 @@
 """ https://adventofcode.com/2025/day/1 """
 
-from typing import Any, List, DefaultDict, Tuple, Set, Literal
-from collections import defaultdict, deque
-from python_datastructures import Stack, Queue, MinHeap, MaxHeap, Trie, SinglyLinkedList, DoublyLinkedList
-import heapq
+from typing import List, Tuple
 
 Move = Tuple[str, int]
 
@@ -17,11 +14,10 @@ def part1(data: List[Move]) -> int:
 
     zero_count = 0; dial = 50
 
-    for (direction, distance) in data:
-        if direction == "L": dial = (dial + (100 - distance)) % 100
-        elif direction == "R": dial = (dial + distance) % 100
-        
-        if dial == 0: zero_count += 1
+    for (dir, distance) in data:
+        dir_distance = 100 - distance if dir == "L" else distance
+        dial = (dial + dir_distance) % 100
+        zero_count += dial == 0
 
     return zero_count
 
@@ -37,7 +33,7 @@ def part2(data: List[Move]) -> int:
             zero_count -= dial == 0
             dial = (dial + (100 - distance)) % 100
 
-        elif direction == "R":
+        else:
             zero_count += (dial + distance) // 100
             dial = (dial + distance) % 100
 
