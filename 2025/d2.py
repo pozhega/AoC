@@ -2,16 +2,16 @@
 
 from typing import List
 
-Range = List[str]
+IdRange = List[str]
 
-def parse_input(filename: str) -> List[Range]:
+def parse_input(filename: str) -> List[IdRange]:
     line = [line.strip() for line in open(filename, "r")][0]
-    ranges = [range.split("-") for range in line.split(",")]
-    return ranges
+    id_ranges = [range.split("-") for range in line.split(",")]
+    return id_ranges
 
-def part1(data: List[Range]) -> int:
+def part1(data: List[IdRange]) -> int:
     sum = 0
-
+    
     for id_ranges in data:
         start, end = id_ranges
         for id in range(int(start), int(end) + 1):
@@ -22,7 +22,7 @@ def part1(data: List[Range]) -> int:
     return sum
     
 
-def part2(data: List[Range]) -> int:
+def part2(data: List[IdRange]) -> int:    
     sum = 0
     
     for id_ranges in data:
@@ -31,11 +31,9 @@ def part2(data: List[Range]) -> int:
             id_str = str(id)
             id_len = len(id_str)
             for chunk_size in range(id_len//2, 0, -1):
-                compare_chunk = id_str[:chunk_size]
-                for chunk_index in range(chunk_size, id_len, chunk_size):
-                    if id_str[chunk_index:chunk_index+chunk_size] != compare_chunk:
-                        break
-                else:
+                base_chunk = id_str[:chunk_size]
+                chunk_count = id_len//chunk_size
+                if (base_chunk * chunk_count) == id_str:
                     sum += id
                     break
 

@@ -10,8 +10,6 @@ def parse_input(filename: str) -> List[Move]:
     return moves
 
 def part1(data: List[Move]) -> int:
-    """ O(n) solution """
-
     zero_count = 0; dial = 50
 
     for (dir, distance) in data:
@@ -23,8 +21,6 @@ def part1(data: List[Move]) -> int:
 
 
 def part2(data: List[Move]) -> int:
-    """ O(n) solution """
-
     zero_count = 0; dial = 50
 
     for (direction, distance) in data:
