@@ -31,7 +31,7 @@ def part2(data: List[Move]) -> int:
         if direction == "L":
             zero_count += ((100 - dial) + distance) // 100
             zero_count -= dial == 0
-            dial = (dial + (100 - distance)) % 100
+            dial = (dial + 100 - distance) % 100
 
         else:
             zero_count += (dial + distance) // 100
