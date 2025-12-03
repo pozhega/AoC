@@ -9,29 +9,25 @@ def parse_input(filename: str) -> List[Move]:
     moves = [(line[0], int(line[1:])) for line in lines]
     return moves
 
-def part1(data: List[Move]) -> int:
+def part1(data: List[Move]):
     zero_count = 0; dial = 50
 
     for (dir, distance) in data:
-        dir_distance = 100 - distance if dir == "L" else distance
-        dial = (dial + dir_distance) % 100
+        relative_dial = dial + (distance if dir == "R" else -distance)
+        dial = relative_dial % 100
         zero_count += dial == 0
 
     return zero_count
 
 
-def part2(data: List[Move]) -> int:
+def part2(data: List[Move]):
     zero_count = 0; dial = 50
 
-    for (direction, distance) in data:
-        if direction == "L":
-            zero_count += ((100 - dial) + distance) // 100
-            zero_count -= dial == 0
-            dial = (dial + 100 - distance) % 100
-
-        else:
-            zero_count += (dial + distance) // 100
-            dial = (dial + distance) % 100
+    for (dir, distance) in data:
+        relative_dial = dial + (distance if dir == "R" else -distance)
+        zero_distance = distance + (dial if dir == "R" else ((dial > 0) * 100) - dial)
+        zero_count += zero_distance // 100
+        dial = relative_dial % 100
 
     return zero_count
 

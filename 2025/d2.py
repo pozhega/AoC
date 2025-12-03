@@ -9,7 +9,7 @@ def parse_input(filename: str) -> List[IdRange]:
     id_ranges = [range.split("-") for range in line.split(",")]
     return id_ranges
 
-def part1(data: List[IdRange]) -> int:
+def part1(data: List[IdRange]):
     sum = 0
     
     for id_ranges in data:
@@ -22,7 +22,7 @@ def part1(data: List[IdRange]) -> int:
     return sum
     
 
-def part2(data: List[IdRange]) -> int:    
+def part2(data: List[IdRange]):    
     sum = 0
     
     for id_ranges in data:
