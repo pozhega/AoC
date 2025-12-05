@@ -43,9 +43,11 @@ if __name__ == "__main__":
     TEST = parse_input("tests/d3.txt")
     PUZZLE = parse_input("puzzles/d3.txt")
 
+    # print ("Part 1(TEST):", solve(TEST, 2))
     # assert solve(TEST, 2) == 357
+    print(f"Part 1: {solve(TEST, 2)}")
+
+    # print ("Part 2(TEST):", solve(TEST, 12))
     # assert solve(TEST, 12) == 3121910778619
-    
-    print(f"Part 1: {solve(PUZZLE, 2)}")
     print(f"Part 2: {solve(PUZZLE, 12)}")
 
