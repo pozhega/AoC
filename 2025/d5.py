@@ -30,7 +30,7 @@ def part1(data: Data):
     
     for ingredient in ingredients:
         for range in ranges:
-            if ingredient >= range[0] and ingredient <= range[1]:
+            if range[0] <= ingredient <= range[1]:
                 fresh += 1
                 break
 
@@ -44,7 +44,7 @@ def part2(data: Data):
     fresh = 0; max_stop = 0
     for (start, stop) in ranges:
         if start > max_stop: fresh += stop - start + 1
-        elif start <= max_stop and stop > max_stop: fresh += stop - max_stop
+        elif stop > max_stop: fresh += stop - max_stop
         max_stop = max(max_stop, stop)
 
     return fresh
