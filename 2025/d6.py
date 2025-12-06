@@ -1,6 +1,6 @@
 """ https://adventofcode.com/2025/day/6 """
 
-from typing import List
+from typing import Any, List
 
 Problems = List[List[str]]
 
@@ -27,14 +27,9 @@ def parse_input(filename: str):
 
 def part1(data: Problems):
     sum = 0
-
-    for i in range(len(data[0])):
-        operator = data[-1][i]; equation = ""
-        
-        for row in data[:-1]:
-            equation += row[i] + operator
-        
-        sum += eval(equation.strip()[0:-1])
+ 
+    for col_i, col in enumerate(zip(*data[:-1])):
+        sum += eval(data[-1][col_i].join(col))
         
     return sum
 
@@ -42,15 +37,10 @@ def part1(data: Problems):
 def part2(data: Problems):
     sum = 0
 
-    for coll_i in range(len(data[0])):
-        operator = data[-1][coll_i]; equation = ""
-    
-        for num_i in range(len(operator)):
-            number = [row[coll_i][num_i] for row in data[:-1]]
-            equation += "".join(number) + operator
+    for col_i, col in enumerate(zip(*data[:-1])):
+        nested_cols = ["".join(nested_col) for nested_col in zip(*col)]
+        sum += eval(data[-1][col_i].join(nested_cols))            
 
-        sum += eval(equation.strip()[0:-1])
-        
     return sum
 
 

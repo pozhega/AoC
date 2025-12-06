@@ -9,6 +9,7 @@ Data = Tuple[List[Ingredient], List[Range]]
 def parse_input(filename: str) -> List[str]:
     lines = [line.strip() for line in open(filename, "r")]
     ingredients: List[Ingredient] = []; ranges: List[Range] = []; mode = "ranges"
+    
     for line in lines:
         if line == "":
             mode = "ingredients"
