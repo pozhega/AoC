@@ -29,10 +29,9 @@ def part1(data: Problems):
     sum = 0
 
     for i in range(len(data[0])):
-        operator = data[-1][i]
-        equation = ""
-        for row_i, row in enumerate(data):
-            if (row_i == len(data) - 1): continue
+        operator = data[-1][i]; equation = ""
+        
+        for row in data[:-1]:
             equation += row[i] + operator
         
         sum += eval(equation.strip()[0:-1])
@@ -44,14 +43,11 @@ def part2(data: Problems):
     sum = 0
 
     for coll_i in range(len(data[0])):
-        operator = data[-1][coll_i]
-        equation = ""
+        operator = data[-1][coll_i]; equation = ""
+    
         for num_i in range(len(operator)):
-            number = ""
-            for row in (data[:-1]):
-                number += row[coll_i][num_i]
-
-            equation += number + operator
+            number = [row[coll_i][num_i] for row in data[:-1]]
+            equation += "".join(number) + operator
 
         sum += eval(equation.strip()[0:-1])
         
