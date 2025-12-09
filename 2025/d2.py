@@ -40,7 +40,7 @@ def part2(data: List[IdRange]):
     return sum
 
 if __name__ == "__main__":
-    TEST = parse_input("tests/d2.txt")
+    # TEST = parse_input("tests/d2.txt")
     PUZZLE = parse_input("puzzles/d2.txt")
 
     # print ("Part 1(TEST):", part1(TEST))

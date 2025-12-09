@@ -52,8 +52,8 @@ def part2(data: Data):
 
 
 if __name__ == "__main__":
-    TEST = parse_input("tests/d5.txt")
-    TEST_2 = parse_input("tests/d5_2.txt")
+    # TEST = parse_input("tests/d5.txt")
+    # TEST_2 = parse_input("tests/d5_2.txt")
     PUZZLE = parse_input("puzzles/d5.txt")
 
     # print ("Part 1(TEST):", part1(TEST))

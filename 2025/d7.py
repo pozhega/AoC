@@ -40,7 +40,7 @@ def solve(data: Map):
 
 
 if __name__ == "__main__":
-    TEST = parse_input("tests/d7.txt")
+    # TEST = parse_input("tests/d7.txt")
     PUZZLE = parse_input("puzzles/d7.txt")
 
     # print ("Part 1(TEST):", solve(TEST)[0])

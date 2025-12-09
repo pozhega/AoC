@@ -33,7 +33,7 @@ def part2(data: List[Move]):
 
 
 if __name__ == "__main__":
-    TEST = parse_input("tests/d1.txt")
+    # TEST = parse_input("tests/d1.txt")
     PUZZLE = parse_input("puzzles/d1.txt")
 
     # print ("Part 1(TEST):", part1(TEST))

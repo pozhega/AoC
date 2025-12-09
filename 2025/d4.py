@@ -51,7 +51,7 @@ def part2(data: Grid):
 
 
 if __name__ == "__main__":
-    TEST = parse_input("tests/d4.txt")
+    # TEST = parse_input("tests/d4.txt")
     PUZZLE = parse_input("puzzles/d4.txt")
 
     # print ("Part 1(TEST):", part1(TEST))
