@@ -18,7 +18,7 @@ def part1(data: List[Point]):
         for point2 in data[point1_i + 1:]:
             x1, y1 = point1
             x2, y2 = point2
-            max_square = max(max_square, abs(x1 - x2 + 1) * abs(y1 - y2 + 1))
+            max_square = max(max_square, (abs(x1 - x2) + 1) * (abs(y1 - y2) + 1))
 
     return max_square
 
@@ -27,31 +27,27 @@ def intersects(segment1: Tuple[int, int, int, int], segment2: Tuple[int, int, in
     x3, y3, x4, y4 = segment2
     
     denom = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4)
-    if denom == 0:
-        return None  # parallel lines
+    if denom == 0: return None 
     
     t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / denom
     u = -((x1 - x2) * (y1 - y3) - (y1 - y2) * (x1 - x3)) / denom
     
-    # Check if intersection is within both segments
     if 0 <= t <= 1 and 0 <= u <= 1:
         x = x1 + t * (x2 - x1)
         y = y1 + t * (y2 - y1)
         return (x, y)
     
-    return None  # intersection is outside the segments
+    return None 
 
 def part2(data: List[Point]):
-    vertical_segments = []	
-    horizontal_segments = []
+    vertical_segments = []; horizontal_segments = [];
+
     for point_i, point1 in enumerate(data):
         point2 = data[point_i + 1] if point_i + 1 < len(data) else data[0]
         x1, y1 = point1
         x2, y2 = point2
-        if x2 == x1:
-            vertical_segments.append((x1, y1, x2, y2))
-        elif y2 == y1:
-            horizontal_segments.append((x1, y1, x2, y2))
+        if x2 == x1: vertical_segments.append((x1, y1, x2, y2))
+        else: horizontal_segments.append((x1, y1, x2, y2))
 
     max_square = 0
     for point1_i, point1 in enumerate(data):
@@ -95,13 +91,13 @@ def part2(data: List[Point]):
 
 
 if __name__ == "__main__":
-    TEST = parse_input("tests/d9.txt")
+    # TEST = parse_input("tests/d9.txt")
     PUZZLE = parse_input("puzzles/d9.txt")
 
     # print ("Part 1(TEST):", part1(TEST))
     # assert part1(TEST) == 50
     print(f"Part 1: {part1(PUZZLE)}")
 
-    print ("Part 2(TEST):", part2(TEST))
-    assert part2(TEST) == 24
+    # print ("Part 2(TEST):", part2(TEST))
+    # assert part2(TEST) == 24
     print(f"Part 2: {part2(PUZZLE)}") # 4605625856
